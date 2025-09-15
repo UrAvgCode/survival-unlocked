@@ -1,0 +1,4 @@
+name: survival-unlocked
+version: '1.0'
+main: com.uravgcode.survivalunlocked.SurvivalUnlockedPlugin
+api-version: '1.21'
