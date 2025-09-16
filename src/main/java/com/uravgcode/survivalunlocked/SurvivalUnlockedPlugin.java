@@ -4,19 +4,50 @@ import com.uravgcode.survivalunlocked.listener.*;
 import com.uravgcode.survivalunlocked.mobheads.MobHeadDropListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.nio.file.Files;
+
 public final class SurvivalUnlockedPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveResource("heads.yml", false);
+        saveDefaultConfig();
+        if (!Files.exists(getDataFolder().toPath().resolve("heads.yml"))) {
+            saveResource("heads.yml", false);
+        }
 
+        var config = getConfig();
+        var logger = getLogger();
         var pluginManager = getServer().getPluginManager();
-        pluginManager.registerEvents(new VillagerFollowListener(this), this);
-        pluginManager.registerEvents(new ItemFrameInvisibleListener(), this);
-        pluginManager.registerEvents(new CustomPortalListener(this), this);
-        pluginManager.registerEvents(new FireballThrowListener(), this);
-        pluginManager.registerEvents(new PlayerHeadDropListener(), this);
-        pluginManager.registerEvents(new MobHeadDropListener(this), this);
+
+        if (config.getBoolean("custom-shaped-portals.enabled", false)) {
+            pluginManager.registerEvents(new CustomPortalListener(this), this);
+            logger.info("custom shaped nether portals enabled");
+        }
+
+        if (config.getBoolean("throwable-fireballs.enabled", false)) {
+            pluginManager.registerEvents(new FireballThrowListener(), this);
+            logger.info("throwable fireballs enabled");
+        }
+
+        if (config.getBoolean("invisible-item-frames.enabled", false)) {
+            pluginManager.registerEvents(new ItemFrameInvisibleListener(), this);
+            logger.info("invisible item frames enabled");
+        }
+
+        if (config.getBoolean("villagers-follow-emeralds.enabled", false)) {
+            pluginManager.registerEvents(new VillagerFollowListener(this), this);
+            logger.info("villagers follow emeralds enabled");
+        }
+
+        if (config.getBoolean("more-mob-heads.enabled", false)) {
+            pluginManager.registerEvents(new MobHeadDropListener(this), this);
+            logger.info("more mob heads enabled");
+        }
+
+        if (config.getBoolean("player-head-drops.enabled", false)) {
+            pluginManager.registerEvents(new PlayerHeadDropListener(), this);
+            logger.info("player head drops enabled");
+        }
     }
 
     @Override

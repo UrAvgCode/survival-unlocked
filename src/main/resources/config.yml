@@ -1,0 +1,19 @@
+# config
+
+custom-shaped-portals:
+  enabled: true
+
+throwable-fireballs:
+  enabled: true
+
+invisible-item-frames:
+  enabled: true
+
+villagers-follow-emeralds:
+  enabled: true
+
+more-mob-heads:
+  enabled: true
+
+player-head-drops:
+  enabled: true
