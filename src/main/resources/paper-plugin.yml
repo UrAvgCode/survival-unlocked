@@ -1,4 +1,8 @@
 name: survival-unlocked
 version: '1.0'
-main: com.uravgcode.survivalunlocked.SurvivalUnlockedPlugin
+main: com.uravgcode.survivalunlocked.SurvivalUnlocked
 api-version: '1.21'
+
+description: vanilla friendly survival gameplay improvements
+website: 'https://uravgcode.com'
+authors: [ UrAvgCode ]

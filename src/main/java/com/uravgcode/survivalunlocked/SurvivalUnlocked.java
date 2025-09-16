@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.nio.file.Files;
 
-public final class SurvivalUnlockedPlugin extends JavaPlugin {
+public final class SurvivalUnlocked extends JavaPlugin {
 
     @Override
     public void onEnable() {
@@ -48,9 +48,5 @@ public final class SurvivalUnlockedPlugin extends JavaPlugin {
             pluginManager.registerEvents(new PlayerHeadDropListener(), this);
             logger.info("player head drops enabled");
         }
-    }
-
-    @Override
-    public void onDisable() {
     }
 }
