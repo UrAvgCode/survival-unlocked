@@ -9,6 +9,7 @@ import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -18,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,9 +27,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MobHeadDropListener implements Listener {
     private final JavaPlugin plugin;
+    private final YamlConfiguration config;
 
     public MobHeadDropListener(final JavaPlugin plugin) {
         this.plugin = plugin;
+        this.config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "heads.yml"));
     }
 
     @EventHandler
@@ -70,7 +74,7 @@ public class MobHeadDropListener implements Listener {
     }
 
     private Optional<ConfigurationSection> getEntityConfig(LivingEntity entity) {
-        var configSection = plugin.getConfig().getConfigurationSection(entity.getType().name().toLowerCase());
+        var configSection = config.getConfigurationSection(entity.getType().name().toLowerCase());
         if (configSection == null) return Optional.empty();
 
         String key = switch (entity) {
