@@ -1,5 +1,8 @@
 # config
 
+smooth-sleep-transition:
+  enabled: true
+
 custom-shaped-portals:
   enabled: true
 

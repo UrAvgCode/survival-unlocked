@@ -2,6 +2,7 @@ package com.uravgcode.survivalunlocked;
 
 import com.uravgcode.survivalunlocked.listener.*;
 import com.uravgcode.survivalunlocked.mobheads.MobHeadDropListener;
+import com.uravgcode.survivalunlocked.sleep.SleepListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.nio.file.Files;
@@ -18,6 +19,11 @@ public final class SurvivalUnlocked extends JavaPlugin {
         var config = getConfig();
         var logger = getLogger();
         var pluginManager = getServer().getPluginManager();
+
+        if (config.getBoolean("smooth-sleep-transition.enabled", false)) {
+            pluginManager.registerEvents(new SleepListener(this), this);
+            logger.info("smooth sleep transition enabled");
+        }
 
         if (config.getBoolean("custom-shaped-portals.enabled", false)) {
             pluginManager.registerEvents(new CustomPortalListener(this), this);
