@@ -1,61 +1,95 @@
 package com.uravgcode.survivalunlocked.sleep;
 
+import io.papermc.paper.event.player.PlayerDeepSleepEvent;
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import org.bukkit.GameRule;
-import org.bukkit.Statistic;
+import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerBedEnterEvent;
+import org.bukkit.event.player.PlayerBedLeaveEvent;
+import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.WeakHashMap;
 
 public class SleepListener implements Listener {
-    private static final int TIME_RATE = 70;
-    private static final int DAY_START = 1200;
+    private static final long DAY_LENGTH = 24000;
+    private static final long TIME_RATE = 120;
 
     private final JavaPlugin plugin;
-    private boolean skippingNight;
+    private final Map<World, ScheduledTask> nightSkipTasks;
 
     public SleepListener(@NotNull JavaPlugin plugin) {
         this.plugin = plugin;
-        this.skippingNight = false;
+        this.nightSkipTasks = new WeakHashMap<>();
     }
 
     @EventHandler
-    public void onBedEnter(PlayerBedEnterEvent event) {
-        if (event.getBedEnterResult() != PlayerBedEnterEvent.BedEnterResult.OK) return;
-        if (skippingNight) return;
+    public void onPlayerSleep(PlayerDeepSleepEvent event) {
+        updateNightSkipState(event.getPlayer().getWorld());
+    }
 
-        var sleepingPlayer = event.getPlayer();
-        var world = sleepingPlayer.getWorld();
+    @EventHandler
+    public void onBedLeave(PlayerBedLeaveEvent event) {
+        updateNightSkipState(event.getPlayer().getWorld());
+    }
+
+    @EventHandler
+    public static void onTimeSkip(TimeSkipEvent event) {
+        if (event.getSkipReason() == TimeSkipEvent.SkipReason.NIGHT_SKIP) {
+            event.setCancelled(true);
+        }
+    }
+
+    private void updateNightSkipState(World world) {
+        plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+            boolean isNightSkipping = nightSkipTasks.containsKey(world);
+            boolean sleepingPercentageMet = playersSleepingPercentageMet(world);
+
+            if (!isNightSkipping && sleepingPercentageMet) {
+                startNightSkip(world);
+            } else if (isNightSkipping && !sleepingPercentageMet) {
+                stopNightSkip(world);
+            }
+        }, 1L);
+    }
+
+    private boolean playersSleepingPercentageMet(World world) {
         var gameRuleValue = world.getGameRuleValue(GameRule.PLAYERS_SLEEPING_PERCENTAGE);
         double sleepingPercentage = Objects.requireNonNullElse(gameRuleValue, 100) / 100.0;
 
-        long totalPlayers = world.getPlayers().stream().filter(player -> !player.isSleepingIgnored()).count();
-        long sleepingPlayers = world.getPlayers().stream().filter(player -> player.isSleeping() || player.equals(sleepingPlayer)).count();
-        if (sleepingPlayers < totalPlayers * sleepingPercentage) return;
+        int total = 0;
+        int sleeping = 0;
+        for (var player : world.getPlayers()) {
+            if (player.isSleepingIgnored()) continue;
+            if (player.isSleeping()) sleeping++;
+            total++;
+        }
 
-        skippingNight = true;
-        plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, task -> {
+        return sleeping >= total * sleepingPercentage;
+    }
+
+    private void startNightSkip(World world) {
+        var nightSkipTask = plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, task -> {
             long time = world.getTime();
 
-            if (time >= (DAY_START - TIME_RATE * 1.5) && time <= DAY_START) {
-                world.setTime(DAY_START);
-                if (world.hasStorm()) world.setStorm(false);
-                if (world.isThundering()) world.setThundering(false);
-
-                world.getPlayers().forEach(player -> {
-                    player.setStatistic(Statistic.TIME_SINCE_REST, 0);
-                    if (player.isSleeping()) player.wakeup(false);
-                });
-
-                skippingNight = false;
-                task.cancel();
+            if (time <= DAY_LENGTH && time + TIME_RATE >= DAY_LENGTH) {
+                world.setTime(0);
+                stopNightSkip(world);
                 return;
             }
 
             world.setTime(time + TIME_RATE);
         }, 1L, 1L);
+
+        nightSkipTasks.put(world, nightSkipTask);
+    }
+
+    private void stopNightSkip(World world) {
+        var task = nightSkipTasks.remove(world);
+        if (task != null) task.cancel();
     }
 }
