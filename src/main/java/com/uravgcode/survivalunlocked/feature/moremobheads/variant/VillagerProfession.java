@@ -1,4 +1,4 @@
-package com.uravgcode.survivalunlocked.mobheads.variant;
+package com.uravgcode.survivalunlocked.feature.moremobheads.variant;
 
 import org.bukkit.entity.Villager;
 

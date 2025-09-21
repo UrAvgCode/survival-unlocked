@@ -1,9 +1,9 @@
-package com.uravgcode.survivalunlocked.mobheads;
+package com.uravgcode.survivalunlocked.feature.moremobheads;
 
 import com.destroystokyo.paper.profile.ProfileProperty;
-import com.uravgcode.survivalunlocked.mobheads.variant.BeeVariant;
-import com.uravgcode.survivalunlocked.mobheads.variant.CatType;
-import com.uravgcode.survivalunlocked.mobheads.variant.VillagerProfession;
+import com.uravgcode.survivalunlocked.feature.moremobheads.variant.BeeVariant;
+import com.uravgcode.survivalunlocked.feature.moremobheads.variant.CatType;
+import com.uravgcode.survivalunlocked.feature.moremobheads.variant.VillagerProfession;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;

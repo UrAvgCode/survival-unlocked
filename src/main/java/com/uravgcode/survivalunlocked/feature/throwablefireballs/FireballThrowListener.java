@@ -1,4 +1,4 @@
-package com.uravgcode.survivalunlocked.listener;
+package com.uravgcode.survivalunlocked.feature.throwablefireballs;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;

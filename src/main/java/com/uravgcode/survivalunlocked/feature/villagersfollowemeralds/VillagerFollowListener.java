@@ -1,4 +1,4 @@
-package com.uravgcode.survivalunlocked.listener;
+package com.uravgcode.survivalunlocked.feature.villagersfollowemeralds;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;

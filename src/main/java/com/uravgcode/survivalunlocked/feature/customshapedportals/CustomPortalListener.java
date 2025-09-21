@@ -1,6 +1,9 @@
-package com.uravgcode.survivalunlocked.listener;
+package com.uravgcode.survivalunlocked.feature.customshapedportals;
 
-import org.bukkit.*;
+import org.bukkit.Axis;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;

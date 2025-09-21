@@ -1,8 +1,12 @@
 package com.uravgcode.survivalunlocked;
 
-import com.uravgcode.survivalunlocked.listener.*;
-import com.uravgcode.survivalunlocked.mobheads.MobHeadDropListener;
-import com.uravgcode.survivalunlocked.sleep.SleepListener;
+import com.uravgcode.survivalunlocked.feature.customshapedportals.CustomPortalListener;
+import com.uravgcode.survivalunlocked.feature.invisibleitemframes.ItemFrameListener;
+import com.uravgcode.survivalunlocked.feature.moremobheads.MobHeadDropListener;
+import com.uravgcode.survivalunlocked.feature.playerheaddrops.PlayerHeadDropListener;
+import com.uravgcode.survivalunlocked.feature.smoothsleeptransition.SleepListener;
+import com.uravgcode.survivalunlocked.feature.throwablefireballs.FireballThrowListener;
+import com.uravgcode.survivalunlocked.feature.villagersfollowemeralds.VillagerFollowListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.nio.file.Files;
@@ -36,7 +40,7 @@ public final class SurvivalUnlocked extends JavaPlugin {
         }
 
         if (config.getBoolean("invisible-item-frames.enabled", false)) {
-            pluginManager.registerEvents(new ItemFrameInvisibleListener(), this);
+            pluginManager.registerEvents(new ItemFrameListener(), this);
             logger.info("invisible item frames enabled");
         }
 

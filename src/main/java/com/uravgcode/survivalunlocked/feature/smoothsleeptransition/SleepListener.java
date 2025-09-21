@@ -1,4 +1,4 @@
-package com.uravgcode.survivalunlocked.sleep;
+package com.uravgcode.survivalunlocked.feature.smoothsleeptransition;
 
 import io.papermc.paper.event.player.PlayerDeepSleepEvent;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;

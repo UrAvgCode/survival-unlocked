@@ -1,4 +1,4 @@
-package com.uravgcode.survivalunlocked.mobheads.variant;
+package com.uravgcode.survivalunlocked.feature.moremobheads.variant;
 
 public class BeeVariant {
     public static String name(boolean pollinated, boolean angry) {
