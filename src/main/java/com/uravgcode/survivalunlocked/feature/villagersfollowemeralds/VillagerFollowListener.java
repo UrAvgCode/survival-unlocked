@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +18,7 @@ public class VillagerFollowListener implements Listener {
     private static final double MIN_FOLLOW_DISTANCE = 2.0;
     private final Set<Player> players = new HashSet<>();
 
-    public VillagerFollowListener(JavaPlugin plugin) {
+    public VillagerFollowListener(@NotNull JavaPlugin plugin) {
         plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
             for (Player player : players) {
                 if (!player.isConnected()) {

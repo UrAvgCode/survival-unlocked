@@ -15,6 +15,7 @@ import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.world.PortalCreateEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.BoundingBox;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -30,7 +31,7 @@ public class CustomPortalListener implements Listener {
 
     private final JavaPlugin plugin;
 
-    public CustomPortalListener(JavaPlugin plugin) {
+    public CustomPortalListener(@NotNull JavaPlugin plugin) {
         this.plugin = plugin;
     }
 

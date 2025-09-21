@@ -18,6 +18,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.Objects;
@@ -29,7 +30,7 @@ public class MobHeadDropListener implements Listener {
     private final JavaPlugin plugin;
     private final YamlConfiguration config;
 
-    public MobHeadDropListener(final JavaPlugin plugin) {
+    public MobHeadDropListener(@NotNull JavaPlugin plugin) {
         this.plugin = plugin;
         this.config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "heads.yml"));
     }
