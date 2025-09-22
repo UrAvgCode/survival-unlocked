@@ -3,3 +3,17 @@
 **Survival Unlocked** is a lightweight plugin that introduces small, balanced tweaks and quality-of-life
 improvements to the survival game mode. It is designed to feel like it could belong in the base game,
 keeping the classic vanilla atmosphere intact.
+
+## Features
+
+| Feature                   | Description                                                                                                                  |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| Smooth Sleep Transition   | Smoothly skips the night with an animation when enough players are sleeping, using the `playersSleepingPercentage` gamerule. |
+| Custom Shaped Portals     | Build nether portals in any shape, including with crying obsidian.                                                           |
+| Throwable Fireballs       | Players can throw fireballs from their hand.                                                                                 |
+| Invisible Item Frames     | Make item frames invisible by right-clicking them with shears.                                                               |
+| Better Armor Stands       | Armor stands have arms and can change poses when shift-clicked.                                                              |
+| Villagers Follow Emeralds | Villagers are attracted to players holding emeralds.                                                                         |
+| Silence Mobs              | Use a name tag named `silence` to mute mobs, or `unsilence` to restore their sounds.                                         |
+| More Mob Heads            | Mobs have a chance to drop their heads on death. Chances are configurable.                                                   |
+| Player Head Drops         | Players drop their heads when killed by another player.                                                                      |
