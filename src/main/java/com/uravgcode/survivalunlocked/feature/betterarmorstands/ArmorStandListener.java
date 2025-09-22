@@ -29,22 +29,27 @@ public class ArmorStandListener implements Listener {
         if (!(event.getRightClicked() instanceof ArmorStand armorStand)) return;
         if (!event.getPlayer().isSneaking()) return;
 
-        var dataContainer = armorStand.getPersistentDataContainer();
-        var poseData = dataContainer.get(poseKey, PersistentDataType.STRING);
-        var pose = poseData != null ? ArmorStandPose.valueOf(poseData) : ArmorStandPose.DEFAULT;
-
+        var pose = getPose(armorStand);
         var poses = ArmorStandPose.values();
         int nextIndex = (pose.ordinal() + 1) % poses.length;
         var nextPose = poses[nextIndex];
 
+        setPose(armorStand, nextPose);
+        event.setCancelled(true);
+    }
+
+    private ArmorStandPose getPose(ArmorStand armorStand) {
+        var poseData = armorStand.getPersistentDataContainer().get(poseKey, PersistentDataType.STRING);
+        return poseData != null ? ArmorStandPose.valueOf(poseData) : ArmorStandPose.DEFAULT;
+    }
+
+    private void setPose(ArmorStand armorStand, ArmorStandPose pose) {
+        armorStand.getPersistentDataContainer().set(poseKey, PersistentDataType.STRING, pose.name());
         armorStand.setBodyPose(pose.body);
         armorStand.setHeadPose(pose.head);
         armorStand.setLeftArmPose(pose.leftArm);
         armorStand.setLeftLegPose(pose.leftLeg);
         armorStand.setRightArmPose(pose.rightArm);
         armorStand.setRightLegPose(pose.rightLeg);
-        armorStand.getPersistentDataContainer().set(poseKey, PersistentDataType.STRING, nextPose.name());
-
-        event.setCancelled(true);
     }
 }
