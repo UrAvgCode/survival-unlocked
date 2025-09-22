@@ -18,6 +18,9 @@ better-armor-stands:
 villagers-follow-emeralds:
   enabled: true
 
+silence-mobs:
+  enabled: true
+
 more-mob-heads:
   enabled: true
 

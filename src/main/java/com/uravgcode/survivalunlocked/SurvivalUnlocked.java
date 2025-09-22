@@ -5,6 +5,7 @@ import com.uravgcode.survivalunlocked.feature.customshapedportals.CustomPortalLi
 import com.uravgcode.survivalunlocked.feature.invisibleitemframes.ItemFrameListener;
 import com.uravgcode.survivalunlocked.feature.moremobheads.MobHeadDropListener;
 import com.uravgcode.survivalunlocked.feature.playerheaddrops.PlayerHeadDropListener;
+import com.uravgcode.survivalunlocked.feature.silencemobs.SilenceMobListener;
 import com.uravgcode.survivalunlocked.feature.smoothsleeptransition.SleepListener;
 import com.uravgcode.survivalunlocked.feature.throwablefireballs.FireballThrowListener;
 import com.uravgcode.survivalunlocked.feature.villagersfollowemeralds.VillagerFollowListener;
@@ -53,6 +54,11 @@ public final class SurvivalUnlocked extends JavaPlugin {
         if (config.getBoolean("villagers-follow-emeralds.enabled", false)) {
             pluginManager.registerEvents(new VillagerFollowListener(this), this);
             logger.info("villagers follow emeralds enabled");
+        }
+
+        if (config.getBoolean("silence-mobs.enabled", false)) {
+            pluginManager.registerEvents(new SilenceMobListener(), this);
+            logger.info("silence mobs enabled");
         }
 
         if (config.getBoolean("more-mob-heads.enabled", false)) {
