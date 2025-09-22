@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked;
 
+import com.uravgcode.survivalunlocked.feature.betterarmorstands.ArmorStandListener;
 import com.uravgcode.survivalunlocked.feature.customshapedportals.CustomPortalListener;
 import com.uravgcode.survivalunlocked.feature.invisibleitemframes.ItemFrameListener;
 import com.uravgcode.survivalunlocked.feature.moremobheads.MobHeadDropListener;
@@ -42,6 +43,11 @@ public final class SurvivalUnlocked extends JavaPlugin {
         if (config.getBoolean("invisible-item-frames.enabled", false)) {
             pluginManager.registerEvents(new ItemFrameListener(), this);
             logger.info("invisible item frames enabled");
+        }
+
+        if (config.getBoolean("better-armor-stands.enabled", false)) {
+            pluginManager.registerEvents(new ArmorStandListener(), this);
+            logger.info("better armor stands enabled");
         }
 
         if (config.getBoolean("villagers-follow-emeralds.enabled", false)) {

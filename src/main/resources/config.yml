@@ -12,6 +12,9 @@ throwable-fireballs:
 invisible-item-frames:
   enabled: true
 
+better-armor-stands:
+  enabled: true
+
 villagers-follow-emeralds:
   enabled: true
 
