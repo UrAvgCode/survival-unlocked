@@ -15,7 +15,7 @@ public class PlayerHeadDropListener implements Listener {
         if (player.getKiller() == null) return;
 
         var head = new ItemStack(Material.PLAYER_HEAD, 1);
-        var meta = (SkullMeta) head.getItemMeta();
+        if (!(head.getItemMeta() instanceof SkullMeta meta)) return;
 
         meta.setOwningPlayer(player);
         head.setItemMeta(meta);
