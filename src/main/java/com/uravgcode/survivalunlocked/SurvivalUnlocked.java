@@ -46,7 +46,7 @@ public final class SurvivalUnlocked extends JavaPlugin {
         }
 
         if (config.getBoolean("better-armor-stands.enabled", false)) {
-            pluginManager.registerEvents(new ArmorStandListener(), this);
+            pluginManager.registerEvents(new ArmorStandListener(this), this);
             logger.info("better armor stands enabled");
         }
 
