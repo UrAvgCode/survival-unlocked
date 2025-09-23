@@ -7,6 +7,7 @@ import com.uravgcode.survivalunlocked.feature.moremobheads.MobHeadDropListener;
 import com.uravgcode.survivalunlocked.feature.playerheaddrops.PlayerHeadDropListener;
 import com.uravgcode.survivalunlocked.feature.silencemobs.SilenceMobListener;
 import com.uravgcode.survivalunlocked.feature.silktouchpaintings.PaintingDropListener;
+import com.uravgcode.survivalunlocked.feature.silktouchspawners.SilkTouchSpawnerListener;
 import com.uravgcode.survivalunlocked.feature.smoothsleeptransition.SleepListener;
 import com.uravgcode.survivalunlocked.feature.throwablefireballs.FireballThrowListener;
 import com.uravgcode.survivalunlocked.feature.villagersfollowemeralds.VillagerFollowListener;
@@ -42,6 +43,11 @@ public final class SurvivalUnlocked extends JavaPlugin {
             logger.info("throwable fireballs enabled");
         }
 
+        if (config.getBoolean("better-armor-stands.enabled", false)) {
+            pluginManager.registerEvents(new ArmorStandListener(this), this);
+            logger.info("better armor stands enabled");
+        }
+
         if (config.getBoolean("invisible-item-frames.enabled", false)) {
             pluginManager.registerEvents(new ItemFrameListener(), this);
             logger.info("invisible item frames enabled");
@@ -52,9 +58,9 @@ public final class SurvivalUnlocked extends JavaPlugin {
             logger.info("silk touch paintings enabled");
         }
 
-        if (config.getBoolean("better-armor-stands.enabled", false)) {
-            pluginManager.registerEvents(new ArmorStandListener(this), this);
-            logger.info("better armor stands enabled");
+        if (config.getBoolean("silk-touch-spawners.enabled", false)) {
+            pluginManager.registerEvents(new SilkTouchSpawnerListener(), this);
+            logger.info("silk touch spawners enabled");
         }
 
         if (config.getBoolean("villagers-follow-emeralds.enabled", false)) {

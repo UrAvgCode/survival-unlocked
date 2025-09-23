@@ -9,13 +9,16 @@ custom-shaped-portals:
 throwable-fireballs:
   enabled: true
 
+better-armor-stands:
+  enabled: true
+
 invisible-item-frames:
   enabled: true
 
 silk-touch-paintings:
   enabled: true
 
-better-armor-stands:
+silk-touch-spawners:
   enabled: true
 
 villagers-follow-emeralds:
