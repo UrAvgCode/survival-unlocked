@@ -45,7 +45,7 @@ public class SleepListener implements Listener {
     }
 
     private void updateNightSkipState(World world) {
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+        plugin.getServer().getGlobalRegionScheduler().runDelayed(plugin, task -> {
             boolean isNightSkipping = nightSkipTasks.containsKey(world);
             boolean sleepingPercentageMet = playersSleepingPercentageMet(world);
 
