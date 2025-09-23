@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 public class PaintingDropListener implements Listener {
 
     @EventHandler
+    @SuppressWarnings("UnstableApiUsage")
     public void onPaintingBreak(HangingBreakByEntityEvent event) {
         if (!(event.getEntity() instanceof Painting painting)) return;
 

@@ -98,6 +98,7 @@ public class CustomPortalListener implements Listener {
         return (visited.size() < minPortalSize) ? Optional.empty() : Optional.of(visited);
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     private void buildPortal(Set<Block> validPortalBlocks, Axis axis, World world, Entity entity, Location location) {
         plugin.getServer().getRegionScheduler().run(plugin, location, task -> {
             var portalData = (Orientable) Material.NETHER_PORTAL.createBlockData();
