@@ -19,7 +19,10 @@ public class SilkTouchSpawnerListener implements Listener {
         var block = event.getBlock();
         if (block.getType() != Material.SPAWNER) return;
 
-        var tool = event.getPlayer().getInventory().getItemInMainHand();
+        var player = event.getPlayer();
+        if (player.getGameMode() == org.bukkit.GameMode.CREATIVE) return;
+
+        var tool = player.getInventory().getItemInMainHand();
         if (!tool.containsEnchantment(Enchantment.SILK_TOUCH)) return;
         if (!block.isPreferredTool(tool)) return;
 
