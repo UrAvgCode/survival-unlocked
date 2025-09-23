@@ -1,8 +1,8 @@
 name: survival-unlocked
 main: com.uravgcode.survivalunlocked.SurvivalUnlocked
 folia-supported: true
-version: '1.0'
-api-version: '1.21'
+version: ${version}
+api-version: '1.21.8'
 
 description: vanilla friendly survival gameplay improvements
 website: 'https://uravgcode.com'
