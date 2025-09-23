@@ -11,8 +11,10 @@ keeping the classic vanilla atmosphere intact.
 | Smooth Sleep Transition   | Smoothly skips the night with an animation when enough players are sleeping, using the `playersSleepingPercentage` gamerule. |
 | Custom Shaped Portals     | Build nether portals in any shape, including with crying obsidian.                                                           |
 | Throwable Fireballs       | Players can throw fireballs from their hand.                                                                                 |
-| Invisible Item Frames     | Make item frames invisible by right-clicking them with shears.                                                               |
 | Better Armor Stands       | Armor stands have arms and can change poses when shift-clicked.                                                              |
+| Invisible Item Frames     | Make item frames invisible by right-clicking them with shears.                                                               |
+| Silk Touch Paintings      | Destroy paintings with a silk touch tool to collect the exact painting variant, preserving its artwork.                      |
+| Silk Touch Spawners       | Mine mob spawners with a silk touch tool to collect and place them for decoration.                                           |
 | Villagers Follow Emeralds | Villagers are attracted to players holding emeralds.                                                                         |
 | Silence Mobs              | Use a name tag named `silence` to mute mobs, or `unsilence` to restore their sounds.                                         |
 | More Mob Heads            | Mobs have a chance to drop their heads on death. Chances are configurable.                                                   |
