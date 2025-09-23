@@ -16,10 +16,14 @@ public class FireballThrowListener implements Listener {
         if (event.getAction() != Action.RIGHT_CLICK_AIR) return;
 
         var player = event.getPlayer();
-        var item = player.getInventory().getItemInMainHand();
+        var hand = event.getHand();
+        if (hand == null) return;
+
+        var item = player.getInventory().getItem(hand);
         if (item.getType() != Material.FIRE_CHARGE) return;
 
-        event.getPlayer().playSound(
+        player.swingHand(hand);
+        player.playSound(
             player.getEyeLocation(),
             Sound.ITEM_FIRECHARGE_USE,
             1, 1f
