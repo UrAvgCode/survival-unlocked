@@ -16,11 +16,10 @@ public class SilenceMobListener implements Listener {
 
     @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
-        if (event.getHand() != EquipmentSlot.HAND) return;
         if (!(event.getRightClicked() instanceof Mob mob)) return;
 
         var player = event.getPlayer();
-        var item = player.getInventory().getItemInMainHand();
+        var item = player.getInventory().getItem(event.getHand());
         if (item.getType() != Material.NAME_TAG) return;
 
         var meta = item.getItemMeta();
