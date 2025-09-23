@@ -12,6 +12,9 @@ throwable-fireballs:
 invisible-item-frames:
   enabled: true
 
+silk-touch-paintings:
+  enabled: true
+
 better-armor-stands:
   enabled: true
 

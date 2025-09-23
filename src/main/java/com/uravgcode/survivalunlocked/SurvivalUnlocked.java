@@ -6,6 +6,7 @@ import com.uravgcode.survivalunlocked.feature.invisibleitemframes.ItemFrameListe
 import com.uravgcode.survivalunlocked.feature.moremobheads.MobHeadDropListener;
 import com.uravgcode.survivalunlocked.feature.playerheaddrops.PlayerHeadDropListener;
 import com.uravgcode.survivalunlocked.feature.silencemobs.SilenceMobListener;
+import com.uravgcode.survivalunlocked.feature.silktouchpaintings.PaintingDropListener;
 import com.uravgcode.survivalunlocked.feature.smoothsleeptransition.SleepListener;
 import com.uravgcode.survivalunlocked.feature.throwablefireballs.FireballThrowListener;
 import com.uravgcode.survivalunlocked.feature.villagersfollowemeralds.VillagerFollowListener;
@@ -44,6 +45,11 @@ public final class SurvivalUnlocked extends JavaPlugin {
         if (config.getBoolean("invisible-item-frames.enabled", false)) {
             pluginManager.registerEvents(new ItemFrameListener(), this);
             logger.info("invisible item frames enabled");
+        }
+
+        if (config.getBoolean("silk-touch-paintings.enabled", false)) {
+            pluginManager.registerEvents(new PaintingDropListener(), this);
+            logger.info("silk touch paintings enabled");
         }
 
         if (config.getBoolean("better-armor-stands.enabled", false)) {
