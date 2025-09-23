@@ -1,7 +1,9 @@
 package com.uravgcode.survivalunlocked.feature.villagersfollowemeralds;
 
+import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
@@ -11,52 +13,77 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class VillagerFollowListener implements Listener {
     private static final double MIN_FOLLOW_DISTANCE = 2.0;
-    private final Set<Player> players = new HashSet<>();
+
+    private final JavaPlugin plugin;
+    private final Map<Player, ScheduledTask> followTasks;
 
     public VillagerFollowListener(@NotNull JavaPlugin plugin) {
-        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
-            for (Player player : players) {
-                if (!player.isConnected()) {
-                    players.remove(player);
-                    continue;
-                }
-
-                for (org.bukkit.entity.Entity entity : player.getNearbyEntities(10, 5, 10)) {
-                    if (entity.getType() == EntityType.VILLAGER) {
-                        var villager = (Villager) entity;
-                        var pathfinder = villager.getPathfinder();
-
-                        var distance = villager.getLocation().distance(player.getLocation());
-                        if (distance > MIN_FOLLOW_DISTANCE) {
-                            pathfinder.moveTo(player, 0.6);
-                        } else {
-                            pathfinder.stopPathfinding();
-                        }
-                    }
-                }
-            }
-        }, 0L, 10L);
+        this.plugin = plugin;
+        this.followTasks = new HashMap<>();
     }
 
     @EventHandler
     public void onPlayerItemHeld(PlayerItemHeldEvent event) {
         var player = event.getPlayer();
-        var item = player.getInventory().getItem(event.getNewSlot());
+        var slot = event.getNewSlot();
+        var mainHand = player.getInventory().getItem(slot);
+        var offHand = player.getInventory().getItemInOffHand();
 
-        if (item != null && item.getType() == Material.EMERALD_BLOCK) {
-            players.add(player);
+        if ((mainHand != null && mainHand.getType() == Material.EMERALD_BLOCK) ||
+            (offHand.getType() == Material.EMERALD_BLOCK)) {
+            startFollowTask(player);
         } else {
-            players.remove(player);
+            stopFollowTask(player);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerInventorySlotChange(PlayerInventorySlotChangeEvent event) {
+        var player = event.getPlayer();
+        var mainHand = player.getInventory().getItemInMainHand();
+        var offHand = player.getInventory().getItemInOffHand();
+
+        if ((mainHand.getType() == Material.EMERALD_BLOCK) ||
+            (offHand.getType() == Material.EMERALD_BLOCK)) {
+            startFollowTask(player);
+        } else {
+            stopFollowTask(player);
         }
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        players.remove(event.getPlayer());
+        stopFollowTask(event.getPlayer());
+    }
+
+    private void startFollowTask(Player player) {
+        if (followTasks.containsKey(player)) return;
+
+        var followTask = player.getScheduler().runAtFixedRate(plugin, task -> {
+            for (Entity entity : player.getNearbyEntities(10, 5, 10)) {
+                if (entity instanceof Villager villager) {
+                    var pathfinder = villager.getPathfinder();
+
+                    var distance = villager.getLocation().distance(player.getLocation());
+                    if (distance > MIN_FOLLOW_DISTANCE) {
+                        pathfinder.moveTo(player, 0.6);
+                    } else {
+                        pathfinder.stopPathfinding();
+                    }
+                }
+            }
+        }, null, 1L, 10L);
+
+        followTasks.put(player, followTask);
+    }
+
+    private void stopFollowTask(Player player) {
+        var followTask = followTasks.remove(player);
+        if (followTask != null) followTask.cancel();
     }
 }
