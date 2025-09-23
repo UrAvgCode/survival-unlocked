@@ -7,7 +7,6 @@ import org.bukkit.entity.Mob;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.inventory.EquipmentSlot;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -22,10 +21,7 @@ public class SilenceMobListener implements Listener {
         var item = player.getInventory().getItem(event.getHand());
         if (item.getType() != Material.NAME_TAG) return;
 
-        var meta = item.getItemMeta();
-        if (meta == null || !meta.hasCustomName()) return;
-
-        var name = meta.customName();
+        var name = item.getItemMeta().customName();
         if (Component.text("silence").equals(name)) {
             if (player.getGameMode() != GameMode.CREATIVE) item.subtract();
             player.sendActionBar(Component.text(getMobName(mob) + " silenced"));
