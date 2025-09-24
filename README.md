@@ -15,7 +15,7 @@ keeping the classic vanilla atmosphere intact.
 | Invisible Item Frames     | Make item frames invisible by right-clicking them with shears.                                                               |
 | Silk Touch Paintings      | Destroy paintings with a silk touch tool to collect the exact painting variant, preserving its artwork.                      |
 | Silk Touch Spawners       | Mine mob spawners with a silk touch tool to collect and place them for decoration.                                           |
-| Villagers Follow Emeralds | Villagers are attracted to players holding emeralds.                                                                         |
+| Villagers Follow Emeralds | Villagers are attracted to players holding emerald blocks.                                                                   |
 | Silence Mobs              | Use a name tag named `silence` to mute mobs, or `unsilence` to restore their sounds.                                         |
 | More Mob Heads            | Mobs have a chance to drop their heads on death. Chances are configurable.                                                   |
 | Player Head Drops         | Players drop their heads when killed by another player.                                                                      |

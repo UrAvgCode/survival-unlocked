@@ -1,6 +1,7 @@
 package com.uravgcode.survivalunlocked.feature.moremobheads;
 
 import com.destroystokyo.paper.profile.ProfileProperty;
+import com.uravgcode.survivalunlocked.feature.Feature;
 import com.uravgcode.survivalunlocked.feature.moremobheads.variant.BeeVariant;
 import com.uravgcode.survivalunlocked.feature.moremobheads.variant.CatType;
 import com.uravgcode.survivalunlocked.feature.moremobheads.variant.VillagerProfession;
@@ -26,6 +27,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Feature(name = "more-mob-heads")
 public class MobHeadDropListener implements Listener {
     private final JavaPlugin plugin;
     private final YamlConfiguration config;

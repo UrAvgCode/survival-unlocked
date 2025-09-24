@@ -1,34 +1,47 @@
-# config
+# Main configuration file for gameplay features.
 
-smooth-sleep-transition:
-  enabled: true
+features:
+  # Smoothly skips the night with an animation when enough players are sleeping.
+  # Use the playersSleepingPercentage gamerule to adjust sleeping percentage.
+  smooth-sleep-transition:
+    enabled: true
 
-custom-shaped-portals:
-  enabled: true
+  # Build nether portals in any shape, including with crying obsidian.
+  custom-shaped-portals:
+    enabled: true
 
-throwable-fireballs:
-  enabled: true
+  # Players can throw fireballs from their hand.
+  throwable-fireballs:
+    enabled: true
 
-better-armor-stands:
-  enabled: true
+  # Armor stands have arms and can change poses when shift-clicked.
+  better-armor-stands:
+    enabled: true
 
-invisible-item-frames:
-  enabled: true
+  # Make item frames invisible by right-clicking them with shears.
+  invisible-item-frames:
+    enabled: true
 
-silk-touch-paintings:
-  enabled: true
+  # Destroy paintings with a silk touch tool to collect the exact painting variant.
+  silk-touch-paintings:
+    enabled: true
 
-silk-touch-spawners:
-  enabled: true
+  # Mine mob spawners with a silk touch tool to collect and place them for decoration.
+  silk-touch-spawners:
+    enabled: true
 
-villagers-follow-emeralds:
-  enabled: true
+  # Villagers are attracted to players holding emerald blocks.
+  villagers-follow-emeralds:
+    enabled: true
 
-silence-mobs:
-  enabled: true
+  # Use a name tag named silence to mute mobs, or unsilence to restore their sounds.
+  silence-mobs:
+    enabled: true
 
-more-mob-heads:
-  enabled: true
+  # Mobs have a chance to drop their heads on death. Chances are configurable.
+  more-mob-heads:
+    enabled: true
 
-player-head-drops:
-  enabled: true
+  # Players drop their heads when killed by another player.
+  player-head-drops:
+    enabled: true

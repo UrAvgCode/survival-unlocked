@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.villagersfollowemeralds;
 
+import com.uravgcode.survivalunlocked.feature.Feature;
 import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import org.bukkit.Material;
@@ -16,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+@Feature(name = "villagers-follow-emeralds")
 public class VillagerFollowListener implements Listener {
     private static final double MIN_FOLLOW_DISTANCE = 2.0;
 

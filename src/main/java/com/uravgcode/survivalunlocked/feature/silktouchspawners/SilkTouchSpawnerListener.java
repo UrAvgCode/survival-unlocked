@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.silktouchspawners;
 
+import com.uravgcode.survivalunlocked.feature.Feature;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.TooltipDisplay;
 import io.papermc.paper.registry.keys.DataComponentTypeKeys;
@@ -11,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
+@Feature(name = "silk-touch-spawners")
 public class SilkTouchSpawnerListener implements Listener {
 
     @EventHandler

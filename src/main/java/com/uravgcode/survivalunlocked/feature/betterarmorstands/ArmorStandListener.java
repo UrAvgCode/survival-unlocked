@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.betterarmorstands;
 
+import com.uravgcode.survivalunlocked.feature.Feature;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
@@ -10,6 +11,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+@Feature(name = "better-armor-stands")
 public class ArmorStandListener implements Listener {
     private final NamespacedKey poseKey;
 

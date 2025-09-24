@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.throwablefireballs;
 
+import com.uravgcode.survivalunlocked.feature.Feature;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -9,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+@Feature(name = "throwable-fireballs")
 public class FireballThrowListener implements Listener {
 
     @EventHandler

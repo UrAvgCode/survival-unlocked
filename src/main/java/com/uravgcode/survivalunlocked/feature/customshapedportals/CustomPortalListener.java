@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.customshapedportals;
 
+import com.uravgcode.survivalunlocked.feature.Feature;
 import org.bukkit.Axis;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
+@Feature(name = "custom-shaped-portals")
 public class CustomPortalListener implements Listener {
     private static final int minPortalSize = 6;
     private static final int maxWidth = 21;

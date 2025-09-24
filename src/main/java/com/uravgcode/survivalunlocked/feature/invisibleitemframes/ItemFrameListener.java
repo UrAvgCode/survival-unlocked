@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.invisibleitemframes;
 
+import com.uravgcode.survivalunlocked.feature.Feature;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -9,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
+@Feature(name = "invisible-item-frames")
 public class ItemFrameListener implements Listener {
 
     @EventHandler

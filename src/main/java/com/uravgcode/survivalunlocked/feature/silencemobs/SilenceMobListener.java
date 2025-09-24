@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.silencemobs;
 
+import com.uravgcode.survivalunlocked.feature.Feature;
 import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -11,6 +12,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+@Feature(name = "silence-mobs")
 public class SilenceMobListener implements Listener {
 
     @EventHandler

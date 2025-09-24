@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.silktouchpaintings;
 
+import com.uravgcode.survivalunlocked.feature.Feature;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -10,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
+@Feature(name = "silk-touch-paintings")
 public class PaintingDropListener implements Listener {
 
     @EventHandler

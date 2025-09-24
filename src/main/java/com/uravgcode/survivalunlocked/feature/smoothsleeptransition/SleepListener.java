@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.smoothsleeptransition;
 
+import com.uravgcode.survivalunlocked.feature.Feature;
 import io.papermc.paper.event.player.PlayerDeepSleepEvent;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import org.bukkit.GameRule;
@@ -15,6 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
+@Feature(name = "smooth-sleep-transition")
 public class SleepListener implements Listener {
     private static final long DAY_LENGTH = 24000;
     private static final long TIME_RATE = 120;
