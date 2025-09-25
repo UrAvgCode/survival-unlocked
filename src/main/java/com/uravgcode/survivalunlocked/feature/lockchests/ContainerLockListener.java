@@ -55,6 +55,7 @@ public class ContainerLockListener implements Listener {
 
         var key = player.getInventory().getItemInMainHand();
         if (key.getType() != Material.TRIAL_KEY) return;
+        if (key.getItemMeta().getPersistentDataContainer().has(lockKey, PersistentDataType.LONG)) return;
 
         long lockValue = ThreadLocalRandom.current().nextLong();
         setLockValue(key, lockValue);
