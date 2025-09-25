@@ -12,6 +12,7 @@ import com.uravgcode.survivalunlocked.feature.silktouchpaintings.PaintingDropLis
 import com.uravgcode.survivalunlocked.feature.silktouchspawners.SilkTouchSpawnerListener;
 import com.uravgcode.survivalunlocked.feature.smoothsleeptransition.SleepListener;
 import com.uravgcode.survivalunlocked.feature.throwablefireballs.FireballThrowListener;
+import com.uravgcode.survivalunlocked.feature.transferyourpets.PetTransferListener;
 import com.uravgcode.survivalunlocked.feature.villagersfollowemeralds.VillagerFollowListener;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,6 +33,7 @@ public class FeatureList {
             new ChestLockListener(plugin),
             new VillagerFollowListener(plugin),
             new PetCallListener(),
+            new PetTransferListener(),
             new SilenceMobListener(),
             new MobHeadDropListener(plugin),
             new PlayerHeadDropListener()

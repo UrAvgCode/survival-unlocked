@@ -42,6 +42,10 @@ features:
   call-your-pets:
     enabled: true
 
+  # Pets can be transferred between players by shift-right-clicking them with a leashed pet.
+  transfer-your-pets:
+    enabled: true
+
   # Use a name tag named silence to mute mobs, or unsilence to restore their sounds.
   silence-mobs:
     enabled: true
