@@ -11,21 +11,32 @@ import org.bukkit.block.Container;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Feature(name = "container-locking")
 public class ContainerLockListener implements Listener {
     private final NamespacedKey lockKey;
+    private final NamespacedKey recipeKey;
 
     public ContainerLockListener(@NotNull JavaPlugin plugin) {
         this.lockKey = new NamespacedKey(plugin, "lock");
+        this.recipeKey = new NamespacedKey(plugin, "trial_key_recipe");
+
+        var result = new ItemStack(Material.TRIAL_KEY);
+        var recipe = new ShapelessRecipe(recipeKey, result);
+        recipe.addIngredient(Material.TRIAL_KEY);
+        plugin.getServer().addRecipe(recipe);
     }
 
     @EventHandler
@@ -53,6 +64,22 @@ public class ContainerLockListener implements Listener {
         player.playSound(player.getLocation(), Sound.BLOCK_VAULT_INSERT_ITEM_FAIL, 1.0f, 1.0f);
 
         event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onTrialKeyCraft(PrepareItemCraftEvent event) {
+        if (!(event.getRecipe() instanceof ShapelessRecipe recipe)) return;
+        if (!recipe.key().equals(recipeKey)) return;
+
+        boolean isContainerKey = Arrays.stream(event.getInventory().getMatrix())
+            .filter(Objects::nonNull)
+            .map(ItemStack::getItemMeta)
+            .filter(Objects::nonNull)
+            .allMatch(meta -> meta.getPersistentDataContainer().has(lockKey, PersistentDataType.LONG));
+
+        if (!isContainerKey) {
+            event.getInventory().setResult(null);
+        }
     }
 
     @SuppressWarnings("UnstableApiUsage")
