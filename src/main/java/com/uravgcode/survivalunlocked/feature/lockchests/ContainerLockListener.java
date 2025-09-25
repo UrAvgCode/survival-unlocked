@@ -6,6 +6,7 @@ import net.kyori.adventure.text.TranslatableComponent;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.block.Container;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -43,11 +44,13 @@ public class ContainerLockListener implements Listener {
 
         var key = player.getInventory().getItemInMainHand();
         if (key.getType() != Material.TRIAL_KEY) return;
-        setKeyMeta(key, container);
 
         long lockValue = ThreadLocalRandom.current().nextLong();
         setLockValue(key, lockValue);
         lockContainer(container, lockValue);
+
+        setKeyMeta(key, container);
+        player.playSound(player.getLocation(), Sound.BLOCK_VAULT_INSERT_ITEM_FAIL, 1.0f, 1.0f);
 
         event.setCancelled(true);
     }
