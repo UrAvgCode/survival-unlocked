@@ -38,6 +38,10 @@ features:
   villagers-follow-emeralds:
     enabled: true
 
+  # Pets can be called to the player by using a goat horn.
+  call-your-pets:
+    enabled: true
+
   # Use a name tag named silence to mute mobs, or unsilence to restore their sounds.
   silence-mobs:
     enabled: true

@@ -1,6 +1,7 @@
 package com.uravgcode.survivalunlocked.feature;
 
 import com.uravgcode.survivalunlocked.feature.betterarmorstands.ArmorStandListener;
+import com.uravgcode.survivalunlocked.feature.callyourpets.PetCallListener;
 import com.uravgcode.survivalunlocked.feature.customshapedportals.CustomPortalListener;
 import com.uravgcode.survivalunlocked.feature.invisibleitemframes.ItemFrameListener;
 import com.uravgcode.survivalunlocked.feature.lockchests.ChestLockListener;
@@ -30,6 +31,7 @@ public class FeatureList {
             new SilkTouchSpawnerListener(),
             new ChestLockListener(plugin),
             new VillagerFollowListener(plugin),
+            new PetCallListener(),
             new SilenceMobListener(),
             new MobHeadDropListener(plugin),
             new PlayerHeadDropListener()
