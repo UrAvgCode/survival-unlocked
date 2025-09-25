@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +24,6 @@ public class ContainerLockListener implements Listener {
     }
 
     @EventHandler
-    @SuppressWarnings("UnstableApiUsage")
     public void onContainerLock(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 
@@ -32,6 +32,7 @@ public class ContainerLockListener implements Listener {
 
         var state = block.getState();
         if (!(state instanceof Container container)) return;
+        if (container.isLocked()) return;
 
         var player = event.getPlayer();
         if (!player.isSneaking()) return;
@@ -39,14 +40,27 @@ public class ContainerLockListener implements Listener {
         var key = player.getInventory().getItemInMainHand();
         if (key.getType() != Material.TRIAL_KEY) return;
 
-        var meta = key.getItemMeta();
+        long lockValue = ThreadLocalRandom.current().nextLong();
+        setLockValue(key, lockValue);
+        lockContainer(container, lockValue);
+
+        event.setCancelled(true);
+    }
+
+    private void setLockValue(ItemStack item, long value) {
+        var meta = item.getItemMeta();
         if (meta == null) return;
 
-        meta.getPersistentDataContainer().set(lockKey, PersistentDataType.LONG, ThreadLocalRandom.current().nextLong());
-        key.setItemMeta(meta);
+        meta.getPersistentDataContainer().set(lockKey, PersistentDataType.LONG, value);
+        item.setItemMeta(meta);
+    }
 
-        container.setLockItem(key);
+    @SuppressWarnings("UnstableApiUsage")
+    private void lockContainer(Container container, long value) {
+        var item = new ItemStack(Material.TRIAL_KEY);
+        setLockValue(item, value);
+
+        container.setLockItem(item);
         container.update();
-        event.setCancelled(true);
     }
 }
