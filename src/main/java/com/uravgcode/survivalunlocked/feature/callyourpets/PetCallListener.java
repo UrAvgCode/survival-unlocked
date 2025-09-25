@@ -2,7 +2,6 @@ package com.uravgcode.survivalunlocked.feature.callyourpets;
 
 import com.uravgcode.survivalunlocked.feature.Feature;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Sittable;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
@@ -25,7 +24,7 @@ public class PetCallListener implements Listener {
         if (item.getType() != Material.GOAT_HORN) return;
         if (player.hasCooldown(item)) return;
 
-        for (Entity entity : player.getNearbyEntities(100, 100, 100)) {
+        for (var entity : player.getNearbyEntities(64, 64, 64)) {
             if (!(entity instanceof Tameable pet)) continue;
             if (pet instanceof Sittable sittable && sittable.isSitting()) continue;
             if (!player.getUniqueId().equals(pet.getOwnerUniqueId())) continue;
