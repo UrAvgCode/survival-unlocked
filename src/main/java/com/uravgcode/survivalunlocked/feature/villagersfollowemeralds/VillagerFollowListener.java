@@ -67,8 +67,8 @@ public class VillagerFollowListener implements Listener {
         if (followTasks.containsKey(player)) return;
 
         var followTask = player.getScheduler().runAtFixedRate(plugin, task -> {
-            for (Entity entity : player.getNearbyEntities(10, 5, 10)) {
-                if (entity instanceof Villager villager) {
+            for (Entity entity : player.getNearbyEntities(9, 9, 9)) {
+                if (entity instanceof Villager villager && !villager.isSleeping()) {
                     var pathfinder = villager.getPathfinder();
 
                     var distance = villager.getLocation().distance(player.getLocation());
