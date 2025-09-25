@@ -2,12 +2,12 @@ package com.uravgcode.survivalunlocked.feature.lockchests;
 
 import com.uravgcode.survivalunlocked.feature.Feature;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TranslatableComponent;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
-import org.bukkit.block.Container;
+import org.bukkit.block.Chest;
+import org.bukkit.block.DoubleChest;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -24,12 +24,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
-@Feature(name = "container-locking")
-public class ContainerLockListener implements Listener {
+@Feature(name = "lock-chests")
+public class ChestLockListener implements Listener {
     private final NamespacedKey lockKey;
     private final NamespacedKey recipeKey;
 
-    public ContainerLockListener(@NotNull JavaPlugin plugin) {
+    public ChestLockListener(@NotNull JavaPlugin plugin) {
         this.lockKey = new NamespacedKey(plugin, "lock");
         this.recipeKey = new NamespacedKey(plugin, "trial_key_recipe");
 
@@ -40,28 +40,33 @@ public class ContainerLockListener implements Listener {
     }
 
     @EventHandler
-    public void onContainerLock(PlayerInteractEvent event) {
+    public void onChestLock(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 
         var block = event.getClickedBlock();
         if (block == null) return;
 
         var state = block.getState();
-        if (!(state instanceof Container container)) return;
-        if (container.isLocked()) return;
+        if (!(state instanceof Chest chest)) return;
+        if (chest.isLocked()) return;
 
         var player = event.getPlayer();
         if (!player.isSneaking()) return;
 
         var key = player.getInventory().getItemInMainHand();
         if (key.getType() != Material.TRIAL_KEY) return;
-        if (key.getItemMeta().getPersistentDataContainer().has(lockKey, PersistentDataType.LONG)) return;
 
-        long lockValue = ThreadLocalRandom.current().nextLong();
+        var meta = key.getItemMeta();
+        if (meta == null) return;
+
+        var lockValue = meta.getPersistentDataContainer().get(lockKey, PersistentDataType.LONG);
+        if (lockValue == null) lockValue = ThreadLocalRandom.current().nextLong();
+
+        setKeyMeta(key);
         setLockValue(key, lockValue);
-        lockContainer(container, lockValue);
+        lockChest(chest, lockValue);
 
-        setKeyMeta(key, container);
+        player.swingMainHand();
         player.playSound(player.getLocation(), Sound.BLOCK_VAULT_INSERT_ITEM_FAIL, 1.0f, 1.0f);
 
         event.setCancelled(true);
@@ -84,17 +89,13 @@ public class ContainerLockListener implements Listener {
     }
 
     @SuppressWarnings("UnstableApiUsage")
-    private void setKeyMeta(ItemStack item, Container container) {
+    private void setKeyMeta(ItemStack item) {
         var meta = item.getItemMeta();
         if (meta == null) return;
 
-        if (!meta.hasCustomName() || meta.customName() instanceof TranslatableComponent) {
-            var containerTranslationKey = container.getType().translationKey();
-            var name = Component.translatable(containerTranslationKey)
-                .append(Component.text(" "))
-                .append(Component.translatable("item.survivalunlocked.key").fallback("Key"))
+        if (!meta.hasCustomName()) {
+            var name = Component.translatable("item.survivalunlocked.key").fallback("Key")
                 .decoration(TextDecoration.ITALIC, false);
-
             meta.customName(name);
         }
 
@@ -114,11 +115,22 @@ public class ContainerLockListener implements Listener {
     }
 
     @SuppressWarnings("UnstableApiUsage")
-    private void lockContainer(Container container, long value) {
+    private void lockChest(Chest chest, long value) {
         var item = new ItemStack(Material.TRIAL_KEY);
         setLockValue(item, value);
 
-        container.setLockItem(item);
-        container.update();
+        if (chest.getInventory().getHolder() instanceof DoubleChest doubleChest) {
+            if (doubleChest.getLeftSide() instanceof Chest leftSide) {
+                leftSide.setLockItem(item);
+                leftSide.update(false, false);
+            }
+            if (doubleChest.getRightSide() instanceof Chest rightSide) {
+                rightSide.setLockItem(item);
+                rightSide.update(false, false);
+            }
+        } else {
+            chest.setLockItem(item);
+            chest.update(false, false);
+        }
     }
 }

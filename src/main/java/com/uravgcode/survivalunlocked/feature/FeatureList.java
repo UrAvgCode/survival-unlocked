@@ -3,7 +3,7 @@ package com.uravgcode.survivalunlocked.feature;
 import com.uravgcode.survivalunlocked.feature.betterarmorstands.ArmorStandListener;
 import com.uravgcode.survivalunlocked.feature.customshapedportals.CustomPortalListener;
 import com.uravgcode.survivalunlocked.feature.invisibleitemframes.ItemFrameListener;
-import com.uravgcode.survivalunlocked.feature.lockchests.ContainerLockListener;
+import com.uravgcode.survivalunlocked.feature.lockchests.ChestLockListener;
 import com.uravgcode.survivalunlocked.feature.moremobheads.MobHeadDropListener;
 import com.uravgcode.survivalunlocked.feature.playerheaddrops.PlayerHeadDropListener;
 import com.uravgcode.survivalunlocked.feature.silencemobs.SilenceMobListener;
@@ -28,7 +28,7 @@ public class FeatureList {
             new ItemFrameListener(),
             new PaintingDropListener(),
             new SilkTouchSpawnerListener(),
-            new ContainerLockListener(plugin),
+            new ChestLockListener(plugin),
             new VillagerFollowListener(plugin),
             new SilenceMobListener(),
             new MobHeadDropListener(plugin),

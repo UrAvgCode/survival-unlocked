@@ -30,8 +30,8 @@ features:
   silk-touch-spawners:
     enabled: true
 
-  # Lock containers by shift-right-clicking them with a trial key.
-  container-locking:
+  # Lock chests by shift-right-clicking them with a trial key.
+  lock-chests:
     enabled: true
 
   # Villagers are attracted to players holding emerald blocks.
