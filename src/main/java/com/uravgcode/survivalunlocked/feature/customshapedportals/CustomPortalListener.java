@@ -1,16 +1,14 @@
 package com.uravgcode.survivalunlocked.feature.customshapedportals;
 
 import com.uravgcode.survivalunlocked.feature.Feature;
-import org.bukkit.Axis;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.world.PortalCreateEvent;
@@ -37,7 +35,7 @@ public class CustomPortalListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockIgnite(BlockIgniteEvent event) {
         var fireBlock = event.getBlock();
         if (!portalFrameMaterials.contains(fireBlock.getRelative(BlockFace.DOWN).getType())) return;
@@ -48,7 +46,7 @@ public class CustomPortalListener implements Listener {
         var entity = event.getIgnitingEntity();
         var location = fireBlock.getLocation();
 
-        for (Axis axis : new Axis[]{Axis.X, Axis.Z}) {
+        for (var axis : new Axis[]{Axis.X, Axis.Z}) {
             var portalBlocks = getPortalBlocks(fireBlock, axis);
             if (portalBlocks.isPresent()) {
                 buildPortal(portalBlocks.get(), axis, world, entity, location);
@@ -59,8 +57,8 @@ public class CustomPortalListener implements Listener {
     }
 
     private Optional<Set<Block>> getPortalBlocks(Block fireBlock, Axis axis) {
-        Set<Block> visited = new HashSet<>(Collections.singletonList(fireBlock));
-        Deque<Block> queue = new ArrayDeque<>(Collections.singletonList(fireBlock));
+        var visited = new HashSet<>(Collections.singletonList(fireBlock));
+        var queue = new ArrayDeque<>(Collections.singletonList(fireBlock));
 
         var directions = (axis == Axis.Z)
             ? new BlockFace[]{BlockFace.UP, BlockFace.DOWN, BlockFace.NORTH, BlockFace.SOUTH}
@@ -102,19 +100,21 @@ public class CustomPortalListener implements Listener {
 
     @SuppressWarnings("UnstableApiUsage")
     private void buildPortal(Set<Block> validPortalBlocks, Axis axis, World world, Entity entity, Location location) {
-        plugin.getServer().getRegionScheduler().run(plugin, location, task -> {
+        plugin.getServer().getRegionScheduler().execute(plugin, location, () -> {
             var portalData = (Orientable) Material.NETHER_PORTAL.createBlockData();
             portalData.setAxis(axis);
 
-            List<BlockState> blockStates = new ArrayList<>(validPortalBlocks.size());
-            for (Block block : validPortalBlocks) {
+            var blockStates = new ArrayList<BlockState>(validPortalBlocks.size());
+            for (var block : validPortalBlocks) {
                 var state = block.getState();
                 state.setBlockData(portalData);
                 blockStates.add(state);
             }
 
             var portalCreateEvent = new PortalCreateEvent(blockStates, world, entity, PortalCreateEvent.CreateReason.FIRE);
-            if (portalCreateEvent.callEvent()) {
+            plugin.getServer().getPluginManager().callEvent(portalCreateEvent);
+
+            if (!portalCreateEvent.isCancelled()) {
                 blockStates.forEach(state -> state.update(true));
             }
         });
