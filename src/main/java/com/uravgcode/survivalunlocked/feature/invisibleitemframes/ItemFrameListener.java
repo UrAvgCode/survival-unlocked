@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.invisibleitemframes;
 
-import com.uravgcode.survivalunlocked.feature.Feature;
+import com.uravgcode.survivalunlocked.annotation.Feature;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;

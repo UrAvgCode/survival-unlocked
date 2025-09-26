@@ -1,7 +1,7 @@
 package com.uravgcode.survivalunlocked.feature.moremobheads;
 
 import com.destroystokyo.paper.profile.ProfileProperty;
-import com.uravgcode.survivalunlocked.feature.Feature;
+import com.uravgcode.survivalunlocked.annotation.Feature;
 import com.uravgcode.survivalunlocked.feature.moremobheads.variant.BeeVariant;
 import com.uravgcode.survivalunlocked.feature.moremobheads.variant.CatType;
 import com.uravgcode.survivalunlocked.feature.moremobheads.variant.VillagerProfession;

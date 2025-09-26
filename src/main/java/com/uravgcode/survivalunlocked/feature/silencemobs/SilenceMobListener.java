@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.silencemobs;
 
-import com.uravgcode.survivalunlocked.feature.Feature;
+import com.uravgcode.survivalunlocked.annotation.Feature;
 import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
 import org.bukkit.Material;

@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.villagersfollowemeralds;
 
-import com.uravgcode.survivalunlocked.feature.Feature;
+import com.uravgcode.survivalunlocked.annotation.Feature;
 import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import org.bukkit.Material;

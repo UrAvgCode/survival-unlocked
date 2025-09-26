@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.lockchests;
 
-import com.uravgcode.survivalunlocked.feature.Feature;
+import com.uravgcode.survivalunlocked.annotation.Feature;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;

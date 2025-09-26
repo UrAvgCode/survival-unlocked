@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.throwablefireballs;
 
-import com.uravgcode.survivalunlocked.feature.Feature;
+import com.uravgcode.survivalunlocked.annotation.Feature;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;

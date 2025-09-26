@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.silktouchpaintings;
 
-import com.uravgcode.survivalunlocked.feature.Feature;
+import com.uravgcode.survivalunlocked.annotation.Feature;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

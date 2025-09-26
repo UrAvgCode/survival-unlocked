@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.smoothsleeptransition;
 
-import com.uravgcode.survivalunlocked.feature.Feature;
+import com.uravgcode.survivalunlocked.annotation.Feature;
 import io.papermc.paper.event.player.PlayerDeepSleepEvent;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import org.bukkit.GameRule;

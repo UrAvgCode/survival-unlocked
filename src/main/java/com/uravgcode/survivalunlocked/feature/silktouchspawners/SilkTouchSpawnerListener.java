@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.silktouchspawners;
 
-import com.uravgcode.survivalunlocked.feature.Feature;
+import com.uravgcode.survivalunlocked.annotation.Feature;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.TooltipDisplay;
 import io.papermc.paper.registry.keys.DataComponentTypeKeys;

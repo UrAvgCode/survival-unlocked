@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.transferyourpets;
 
-import com.uravgcode.survivalunlocked.feature.Feature;
+import com.uravgcode.survivalunlocked.annotation.Feature;
 import io.papermc.paper.dialog.Dialog;
 import io.papermc.paper.entity.Leashable;
 import io.papermc.paper.registry.data.dialog.ActionButton;

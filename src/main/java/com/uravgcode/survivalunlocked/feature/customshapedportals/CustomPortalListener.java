@@ -1,7 +1,10 @@
 package com.uravgcode.survivalunlocked.feature.customshapedportals;
 
-import com.uravgcode.survivalunlocked.feature.Feature;
-import org.bukkit.*;
+import com.uravgcode.survivalunlocked.annotation.Feature;
+import org.bukkit.Axis;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;

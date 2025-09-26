@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.playerheaddrops;
 
-import com.uravgcode.survivalunlocked.feature.Feature;
+import com.uravgcode.survivalunlocked.annotation.Feature;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

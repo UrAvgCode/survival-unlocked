@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.callyourpets;
 
-import com.uravgcode.survivalunlocked.feature.Feature;
+import com.uravgcode.survivalunlocked.annotation.Feature;
 import org.bukkit.Material;
 import org.bukkit.entity.Sittable;
 import org.bukkit.entity.Tameable;

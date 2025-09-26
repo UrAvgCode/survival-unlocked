@@ -1,4 +1,4 @@
-package com.uravgcode.survivalunlocked.feature;
+package com.uravgcode.survivalunlocked.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
