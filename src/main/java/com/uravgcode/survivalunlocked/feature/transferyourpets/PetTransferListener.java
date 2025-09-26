@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import java.util.List;
 public class PetTransferListener implements Listener {
 
     @EventHandler
-    public void onPetTransfer(PlayerInteractAtEntityEvent event) {
+    public void onPetTransfer(PlayerInteractEntityEvent event) {
         if (!(event.getRightClicked() instanceof Player target)) return;
 
         var player = event.getPlayer();
