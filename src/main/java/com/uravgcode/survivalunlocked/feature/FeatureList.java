@@ -4,6 +4,7 @@ import com.uravgcode.survivalunlocked.feature.betterarmorstands.ArmorStandListen
 import com.uravgcode.survivalunlocked.feature.callyourpets.PetCallListener;
 import com.uravgcode.survivalunlocked.feature.customshapedportals.CustomPortalListener;
 import com.uravgcode.survivalunlocked.feature.invisibleitemframes.ItemFrameListener;
+import com.uravgcode.survivalunlocked.feature.keepbabyanimals.KeepBabyAnimalsListener;
 import com.uravgcode.survivalunlocked.feature.lockchests.ChestLockListener;
 import com.uravgcode.survivalunlocked.feature.moremobheads.MobHeadDropListener;
 import com.uravgcode.survivalunlocked.feature.playerheaddrops.PlayerHeadDropListener;
@@ -34,6 +35,7 @@ public class FeatureList {
             new VillagerFollowListener(plugin),
             new PetCallListener(),
             new PetTransferListener(),
+            new KeepBabyAnimalsListener(),
             new SilenceMobListener(),
             new MobHeadDropListener(plugin),
             new PlayerHeadDropListener()

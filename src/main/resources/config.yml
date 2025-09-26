@@ -46,6 +46,10 @@ features:
   transfer-your-pets:
     enabled: true
 
+  # Keep animals in their baby form by feeding them a poisonous potato.
+  keep-baby-animals:
+    enabled: true
+
   # Use a name tag named silence to mute mobs, or unsilence to restore their sounds.
   silence-mobs:
     enabled: true
