@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.villagersfollowemeralds;
 
+import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import com.uravgcode.survivalunlocked.annotation.Feature;
 import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
@@ -19,7 +20,15 @@ import java.util.Map;
 
 @Feature(name = "villagers-follow-emeralds")
 public class VillagerFollowListener implements Listener {
-    private static final double MIN_FOLLOW_DISTANCE = 2.0;
+
+    @ConfigValue(name = "follow-radius")
+    private double followRadius = 9.0;
+
+    @ConfigValue(name = "follow-speed")
+    private double followSpeed = 0.6;
+
+    @ConfigValue(name = "min-follow-distance")
+    private double minFollowDistance = 2.0;
 
     private final JavaPlugin plugin;
     private final Map<Player, ScheduledTask> followTasks;
@@ -67,13 +76,13 @@ public class VillagerFollowListener implements Listener {
         if (followTasks.containsKey(player)) return;
 
         var followTask = player.getScheduler().runAtFixedRate(plugin, task -> {
-            for (Entity entity : player.getNearbyEntities(9, 9, 9)) {
+            for (Entity entity : player.getNearbyEntities(followRadius, followRadius, followRadius)) {
                 if (entity instanceof Villager villager && !villager.isSleeping()) {
                     var pathfinder = villager.getPathfinder();
 
                     var distance = villager.getLocation().distance(player.getLocation());
-                    if (distance > MIN_FOLLOW_DISTANCE) {
-                        pathfinder.moveTo(player, 0.6);
+                    if (distance > minFollowDistance) {
+                        pathfinder.moveTo(player, followSpeed);
                     } else {
                         pathfinder.stopPathfinding();
                     }

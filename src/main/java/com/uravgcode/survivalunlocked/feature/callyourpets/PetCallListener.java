@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.callyourpets;
 
+import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import com.uravgcode.survivalunlocked.annotation.Feature;
 import org.bukkit.Material;
 import org.bukkit.entity.Sittable;
@@ -11,6 +12,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 @Feature(name = "call-your-pets")
 public class PetCallListener implements Listener {
+
+    @ConfigValue(name = "call-radius")
+    private double callRadius = 64.0;
 
     @EventHandler
     public void onHornBlow(PlayerInteractEvent event) {
@@ -24,7 +28,7 @@ public class PetCallListener implements Listener {
         if (item.getType() != Material.GOAT_HORN) return;
         if (player.hasCooldown(item)) return;
 
-        for (var entity : player.getNearbyEntities(64, 64, 64)) {
+        for (var entity : player.getNearbyEntities(callRadius, callRadius, callRadius)) {
             if (!(entity instanceof Tameable pet)) continue;
             if (pet instanceof Sittable sittable && sittable.isSitting()) continue;
             if (!player.getUniqueId().equals(pet.getOwnerUniqueId())) continue;

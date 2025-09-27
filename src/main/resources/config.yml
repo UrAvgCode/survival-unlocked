@@ -5,10 +5,14 @@ features:
   # Use the playersSleepingPercentage gamerule to adjust sleeping percentage.
   smooth-sleep-transition:
     enabled: true
+    time-rate: 120
 
   # Build nether portals in any shape, including with crying obsidian.
   custom-shaped-portals:
     enabled: true
+    minimum-portal-size: 6
+    maximum-portal-width: 21
+    maximum-portal-height: 21
 
   # Players can throw fireballs from their hand.
   throwable-fireballs:
@@ -37,10 +41,14 @@ features:
   # Villagers are attracted to players holding emerald blocks.
   villagers-follow-emeralds:
     enabled: true
+    follow-radius: 9
+    follow-speed: 0.6
+    min-follow-distance: 2.0
 
   # Pets can be called to the player by using a goat horn.
   call-your-pets:
     enabled: true
+    call-radius: 64
 
   # Pets can be transferred between players by shift-right-clicking them with a leashed pet.
   transfer-your-pets:

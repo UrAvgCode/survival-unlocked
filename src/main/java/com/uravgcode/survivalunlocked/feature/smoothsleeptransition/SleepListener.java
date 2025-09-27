@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.smoothsleeptransition;
 
+import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import com.uravgcode.survivalunlocked.annotation.Feature;
 import io.papermc.paper.event.player.PlayerDeepSleepEvent;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
@@ -19,7 +20,9 @@ import java.util.WeakHashMap;
 @Feature(name = "smooth-sleep-transition")
 public class SleepListener implements Listener {
     private static final long DAY_LENGTH = 24000;
-    private static final long TIME_RATE = 120;
+
+    @ConfigValue(name = "time-rate")
+    private long timeRate = 120;
 
     private final JavaPlugin plugin;
     private final Map<World, ScheduledTask> nightSkipTasks;
@@ -78,13 +81,13 @@ public class SleepListener implements Listener {
         var nightSkipTask = plugin.getServer().getGlobalRegionScheduler().runAtFixedRate(plugin, task -> {
             long time = world.getTime();
 
-            if (time <= DAY_LENGTH && time + TIME_RATE >= DAY_LENGTH) {
+            if (time <= DAY_LENGTH && time + timeRate >= DAY_LENGTH) {
                 world.setTime(0);
                 stopNightSkip(world);
                 return;
             }
 
-            world.setTime(time + TIME_RATE);
+            world.setTime(time + timeRate);
         }, 1L, 1L);
 
         nightSkipTasks.put(world, nightSkipTask);

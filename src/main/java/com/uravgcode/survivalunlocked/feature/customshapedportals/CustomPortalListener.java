@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked.feature.customshapedportals;
 
+import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import com.uravgcode.survivalunlocked.annotation.Feature;
 import org.bukkit.Axis;
 import org.bukkit.Location;
@@ -23,11 +24,17 @@ import java.util.*;
 
 @Feature(name = "custom-shaped-portals")
 public class CustomPortalListener implements Listener {
-    private static final int minPortalSize = 6;
-    private static final int maxWidth = 21;
-    private static final int maxHeight = 21;
 
-    private static final Set<Material> portalFrameMaterials = Set.of(
+    @ConfigValue(name = "minimum-portal-size")
+    private int minPortalSize = 6;
+
+    @ConfigValue(name = "maximum-portal-width")
+    private int maxWidth = 21;
+
+    @ConfigValue(name = "maximum-portal-height")
+    private int maxHeight = 21;
+
+    private final Set<Material> portalFrameMaterials = Set.of(
         Material.OBSIDIAN,
         Material.CRYING_OBSIDIAN
     );
