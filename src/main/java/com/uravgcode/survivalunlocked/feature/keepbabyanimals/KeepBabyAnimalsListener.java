@@ -1,9 +1,7 @@
 package com.uravgcode.survivalunlocked.feature.keepbabyanimals;
 
 import com.uravgcode.survivalunlocked.annotation.Feature;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Breedable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,8 +20,23 @@ public class KeepBabyAnimalsListener implements Listener {
         var item = player.getInventory().getItemInMainHand();
         if (item.getType() != Material.POISONOUS_POTATO) return;
 
+        breedable.playHurtAnimation(0);
+        breedable.getWorld().spawnParticle(
+            Particle.ENTITY_EFFECT,
+            breedable.getEyeLocation(),
+            8,
+            0.15, 0.15, 0.15,
+            0.0,
+            Color.fromRGB(0x4E9331)
+        );
+
+        player.playSound(
+            breedable.getLocation(),
+            Sound.ENTITY_DONKEY_EAT,
+            1f, 1f
+        );
+
         breedable.setAgeLock(true);
-        player.playSound(breedable.getLocation(), Sound.ENTITY_DONKEY_EAT, 1f, 1f);
         if (player.getGameMode() != GameMode.CREATIVE) item.subtract();
     }
 }
