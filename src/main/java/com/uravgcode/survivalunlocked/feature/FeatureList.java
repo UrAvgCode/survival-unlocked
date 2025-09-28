@@ -32,7 +32,7 @@ public class FeatureList {
             new PaintingDropListener(),
             new SilkTouchSpawnerListener(),
             new ChestLockListener(plugin),
-            new VillagerFollowListener(plugin),
+            new VillagerFollowListener(),
             new PetCallListener(),
             new PetTransferListener(),
             new KeepBabyAnimalsListener(),

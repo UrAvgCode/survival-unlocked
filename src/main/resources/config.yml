@@ -41,9 +41,7 @@ features:
   # Villagers are attracted to players holding emerald blocks.
   villagers-follow-emeralds:
     enabled: true
-    follow-radius: 9
     follow-speed: 0.6
-    min-follow-distance: 2.0
 
   # Pets can be called to the player by using a goat horn.
   call-your-pets:
