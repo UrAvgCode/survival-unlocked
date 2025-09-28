@@ -67,9 +67,11 @@ public class ChestLockListener implements Listener {
         lockChest(chest, lockValue);
 
         player.swingMainHand();
-        player.playSound(player.getLocation(), Sound.BLOCK_VAULT_INSERT_ITEM_FAIL, 1.0f, 1.0f);
-
-        event.setCancelled(true);
+        player.getWorld().playSound(
+            player.getLocation(),
+            Sound.BLOCK_VAULT_INSERT_ITEM_FAIL,
+            1.0f, 1.0f
+        );
     }
 
     @EventHandler

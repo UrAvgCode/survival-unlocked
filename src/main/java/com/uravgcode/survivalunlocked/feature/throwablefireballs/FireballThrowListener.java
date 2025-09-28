@@ -25,7 +25,7 @@ public class FireballThrowListener implements Listener {
         if (item.getType() != Material.FIRE_CHARGE) return;
 
         player.swingHand(hand);
-        player.playSound(
+        player.getWorld().playSound(
             player.getEyeLocation(),
             Sound.ITEM_FIRECHARGE_USE,
             1, 1f

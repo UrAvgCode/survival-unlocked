@@ -30,7 +30,7 @@ public class KeepBabyAnimalsListener implements Listener {
             Color.fromRGB(0x4E9331)
         );
 
-        player.playSound(
+        breedable.getWorld().playSound(
             breedable.getLocation(),
             Sound.ENTITY_DONKEY_EAT,
             1f, 1f

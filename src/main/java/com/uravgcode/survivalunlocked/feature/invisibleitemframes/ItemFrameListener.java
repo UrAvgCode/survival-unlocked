@@ -27,11 +27,12 @@ public class ItemFrameListener implements Listener {
         frame.getWorld().spawnParticle(
             Particle.CRIT,
             frame.getLocation().add(0, 0.5, 0),
-            5, 0.2, 0.2, 0.2,
+            5,
+            0.2, 0.2, 0.2,
             0.05
         );
 
-        event.getPlayer().playSound(
+        frame.getWorld().playSound(
             frame.getLocation(),
             Sound.BLOCK_BEEHIVE_SHEAR,
             1, 1f
