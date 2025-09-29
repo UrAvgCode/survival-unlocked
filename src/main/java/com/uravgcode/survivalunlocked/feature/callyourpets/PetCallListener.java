@@ -3,6 +3,7 @@ package com.uravgcode.survivalunlocked.feature.callyourpets;
 import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import com.uravgcode.survivalunlocked.annotation.Feature;
 import org.bukkit.Material;
+import org.bukkit.entity.AbstractHorse;
 import org.bukkit.entity.Sittable;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
@@ -32,7 +33,13 @@ public class PetCallListener implements Listener {
             if (!(entity instanceof Tameable pet)) continue;
             if (pet instanceof Sittable sittable && sittable.isSitting()) continue;
             if (!player.getUniqueId().equals(pet.getOwnerUniqueId())) continue;
-            pet.getPathfinder().moveTo(player, 1.2);
+
+            final double speed = switch (pet) {
+                case AbstractHorse ignored -> 2.0;
+                default -> 1.2;
+            };
+
+            pet.getPathfinder().moveTo(player, speed);
         }
     }
 }
