@@ -18,6 +18,9 @@ features:
   throwable-fireballs:
     enabled: true
 
+  zombie-horse:
+    enabled: true
+
   # Armor stands have arms and can change poses when shift-clicked.
   better-armor-stands:
     enabled: true

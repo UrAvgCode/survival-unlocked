@@ -15,6 +15,7 @@ import com.uravgcode.survivalunlocked.feature.smoothsleeptransition.SleepListene
 import com.uravgcode.survivalunlocked.feature.throwablefireballs.FireballThrowListener;
 import com.uravgcode.survivalunlocked.feature.transferyourpets.PetTransferListener;
 import com.uravgcode.survivalunlocked.feature.villagersfollowemeralds.VillagerFollowListener;
+import com.uravgcode.survivalunlocked.feature.zombiehorse.ZombieHorseListener;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +28,7 @@ public class FeatureList {
             new SleepListener(plugin),
             new CustomPortalListener(plugin),
             new FireballThrowListener(),
+            new ZombieHorseListener(),
             new ArmorStandListener(plugin),
             new ItemFrameListener(),
             new PaintingDropListener(),
