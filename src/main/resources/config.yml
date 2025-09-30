@@ -71,3 +71,6 @@ features:
   # Players drop their heads when killed by another player.
   player-head-drops:
     enabled: true
+
+config:
+  version: ${version}
