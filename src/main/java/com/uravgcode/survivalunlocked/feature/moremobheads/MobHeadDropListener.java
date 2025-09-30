@@ -4,6 +4,7 @@ import com.destroystokyo.paper.profile.ProfileProperty;
 import com.uravgcode.survivalunlocked.annotation.Feature;
 import com.uravgcode.survivalunlocked.feature.moremobheads.variant.BeeVariant;
 import com.uravgcode.survivalunlocked.feature.moremobheads.variant.CatType;
+import com.uravgcode.survivalunlocked.feature.moremobheads.variant.CopperGolemState;
 import com.uravgcode.survivalunlocked.feature.moremobheads.variant.VillagerProfession;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -85,6 +86,7 @@ public class MobHeadDropListener implements Listener {
             case Bee bee -> BeeVariant.name(bee.hasNectar(), bee.getAnger() > 0);
             case Cat cat -> CatType.name(cat.getCatType());
             case Chicken chicken -> chicken.getVariant().key().value();
+            case CopperGolem copperGolem -> CopperGolemState.name(copperGolem);
             case Cow cow -> cow.getVariant().key().value();
             case Creeper creeper -> creeper.isPowered() ? "charged" : null;
             case Fox fox -> fox.getFoxType().name().toLowerCase();
