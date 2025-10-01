@@ -5,15 +5,12 @@ import com.uravgcode.survivalunlocked.annotation.Feature;
 import com.uravgcode.survivalunlocked.feature.FeatureList;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
-import java.util.Objects;
+import java.nio.file.StandardCopyOption;
 
 public final class SurvivalUnlocked extends JavaPlugin {
 
@@ -30,7 +27,8 @@ public final class SurvivalUnlocked extends JavaPlugin {
 
         if (!pluginVersion.equals(configVersion)) {
             try {
-                updateConfig();
+                updateResource("config.yml");
+                updateResource("heads.yml");
                 reloadConfig();
                 logger.info("updating config to version {}", pluginVersion);
             } catch (IOException exception) {
@@ -57,21 +55,13 @@ public final class SurvivalUnlocked extends JavaPlugin {
         }
     }
 
-    private void updateConfig() throws IOException {
-        var currentConfig = getConfig();
-        var defaultConfig = YamlConfiguration.loadConfiguration(
-            new InputStreamReader(Objects.requireNonNull(getResource("config.yml")))
-        );
+    private void updateResource(String resourceName) throws IOException {
+        var dataFolder = getDataFolder().toPath();
+        var resourcePath = dataFolder.resolve(resourceName);
+        var backupPath = dataFolder.resolve(resourceName.replace(".yml", ".old.yml"));
 
-        for (String key : defaultConfig.getKeys(true)) {
-            if (key.startsWith("config")) continue;
-            if (currentConfig.contains(key)) {
-                defaultConfig.set(key, currentConfig.get(key));
-                defaultConfig.setComments(key, currentConfig.getComments(key));
-            }
-        }
-
-        defaultConfig.save(new File(getDataFolder(), "config.yml"));
+        Files.move(resourcePath, backupPath, StandardCopyOption.REPLACE_EXISTING);
+        saveResource(resourceName, false);
     }
 
     private void injectConfigValues(Listener feature) {
