@@ -18,7 +18,11 @@ features:
   throwable-fireballs:
     enabled: true
 
-  # A zombie riding a zombie horse can spawn when a lightning strikes during a thunderstorm
+  # Tridents enchanted with loyalty will return when thrown into the void.
+  better-tridents:
+    enabled: true
+
+  # A zombie riding a zombie horse can spawn when a lightning strikes during a thunderstorm.
   zombie-horse:
     enabled: true
 

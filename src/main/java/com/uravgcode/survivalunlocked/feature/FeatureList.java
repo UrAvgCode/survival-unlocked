@@ -1,6 +1,7 @@
 package com.uravgcode.survivalunlocked.feature;
 
 import com.uravgcode.survivalunlocked.feature.betterarmorstands.ArmorStandListener;
+import com.uravgcode.survivalunlocked.feature.bettertridents.TridentListener;
 import com.uravgcode.survivalunlocked.feature.callyourpets.PetCallListener;
 import com.uravgcode.survivalunlocked.feature.customshapedportals.CustomPortalListener;
 import com.uravgcode.survivalunlocked.feature.invisibleitemframes.ItemFrameListener;
@@ -28,6 +29,7 @@ public class FeatureList {
             new SleepListener(plugin),
             new CustomPortalListener(plugin),
             new FireballThrowListener(),
+            new TridentListener(plugin),
             new ZombieHorseListener(),
             new ArmorStandListener(plugin),
             new ItemFrameListener(),
