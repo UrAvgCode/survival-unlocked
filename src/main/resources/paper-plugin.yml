@@ -1,5 +1,6 @@
 name: survival-unlocked
 main: com.uravgcode.survivalunlocked.SurvivalUnlocked
+bootstrapper: com.uravgcode.survivalunlocked.SurvivalUnlockedBootstrap
 folia-supported: true
 version: ${version}
 api-version: '1.21.9'
