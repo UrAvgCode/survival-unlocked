@@ -1,8 +1,9 @@
 package com.uravgcode.survivalunlocked.feature.lockchests;
 
 import com.uravgcode.survivalunlocked.annotation.Feature;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.CustomModelData;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -20,7 +21,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -33,7 +33,7 @@ public class ChestLockListener implements Listener {
         this.lockKey = new NamespacedKey(plugin, "lock");
         this.recipeKey = new NamespacedKey(plugin, "trial_key_recipe");
 
-        var result = new ItemStack(Material.TRIAL_KEY);
+        var result = ItemStack.of(Material.TRIAL_KEY);
         var recipe = new ShapelessRecipe(recipeKey, result);
         recipe.addIngredient(Material.TRIAL_KEY);
         plugin.getServer().addRecipe(recipe);
@@ -92,33 +92,17 @@ public class ChestLockListener implements Listener {
 
     @SuppressWarnings("UnstableApiUsage")
     private void setKeyMeta(ItemStack item) {
-        var meta = item.getItemMeta();
-        if (meta == null) return;
-
-        if (!meta.hasCustomName()) {
-            var name = Component.translatable("item.survivalunlocked.key").fallback("Key")
-                .decoration(TextDecoration.ITALIC, false);
-            meta.customName(name);
-        }
-
-        var customModelData = meta.getCustomModelDataComponent();
-        customModelData.setStrings(List.of("key"));
-        meta.setCustomModelDataComponent(customModelData);
-
-        item.setItemMeta(meta);
+        item.setData(DataComponentTypes.ITEM_NAME, Component.translatable("item.survivalunlocked.key").fallback("Key"));
+        item.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData().addString("key"));
     }
 
     private void setLockValue(ItemStack item, long value) {
-        var meta = item.getItemMeta();
-        if (meta == null) return;
-
-        meta.getPersistentDataContainer().set(lockKey, PersistentDataType.LONG, value);
-        item.setItemMeta(meta);
+        item.editPersistentDataContainer(container -> container.set(lockKey, PersistentDataType.LONG, value));
     }
 
     @SuppressWarnings("UnstableApiUsage")
     private void lockChest(Chest chest, long value) {
-        var item = new ItemStack(Material.TRIAL_KEY);
+        var item = ItemStack.of(Material.TRIAL_KEY);
         setLockValue(item, value);
 
         if (chest.getInventory().getHolder() instanceof DoubleChest doubleChest) {
