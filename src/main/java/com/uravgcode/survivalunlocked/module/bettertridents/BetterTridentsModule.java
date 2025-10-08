@@ -12,10 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "better-tridents")
 public class BetterTridentsModule extends PluginModule {
-    private final JavaPlugin plugin;
 
     public BetterTridentsModule(@NotNull JavaPlugin plugin) {
-        this.plugin = plugin;
+        super(plugin);
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

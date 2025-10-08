@@ -24,11 +24,10 @@ public class SmoothSleepTransitionModule extends PluginModule {
     @ConfigValue(name = "time-rate")
     private long timeRate = 120;
 
-    private final JavaPlugin plugin;
     private final Map<World, ScheduledTask> nightSkipTasks;
 
     public SmoothSleepTransitionModule(@NotNull JavaPlugin plugin) {
-        this.plugin = plugin;
+        super(plugin);
         this.nightSkipTasks = new WeakHashMap<>();
     }
 

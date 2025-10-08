@@ -11,12 +11,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.weather.LightningStrikeEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 @ModuleMeta(name = "zombie-horse")
 public final class ZombieHorseModule extends PluginModule {
+
+    public ZombieHorseModule(@NotNull JavaPlugin plugin) {
+        super(plugin);
+    }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onLightningStrike(LightningStrikeEvent event) {

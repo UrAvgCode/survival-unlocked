@@ -27,21 +27,21 @@ public class PluginModules {
         return List.of(
             new BetterArmorStandsModule(plugin),
             new BetterTridentsModule(plugin),
-            new CallYourPetsModule(),
+            new CallYourPetsModule(plugin),
             new CustomShapedPortalsModule(plugin),
-            new InvisibleItemFramesModule(),
-            new KeepBabyAnimalsModule(),
+            new InvisibleItemFramesModule(plugin),
+            new KeepBabyAnimalsModule(plugin),
             new LockChestsModule(plugin),
             new MoreMobHeadsModule(plugin),
-            new PlayerHeadDropsModule(),
-            new SilenceMobsModule(),
-            new SilkTouchPaintingsModule(),
-            new SilkTouchSpawnersModule(),
+            new PlayerHeadDropsModule(plugin),
+            new SilenceMobsModule(plugin),
+            new SilkTouchPaintingsModule(plugin),
+            new SilkTouchSpawnersModule(plugin),
             new SmoothSleepTransitionModule(plugin),
-            new ThrowableFireballsModule(),
-            new TransferYourPetsModule(),
-            new VillagerFollowEmeraldsModule(),
-            new ZombieHorseModule()
+            new ThrowableFireballsModule(plugin),
+            new TransferYourPetsModule(plugin),
+            new VillagerFollowEmeraldsModule(plugin),
+            new ZombieHorseModule(plugin)
         );
     }
 }

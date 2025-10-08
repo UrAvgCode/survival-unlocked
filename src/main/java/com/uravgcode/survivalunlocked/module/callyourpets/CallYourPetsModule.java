@@ -10,12 +10,18 @@ import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "call-your-pets")
 public class CallYourPetsModule extends PluginModule {
 
     @ConfigValue(name = "call-radius")
     private double callRadius = 64.0;
+
+    public CallYourPetsModule(@NotNull JavaPlugin plugin) {
+        super(plugin);
+    }
 
     @EventHandler
     public void onHornBlow(PlayerInteractEvent event) {

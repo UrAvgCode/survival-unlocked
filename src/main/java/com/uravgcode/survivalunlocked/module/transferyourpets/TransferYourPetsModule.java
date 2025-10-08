@@ -16,11 +16,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 @ModuleMeta(name = "transfer-your-pets")
 public class TransferYourPetsModule extends PluginModule {
+
+    public TransferYourPetsModule(@NotNull JavaPlugin plugin) {
+        super(plugin);
+    }
 
     @EventHandler
     public void onPetTransfer(PlayerInteractEntityEvent event) {

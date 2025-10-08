@@ -10,12 +10,18 @@ import org.bukkit.entity.Mob;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @ModuleMeta(name = "silence-mobs")
 public class SilenceMobsModule extends PluginModule {
+
+    public SilenceMobsModule(@NotNull JavaPlugin plugin) {
+        super(plugin);
+    }
 
     @SuppressWarnings("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

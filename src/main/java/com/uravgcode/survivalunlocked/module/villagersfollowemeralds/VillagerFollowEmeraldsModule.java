@@ -10,12 +10,18 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.bukkit.craftbukkit.entity.CraftVillager;
 import org.bukkit.event.EventHandler;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "villagers-follow-emeralds")
 public class VillagerFollowEmeraldsModule extends PluginModule {
 
     @ConfigValue(name = "follow-speed")
     private double followSpeed = 0.6;
+
+    public VillagerFollowEmeraldsModule(@NotNull JavaPlugin plugin) {
+        super(plugin);
+    }
 
     @EventHandler
     public void onVillagerEntityAdd(EntityAddToWorldEvent event) {

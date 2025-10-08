@@ -9,9 +9,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "player-head-drops")
 public class PlayerHeadDropsModule extends PluginModule {
+
+    public PlayerHeadDropsModule(@NotNull JavaPlugin plugin) {
+        super(plugin);
+    }
 
     @SuppressWarnings("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

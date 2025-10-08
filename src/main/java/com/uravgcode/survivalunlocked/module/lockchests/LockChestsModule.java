@@ -31,6 +31,7 @@ public class LockChestsModule extends PluginModule {
     private final NamespacedKey recipeKey;
 
     public LockChestsModule(@NotNull JavaPlugin plugin) {
+        super(plugin);
         this.lockKey = new NamespacedKey(plugin, "lock");
         this.recipeKey = new NamespacedKey(plugin, "trial_key_recipe");
 

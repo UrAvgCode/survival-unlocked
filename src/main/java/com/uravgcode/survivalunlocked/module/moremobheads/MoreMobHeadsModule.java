@@ -33,6 +33,7 @@ public class MoreMobHeadsModule extends PluginModule {
     private final YamlConfiguration config;
 
     public MoreMobHeadsModule(@NotNull JavaPlugin plugin) {
+        super(plugin);
         this.config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "heads.yml"));
     }
 

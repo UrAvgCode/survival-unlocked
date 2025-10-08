@@ -39,10 +39,8 @@ public class CustomShapedPortalsModule extends PluginModule {
         Material.CRYING_OBSIDIAN
     );
 
-    private final JavaPlugin plugin;
-
     public CustomShapedPortalsModule(@NotNull JavaPlugin plugin) {
-        this.plugin = plugin;
+        super(plugin);
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

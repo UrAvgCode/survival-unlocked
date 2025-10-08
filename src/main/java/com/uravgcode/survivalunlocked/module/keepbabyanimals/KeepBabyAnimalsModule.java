@@ -7,9 +7,15 @@ import org.bukkit.entity.Breedable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "keep-baby-animals")
 public class KeepBabyAnimalsModule extends PluginModule {
+
+    public KeepBabyAnimalsModule(@NotNull JavaPlugin plugin) {
+        super(plugin);
+    }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {

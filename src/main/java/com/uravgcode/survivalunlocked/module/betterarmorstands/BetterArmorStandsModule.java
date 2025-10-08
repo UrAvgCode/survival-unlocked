@@ -17,6 +17,7 @@ public class BetterArmorStandsModule extends PluginModule {
     private final NamespacedKey poseKey;
 
     public BetterArmorStandsModule(@NotNull JavaPlugin plugin) {
+        super(plugin);
         this.poseKey = new NamespacedKey(plugin, "pose");
     }
 
