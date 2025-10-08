@@ -6,8 +6,9 @@ import com.uravgcode.survivalunlocked.feature.moremobheads.variant.BeeVariant;
 import com.uravgcode.survivalunlocked.feature.moremobheads.variant.CatType;
 import com.uravgcode.survivalunlocked.feature.moremobheads.variant.CopperGolemState;
 import com.uravgcode.survivalunlocked.feature.moremobheads.variant.VillagerProfession;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.ResolvableProfile;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
@@ -18,23 +19,19 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Feature(name = "more-mob-heads")
 public class MobHeadDropListener implements Listener {
-    private final JavaPlugin plugin;
     private final YamlConfiguration config;
 
     public MobHeadDropListener(@NotNull JavaPlugin plugin) {
-        this.plugin = plugin;
         this.config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "heads.yml"));
     }
 
@@ -60,20 +57,19 @@ public class MobHeadDropListener implements Listener {
         });
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     private ItemStack createHead(String texture, String display, String sound) {
         var head = new ItemStack(Material.PLAYER_HEAD);
-        var meta = (SkullMeta) head.getItemMeta();
 
         if (texture != null) {
-            var profile = plugin.getServer().createProfile(new UUID(0, 0), "");
-            profile.getProperties().add(new ProfileProperty("textures", texture));
-            meta.setPlayerProfile(profile);
+            head.setData(DataComponentTypes.PROFILE, ResolvableProfile.resolvableProfile()
+                .addProperty(new ProfileProperty("textures", texture))
+                .build());
         }
 
-        if (display != null) meta.displayName(Component.text(display).decoration(TextDecoration.ITALIC, false));
-        if (sound != null) meta.setNoteBlockSound(NamespacedKey.minecraft(sound));
+        if (display != null) head.setData(DataComponentTypes.ITEM_NAME, Component.text(display));
+        if (sound != null) head.setData(DataComponentTypes.NOTE_BLOCK_SOUND, NamespacedKey.minecraft(sound));
 
-        head.setItemMeta(meta);
         return head;
     }
 
