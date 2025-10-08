@@ -1,26 +1,26 @@
 package com.uravgcode.survivalunlocked.feature.playerheaddrops;
 
 import com.uravgcode.survivalunlocked.annotation.Feature;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.ResolvableProfile;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 
 @Feature(name = "player-head-drops")
 public class PlayerHeadDropListener implements Listener {
 
-    @EventHandler
+    @SuppressWarnings("UnstableApiUsage")
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerDeath(PlayerDeathEvent event) {
         var player = event.getEntity();
         if (player.getKiller() == null) return;
 
-        var head = new ItemStack(Material.PLAYER_HEAD, 1);
-        if (!(head.getItemMeta() instanceof SkullMeta meta)) return;
-
-        meta.setOwningPlayer(player);
-        head.setItemMeta(meta);
+        var head = ItemStack.of(Material.PLAYER_HEAD);
+        head.setData(DataComponentTypes.PROFILE, ResolvableProfile.resolvableProfile(player.getPlayerProfile()));
         event.getDrops().add(head);
     }
 }
