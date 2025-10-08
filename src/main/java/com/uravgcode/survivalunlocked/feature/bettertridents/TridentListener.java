@@ -4,6 +4,7 @@ import com.uravgcode.survivalunlocked.annotation.Feature;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,7 +18,7 @@ public class TridentListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onTridentThrow(ProjectileLaunchEvent event) {
         if (!(event.getEntity() instanceof Trident trident)) return;
         if (!(trident.getShooter() instanceof Player)) return;

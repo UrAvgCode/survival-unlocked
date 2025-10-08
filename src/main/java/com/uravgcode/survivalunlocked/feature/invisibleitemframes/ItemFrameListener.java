@@ -6,6 +6,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -13,7 +14,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 @Feature(name = "invisible-item-frames")
 public class ItemFrameListener implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         if (!(event.getRightClicked() instanceof ItemFrame frame)) return;
 
@@ -42,7 +43,7 @@ public class ItemFrameListener implements Listener {
         event.setCancelled(true);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof ItemFrame frame) {
             frame.setVisible(true);

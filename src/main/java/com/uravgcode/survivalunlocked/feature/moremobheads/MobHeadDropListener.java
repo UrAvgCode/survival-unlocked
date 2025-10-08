@@ -16,6 +16,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
@@ -35,7 +36,7 @@ public class MobHeadDropListener implements Listener {
         this.config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "heads.yml"));
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onEntityDeath(EntityDeathEvent event) {
         var killed = event.getEntity();
         var killer = killed.getKiller();
@@ -59,7 +60,7 @@ public class MobHeadDropListener implements Listener {
 
     @SuppressWarnings("UnstableApiUsage")
     private ItemStack createHead(String texture, String display, String sound) {
-        var head = new ItemStack(Material.PLAYER_HEAD);
+        var head = ItemStack.of(Material.PLAYER_HEAD);
 
         if (texture != null) {
             head.setData(DataComponentTypes.PROFILE, ResolvableProfile.resolvableProfile()

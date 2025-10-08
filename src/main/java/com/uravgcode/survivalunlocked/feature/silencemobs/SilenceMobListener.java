@@ -1,11 +1,13 @@
 package com.uravgcode.survivalunlocked.feature.silencemobs;
 
 import com.uravgcode.survivalunlocked.annotation.Feature;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Mob;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
@@ -15,7 +17,8 @@ import java.util.stream.Collectors;
 @Feature(name = "silence-mobs")
 public class SilenceMobListener implements Listener {
 
-    @EventHandler
+    @SuppressWarnings("UnstableApiUsage")
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         if (!(event.getRightClicked() instanceof Mob mob)) return;
 
@@ -23,7 +26,7 @@ public class SilenceMobListener implements Listener {
         var item = player.getInventory().getItem(event.getHand());
         if (item.getType() != Material.NAME_TAG) return;
 
-        var name = item.getItemMeta().customName();
+        var name = item.getData(DataComponentTypes.CUSTOM_NAME);
         if (Component.text("silence").equals(name)) {
             if (player.getGameMode() != GameMode.CREATIVE) item.subtract();
             player.sendActionBar(Component.text(getMobName(mob) + " silenced"));

@@ -10,6 +10,7 @@ import org.bukkit.Sound;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
@@ -39,7 +40,7 @@ public class ChestLockListener implements Listener {
         plugin.getServer().addRecipe(recipe);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onChestLock(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 
@@ -56,10 +57,7 @@ public class ChestLockListener implements Listener {
         var key = player.getInventory().getItemInMainHand();
         if (key.getType() != Material.TRIAL_KEY) return;
 
-        var meta = key.getItemMeta();
-        if (meta == null) return;
-
-        var lockValue = meta.getPersistentDataContainer().get(lockKey, PersistentDataType.LONG);
+        var lockValue = key.getPersistentDataContainer().get(lockKey, PersistentDataType.LONG);
         if (lockValue == null) lockValue = ThreadLocalRandom.current().nextLong();
 
         setKeyMeta(key);
@@ -81,9 +79,7 @@ public class ChestLockListener implements Listener {
 
         boolean isContainerKey = Arrays.stream(event.getInventory().getMatrix())
             .filter(Objects::nonNull)
-            .map(ItemStack::getItemMeta)
-            .filter(Objects::nonNull)
-            .allMatch(meta -> meta.getPersistentDataContainer().has(lockKey, PersistentDataType.LONG));
+            .allMatch(item -> item.getPersistentDataContainer().has(lockKey, PersistentDataType.LONG));
 
         if (!isContainerKey) {
             event.getInventory().setResult(null);

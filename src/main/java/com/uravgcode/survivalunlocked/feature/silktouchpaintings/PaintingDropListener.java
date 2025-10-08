@@ -7,6 +7,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.inventory.ItemStack;
@@ -14,8 +15,8 @@ import org.bukkit.inventory.ItemStack;
 @Feature(name = "silk-touch-paintings")
 public class PaintingDropListener implements Listener {
 
-    @EventHandler
     @SuppressWarnings("UnstableApiUsage")
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPaintingBreak(HangingBreakByEntityEvent event) {
         if (!(event.getEntity() instanceof Painting painting)) return;
 

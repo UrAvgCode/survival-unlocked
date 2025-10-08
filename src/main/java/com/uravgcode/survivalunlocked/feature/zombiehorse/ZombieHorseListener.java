@@ -8,6 +8,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.weather.LightningStrikeEvent;
 import org.bukkit.inventory.ItemStack;
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @Feature(name = "zombie-horse")
 public class ZombieHorseListener implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onLightningStrike(LightningStrikeEvent event) {
         var cause = event.getCause();
         if (cause != LightningStrikeEvent.Cause.WEATHER) return;
@@ -36,11 +37,11 @@ public class ZombieHorseListener implements Listener {
         horse.addPassenger(zombie);
 
         var equipment = zombie.getEquipment();
-        equipment.setHelmet(new ItemStack(Material.IRON_HELMET));
-        equipment.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        equipment.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-        equipment.setBoots(new ItemStack(Material.IRON_BOOTS));
-        equipment.setItemInMainHand(new ItemStack(Material.IRON_SWORD));
+        equipment.setHelmet(ItemStack.of(Material.IRON_HELMET));
+        equipment.setChestplate(ItemStack.of(Material.IRON_CHESTPLATE));
+        equipment.setLeggings(ItemStack.of(Material.IRON_LEGGINGS));
+        equipment.setBoots(ItemStack.of(Material.IRON_BOOTS));
+        equipment.setItemInMainHand(ItemStack.of(Material.IRON_SWORD));
     }
 
     private double spawnChance(World world, Location location) {

@@ -4,13 +4,14 @@ import com.uravgcode.survivalunlocked.annotation.Feature;
 import org.bukkit.*;
 import org.bukkit.entity.Breedable;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 @Feature(name = "keep-baby-animals")
 public class KeepBabyAnimalsListener implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         if (!(event.getRightClicked() instanceof Breedable breedable)) return;
         if (breedable.isAdult()) return;

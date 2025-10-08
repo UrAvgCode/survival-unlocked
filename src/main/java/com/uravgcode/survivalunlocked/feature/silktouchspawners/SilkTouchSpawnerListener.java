@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
@@ -15,8 +16,8 @@ import org.bukkit.inventory.ItemStack;
 @Feature(name = "silk-touch-spawners")
 public class SilkTouchSpawnerListener implements Listener {
 
-    @EventHandler
     @SuppressWarnings("UnstableApiUsage")
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
         var block = event.getBlock();
         if (block.getType() != Material.SPAWNER) return;
@@ -28,7 +29,7 @@ public class SilkTouchSpawnerListener implements Listener {
         if (!tool.containsEnchantment(Enchantment.SILK_TOUCH)) return;
         if (!block.isPreferredTool(tool)) return;
 
-        var item = new ItemStack(Material.SPAWNER);
+        var item = ItemStack.of(Material.SPAWNER);
         var dataComponentType = Registry.DATA_COMPONENT_TYPE.get(DataComponentTypeKeys.BLOCK_ENTITY_DATA);
         if (dataComponentType != null) {
             var tooltipDisplay = TooltipDisplay.tooltipDisplay().addHiddenComponents(dataComponentType).build();

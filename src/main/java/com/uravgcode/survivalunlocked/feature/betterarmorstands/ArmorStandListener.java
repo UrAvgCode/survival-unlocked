@@ -4,6 +4,7 @@ import com.uravgcode.survivalunlocked.annotation.Feature;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
@@ -19,14 +20,14 @@ public class ArmorStandListener implements Listener {
         this.poseKey = new NamespacedKey(plugin, "pose");
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onArmorStandSpawn(EntitySpawnEvent event) {
         if (event.getEntity() instanceof ArmorStand armorStand) {
             armorStand.setArms(true);
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onArmorStandClick(PlayerInteractAtEntityEvent event) {
         if (!(event.getRightClicked() instanceof ArmorStand armorStand)) return;
         if (!event.getPlayer().isSneaking()) return;
