@@ -29,11 +29,9 @@ public final class VillagerFollowEmeraldsModule extends PluginModule {
         var villager = craftVillager.getHandle();
 
         var attributes = villager.getAttributes();
-        if (attributes.hasAttribute(Attributes.TEMPT_RANGE)) return;
-        attributes.registerAttribute(Attributes.TEMPT_RANGE);
-
-        var temptRange = villager.getAttribute(Attributes.TEMPT_RANGE);
-        if (temptRange == null) return;
+        if (!attributes.hasAttribute(Attributes.TEMPT_RANGE)) {
+            attributes.registerAttribute(Attributes.TEMPT_RANGE);
+        }
 
         villager.goalSelector.addGoal(3, new TemptGoal(
             villager,
