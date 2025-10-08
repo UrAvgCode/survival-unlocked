@@ -26,7 +26,7 @@ import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 @ModuleMeta(name = "lock-chests")
-public class LockChestsModule extends PluginModule {
+public final class LockChestsModule extends PluginModule {
     private final NamespacedKey lockKey;
     private final NamespacedKey recipeKey;
 

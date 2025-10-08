@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "player-head-drops")
-public class PlayerHeadDropsModule extends PluginModule {
+public final class PlayerHeadDropsModule extends PluginModule {
 
     public PlayerHeadDropsModule(@NotNull JavaPlugin plugin) {
         super(plugin);

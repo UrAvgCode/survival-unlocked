@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "keep-baby-animals")
-public class KeepBabyAnimalsModule extends PluginModule {
+public final class KeepBabyAnimalsModule extends PluginModule {
 
     public KeepBabyAnimalsModule(@NotNull JavaPlugin plugin) {
         super(plugin);

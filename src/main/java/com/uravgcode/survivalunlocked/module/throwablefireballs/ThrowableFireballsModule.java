@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "throwable-fireballs")
-public class ThrowableFireballsModule extends PluginModule {
+public final class ThrowableFireballsModule extends PluginModule {
 
     public ThrowableFireballsModule(@NotNull JavaPlugin plugin) {
         super(plugin);

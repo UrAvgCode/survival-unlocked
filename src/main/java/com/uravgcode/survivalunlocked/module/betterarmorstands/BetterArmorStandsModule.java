@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "better-armor-stands")
-public class BetterArmorStandsModule extends PluginModule {
+public final class BetterArmorStandsModule extends PluginModule {
     private final NamespacedKey poseKey;
 
     public BetterArmorStandsModule(@NotNull JavaPlugin plugin) {

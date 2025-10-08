@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 @ModuleMeta(name = "custom-shaped-portals")
-public class CustomShapedPortalsModule extends PluginModule {
+public final class CustomShapedPortalsModule extends PluginModule {
 
     @ConfigValue(name = "minimum-portal-size")
     private int minPortalSize = 6;

@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "better-tridents")
-public class BetterTridentsModule extends PluginModule {
+public final class BetterTridentsModule extends PluginModule {
 
     public BetterTridentsModule(@NotNull JavaPlugin plugin) {
         super(plugin);

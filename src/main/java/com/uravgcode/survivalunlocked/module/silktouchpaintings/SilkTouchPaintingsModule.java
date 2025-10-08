@@ -15,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "silk-touch-paintings")
-public class SilkTouchPaintingsModule extends PluginModule {
+public final class SilkTouchPaintingsModule extends PluginModule {
 
     public SilkTouchPaintingsModule(@NotNull JavaPlugin plugin) {
         super(plugin);

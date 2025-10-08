@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.WeakHashMap;
 
 @ModuleMeta(name = "smooth-sleep-transition")
-public class SmoothSleepTransitionModule extends PluginModule {
+public final class SmoothSleepTransitionModule extends PluginModule {
     private static final long DAY_LENGTH = 24000;
 
     @ConfigValue(name = "time-rate")

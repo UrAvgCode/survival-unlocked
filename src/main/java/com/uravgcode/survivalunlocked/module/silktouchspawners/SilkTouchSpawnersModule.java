@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "silk-touch-spawners")
-public class SilkTouchSpawnersModule extends PluginModule {
+public final class SilkTouchSpawnersModule extends PluginModule {
 
     public SilkTouchSpawnersModule(@NotNull JavaPlugin plugin) {
         super(plugin);

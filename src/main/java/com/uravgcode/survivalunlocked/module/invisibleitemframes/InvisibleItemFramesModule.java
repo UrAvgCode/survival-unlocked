@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "invisible-item-frames")
-public class InvisibleItemFramesModule extends PluginModule {
+public final class InvisibleItemFramesModule extends PluginModule {
 
     public InvisibleItemFramesModule(@NotNull JavaPlugin plugin) {
         super(plugin);

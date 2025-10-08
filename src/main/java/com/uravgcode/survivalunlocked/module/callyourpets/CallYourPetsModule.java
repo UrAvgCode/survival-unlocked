@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "call-your-pets")
-public class CallYourPetsModule extends PluginModule {
+public final class CallYourPetsModule extends PluginModule {
 
     @ConfigValue(name = "call-radius")
     private double callRadius = 64.0;

@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 @ModuleMeta(name = "transfer-your-pets")
-public class TransferYourPetsModule extends PluginModule {
+public final class TransferYourPetsModule extends PluginModule {
 
     public TransferYourPetsModule(@NotNull JavaPlugin plugin) {
         super(plugin);

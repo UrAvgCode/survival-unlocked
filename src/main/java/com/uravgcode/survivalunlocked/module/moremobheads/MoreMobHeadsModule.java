@@ -29,7 +29,7 @@ import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 @ModuleMeta(name = "more-mob-heads")
-public class MoreMobHeadsModule extends PluginModule {
+public final class MoreMobHeadsModule extends PluginModule {
     private final YamlConfiguration config;
 
     public MoreMobHeadsModule(@NotNull JavaPlugin plugin) {

@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 @ModuleMeta(name = "villagers-follow-emeralds")
-public class VillagerFollowEmeraldsModule extends PluginModule {
+public final class VillagerFollowEmeraldsModule extends PluginModule {
 
     @ConfigValue(name = "follow-speed")
     private double followSpeed = 0.6;

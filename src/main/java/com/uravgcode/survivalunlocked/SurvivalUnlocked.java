@@ -13,6 +13,16 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 public final class SurvivalUnlocked extends JavaPlugin {
+    private static SurvivalUnlocked plugin = null;
+
+    public static SurvivalUnlocked plugin() {
+        return plugin;
+    }
+
+    @Override
+    public void onLoad() {
+        plugin = this;
+    }
 
     @Override
     public void onEnable() {
