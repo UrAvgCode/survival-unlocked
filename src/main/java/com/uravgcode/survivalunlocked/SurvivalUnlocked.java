@@ -1,11 +1,11 @@
 package com.uravgcode.survivalunlocked;
 
 import com.uravgcode.survivalunlocked.annotation.ConfigValue;
-import com.uravgcode.survivalunlocked.annotation.Feature;
-import com.uravgcode.survivalunlocked.feature.FeatureList;
+import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.module.PluginModule;
+import com.uravgcode.survivalunlocked.module.PluginModules;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -37,17 +37,17 @@ public final class SurvivalUnlocked extends JavaPlugin {
         }
 
         var config = getConfig();
-        var features = FeatureList.getFeatures(this);
+        var modules = PluginModules.modules(this);
         var pluginManager = getServer().getPluginManager();
 
-        for (var feature : features) {
-            var annotation = feature.getClass().getAnnotation(Feature.class);
+        for (var module : modules) {
+            var annotation = module.getClass().getAnnotation(ModuleMeta.class);
             if (annotation == null) continue;
 
             var path = annotation.name();
-            if (config.getBoolean("features." + path + ".enabled", false)) {
-                injectConfigValues(feature);
-                pluginManager.registerEvents(feature, this);
+            if (config.getBoolean("modules." + path + ".enabled", false)) {
+                injectConfigValues(module);
+                pluginManager.registerEvents(module, this);
                 logger.info(Component.text(path + " enabled", NamedTextColor.GREEN));
             } else {
                 logger.info(Component.text(path + " disabled", NamedTextColor.RED));
@@ -64,21 +64,21 @@ public final class SurvivalUnlocked extends JavaPlugin {
         saveResource(resourceName, false);
     }
 
-    private void injectConfigValues(Listener feature) {
-        if (!feature.getClass().isAnnotationPresent(Feature.class)) return;
-        var featurePath = feature.getClass().getAnnotation(Feature.class).name();
+    private void injectConfigValues(PluginModule module) {
+        if (!module.getClass().isAnnotationPresent(ModuleMeta.class)) return;
+        var modulePath = module.getClass().getAnnotation(ModuleMeta.class).name();
 
         var config = getConfig();
-        for (var field : feature.getClass().getDeclaredFields()) {
+        for (var field : module.getClass().getDeclaredFields()) {
             if (!field.isAnnotationPresent(ConfigValue.class)) continue;
             var annotation = field.getAnnotation(ConfigValue.class);
-            var path = "features." + featurePath + "." + annotation.name();
+            var path = "modules." + modulePath + "." + annotation.name();
             if (!config.contains(path)) continue;
 
             try {
                 field.setAccessible(true);
                 var value = config.get(path);
-                field.set(feature, value);
+                field.set(module, value);
             } catch (IllegalAccessException e) {
                 getLogger().warning("failed to inject config value for " + field.getName());
             }

@@ -1,0 +1,37 @@
+package com.uravgcode.survivalunlocked.module.bettertridents;
+
+import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.module.PluginModule;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Trident;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+
+@ModuleMeta(name = "better-tridents")
+public class BetterTridentsModule extends PluginModule {
+    private final JavaPlugin plugin;
+
+    public BetterTridentsModule(@NotNull JavaPlugin plugin) {
+        this.plugin = plugin;
+    }
+
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    public void onTridentThrow(ProjectileLaunchEvent event) {
+        if (!(event.getEntity() instanceof Trident trident)) return;
+        if (!(trident.getShooter() instanceof Player)) return;
+        if (trident.getLoyaltyLevel() == 0) return;
+
+        trident.getScheduler().runAtFixedRate(plugin, task -> {
+            if (trident.getLocation().getY() < trident.getWorld().getMinHeight() - 20) {
+                trident.setHasDealtDamage(true);
+            }
+
+            if (trident.hasDealtDamage()) {
+                task.cancel();
+            }
+        }, null, 1L, 1L);
+    }
+}

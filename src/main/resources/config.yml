@@ -1,11 +1,18 @@
 # Main configuration file for gameplay features.
 
-features:
-  # Smoothly skips the night with an animation when enough players are sleeping.
-  # Use the playersSleepingPercentage gamerule to adjust sleeping percentage.
-  smooth-sleep-transition:
+modules:
+  # Armor stands have arms and can change poses when shift-clicked.
+  better-armor-stands:
     enabled: true
-    time-rate: 120
+
+  # Tridents enchanted with loyalty will return when thrown into the void.
+  better-tridents:
+    enabled: true
+
+  # Pets can be called to the player by using a goat horn.
+  call-your-pets:
+    enabled: true
+    call-radius: 64
 
   # Build nether portals in any shape, including with crying obsidian.
   custom-shaped-portals:
@@ -14,24 +21,28 @@ features:
     maximum-portal-width: 21
     maximum-portal-height: 21
 
-  # Players can throw fireballs from their hand.
-  throwable-fireballs:
-    enabled: true
-
-  # Tridents enchanted with loyalty will return when thrown into the void.
-  better-tridents:
-    enabled: true
-
-  # A zombie riding a zombie horse can spawn when a lightning strikes during a thunderstorm.
-  zombie-horse:
-    enabled: true
-
-  # Armor stands have arms and can change poses when shift-clicked.
-  better-armor-stands:
-    enabled: true
-
   # Make item frames invisible by right-clicking them with shears.
   invisible-item-frames:
+    enabled: true
+
+  # Keep animals in their baby form by feeding them a poisonous potato.
+  keep-baby-animals:
+    enabled: true
+
+  # Lock chests by shift-right-clicking them with a trial key.
+  lock-chests:
+    enabled: true
+
+  # Mobs have a chance to drop their heads on death. Chances are configurable.
+  more-mob-heads:
+    enabled: true
+
+  # Players drop their heads when killed by another player.
+  player-head-drops:
+    enabled: true
+
+  # Use a name tag named silence to mute mobs, or unsilence to restore their sounds.
+  silence-mobs:
     enabled: true
 
   # Destroy paintings with a silk touch tool to collect the exact painting variant.
@@ -42,8 +53,18 @@ features:
   silk-touch-spawners:
     enabled: true
 
-  # Lock chests by shift-right-clicking them with a trial key.
-  lock-chests:
+  # Smoothly skips the night with an animation when enough players are sleeping.
+  # Use the playersSleepingPercentage gamerule to adjust sleeping percentage.
+  smooth-sleep-transition:
+    enabled: true
+    time-rate: 120
+
+  # Players can throw fireballs from their hand.
+  throwable-fireballs:
+    enabled: true
+
+  # Pets can be transferred between players by shift-right-clicking them with a leashed pet.
+  transfer-your-pets:
     enabled: true
 
   # Villagers are attracted to players holding emerald blocks.
@@ -51,29 +72,8 @@ features:
     enabled: true
     follow-speed: 0.6
 
-  # Pets can be called to the player by using a goat horn.
-  call-your-pets:
-    enabled: true
-    call-radius: 64
-
-  # Pets can be transferred between players by shift-right-clicking them with a leashed pet.
-  transfer-your-pets:
-    enabled: true
-
-  # Keep animals in their baby form by feeding them a poisonous potato.
-  keep-baby-animals:
-    enabled: true
-
-  # Use a name tag named silence to mute mobs, or unsilence to restore their sounds.
-  silence-mobs:
-    enabled: true
-
-  # Mobs have a chance to drop their heads on death. Chances are configurable.
-  more-mob-heads:
-    enabled: true
-
-  # Players drop their heads when killed by another player.
-  player-head-drops:
+  # A zombie riding a zombie horse can spawn when a lightning strikes during a thunderstorm.
+  zombie-horse:
     enabled: true
 
 config:

@@ -1,0 +1,52 @@
+package com.uravgcode.survivalunlocked.module.invisibleitemframes;
+
+import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.module.PluginModule;
+import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.entity.ItemFrame;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
+
+@ModuleMeta(name = "invisible-item-frames")
+public class InvisibleItemFramesModule extends PluginModule {
+
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
+        if (!(event.getRightClicked() instanceof ItemFrame frame)) return;
+
+        var player = event.getPlayer();
+        var handItem = player.getInventory().getItem(event.getHand());
+        if (handItem.getType() != Material.SHEARS) return;
+
+        var frameItem = frame.getItem();
+        if (frameItem.getType() == Material.AIR || !frame.isVisible()) return;
+
+        frame.getWorld().spawnParticle(
+            Particle.CRIT,
+            frame.getLocation().add(0, 0.5, 0),
+            5,
+            0.2, 0.2, 0.2,
+            0.05
+        );
+
+        frame.getWorld().playSound(
+            frame.getLocation(),
+            Sound.BLOCK_BEEHIVE_SHEAR,
+            1, 1f
+        );
+
+        frame.setVisible(false);
+        event.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (event.getEntity() instanceof ItemFrame frame) {
+            frame.setVisible(true);
+        }
+    }
+}
