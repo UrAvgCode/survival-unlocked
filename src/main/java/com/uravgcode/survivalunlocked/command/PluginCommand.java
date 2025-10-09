@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 public class PluginCommand {
     public static LiteralCommandNode<CommandSourceStack> createCommand() {
         return Commands.literal("survivalunlocked")
+            .requires(sender -> sender.getSender().hasPermission("survivalunlocked.admin"))
             .then(Commands.literal("reload").executes(PluginCommand::reload))
             .then(Commands.literal("toggle").executes(PluginCommand::toggle))
             .build();
