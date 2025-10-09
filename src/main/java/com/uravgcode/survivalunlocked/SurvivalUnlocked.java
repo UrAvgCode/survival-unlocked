@@ -2,9 +2,11 @@ package com.uravgcode.survivalunlocked;
 
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import com.uravgcode.survivalunlocked.module.PluginModules;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Collections;
@@ -31,18 +33,11 @@ public final class SurvivalUnlocked extends JavaPlugin {
             saveResource("heads.yml", false);
         }
 
-        var logger = getComponentLogger();
         var pluginVersion = getPluginMeta().getVersion();
         var configVersion = getConfig().getString("config.version", "0.0.0");
-
         if (!pluginVersion.equals(configVersion)) {
-            try {
-                updateResource("config.yml");
-                updateResource("heads.yml");
-                logger.info("updating config to version {}", pluginVersion);
-            } catch (IOException exception) {
-                logger.warn("failed to update config: {}", exception.getMessage());
-            }
+            updateConfig("config.yml");
+            updateConfig("heads.yml");
         }
 
         modules = PluginModules.modules(this);
@@ -56,12 +51,39 @@ public final class SurvivalUnlocked extends JavaPlugin {
         }
     }
 
-    private void updateResource(String resourceName) throws IOException {
-        var dataFolder = getDataFolder().toPath();
-        var resourcePath = dataFolder.resolve(resourceName);
-        var backupPath = dataFolder.resolve(resourceName.replace(".yml", ".old.yml"));
+    private void updateConfig(String filename) {
+        final var logger = getComponentLogger();
+        final var dataFolder = getDataFolder().toPath();
+        final var configPath = dataFolder.resolve(filename);
+        final var backupPath = dataFolder.resolve(filename.replace(".yml", ".old.yml"));
 
-        Files.move(resourcePath, backupPath, StandardCopyOption.REPLACE_EXISTING);
-        saveResource(resourceName, false);
+        try (var configStream = getResource(filename)) {
+            if (configStream == null) {
+                logger.warn("couldn't find resource {}", filename);
+                return;
+            }
+
+            var currentConfig = YamlConfiguration.loadConfiguration(configPath.toFile());
+            var updatedConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(configStream));
+
+            for (var key : currentConfig.getKeys(true)) {
+                if (key.startsWith("config")) continue;
+
+                var updatedKey = key.replace("features", "modules");
+                if (currentConfig.getConfigurationSection(key) != null || updatedConfig.getConfigurationSection(updatedKey) != null) {
+                    continue;
+                }
+
+                if (updatedConfig.contains(updatedKey)) {
+                    updatedConfig.set(updatedKey, currentConfig.get(key));
+                }
+            }
+
+            Files.move(configPath, backupPath, StandardCopyOption.REPLACE_EXISTING);
+            updatedConfig.save(configPath.toFile());
+            logger.info("successfully updated {}", filename);
+        } catch (IOException exception) {
+            logger.warn("failed to update {}: {}", filename, exception.getMessage());
+        }
     }
 }
