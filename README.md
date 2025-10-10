@@ -4,6 +4,13 @@
 improvements to the survival game mode. It is designed to feel like it could belong in the base game,
 keeping the classic vanilla atmosphere intact.
 
+## Commands
+
+| Command                    | Description                                     | Permission               |
+|----------------------------|-------------------------------------------------|--------------------------|
+| `/survivalunlocked reload` | Reloads the plugin config file.                 | `survivalunlocked.admin` |
+| `/survivalunlocked toggle` | Opens an ingame menu to toggle features on/off. | `survivalunlocked.admin` |
+
 ## Features
 
 | Feature                   | Description                                                                                                                  |
@@ -13,6 +20,7 @@ keeping the classic vanilla atmosphere intact.
 | Throwable Fireballs       | Players can throw fireballs from their hand.                                                                                 |
 | Zombie Horse              | A zombie riding a zombie horse can spawn when a lightning strikes during a thunderstorm.                                     |
 | Better Armor Stands       | Armor stands have arms and can change poses when shift-clicked.                                                              |
+| Better Tridents           | Tridents enchanted with loyalty will return when thrown into the void.                                                       |
 | Invisible Item Frames     | Make item frames invisible by right-clicking them with shears.                                                               |
 | Silk Touch Paintings      | Destroy paintings with a silk touch tool to collect the exact painting variant, preserving its artwork.                      |
 | Silk Touch Spawners       | Mine mob spawners with a silk touch tool to collect and place them for decoration.                                           |
