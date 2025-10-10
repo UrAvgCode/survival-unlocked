@@ -3,7 +3,7 @@ main: com.uravgcode.survivalunlocked.SurvivalUnlocked
 bootstrapper: com.uravgcode.survivalunlocked.SurvivalUnlockedBootstrap
 folia-supported: true
 version: ${version}
-api-version: '1.21.9'
+api-version: '1.21.10'
 
 description: vanilla friendly survival gameplay improvements
 website: 'https://uravgcode.com'
