@@ -18,64 +18,111 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 @ModuleMeta(name = "more-mob-heads")
 public final class MoreMobHeadsModule extends PluginModule {
-    private final YamlConfiguration config;
+
+    private record HeadKey(
+        @NotNull EntityType type,
+        @Nullable String variant
+    ) {
+    }
+
+    private record HeadData(
+        @Nullable String texture,
+        @Nullable String display,
+        @Nullable String sound,
+        double chance,
+        double looting
+    ) {
+    }
+
+    private final Map<@NotNull HeadKey, @NotNull HeadData> heads = new HashMap<>();
 
     public MoreMobHeadsModule(@NotNull JavaPlugin plugin) {
         super(plugin);
-        this.config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "heads.yml"));
+    }
+
+    @Override
+    public void reload() {
+        super.reload();
+        heads.clear();
+
+        final var logger = plugin.getComponentLogger();
+        final var file = plugin.getDataPath().resolve("heads.yml").toFile();
+        final var config = YamlConfiguration.loadConfiguration(file);
+
+        config.getKeys(false).forEach(entityName -> {
+            var entitySection = config.getConfigurationSection(entityName);
+            if (entitySection == null) return;
+
+            try {
+                var entityType = EntityType.valueOf(entityName.toUpperCase());
+                var variants = entitySection.getKeys(false);
+
+                if (variants.stream().anyMatch(entitySection::isConfigurationSection)) {
+                    variants.forEach(variant -> {
+                        var variantSection = entitySection.getConfigurationSection(variant);
+                        if (variantSection == null) return;
+                        heads.put(new HeadKey(entityType, variant), createHeadData(variantSection));
+                    });
+                } else {
+                    heads.put(new HeadKey(entityType, null), createHeadData(entitySection));
+                }
+            } catch (IllegalArgumentException e) {
+                logger.warn("invalid entity type in heads.yml: {}", entityName);
+            }
+        });
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onEntityDeath(EntityDeathEvent event) {
-        var killed = event.getEntity();
-        var killer = killed.getKiller();
+        final var killed = event.getEntity();
+        final var killer = killed.getKiller();
         if (killer == null) return;
 
-        getEntityConfig(killed).ifPresent(configSection -> {
-            var chance = configSection.getDouble("chance", 0.0);
-            var looting = configSection.getDouble("looting", 0.00);
-            int lootingLevel = killer.getInventory().getItemInMainHand().getEnchantmentLevel(Enchantment.LOOTING);
+        final var headData = heads.get(new HeadKey(killed.getType(), getVariant(killed)));
+        if (headData == null) return;
 
-            double finalChance = chance + (looting * lootingLevel);
-            if (ThreadLocalRandom.current().nextDouble() > finalChance) return;
+        final var item = killer.getInventory().getItemInMainHand();
+        final int looting = item.getEnchantmentLevel(Enchantment.LOOTING);
 
-            var texture = configSection.getString("texture");
-            var display = configSection.getString("display");
-            var sound = configSection.getString("sound");
-            var head = createHead(texture, display, sound);
-            event.getDrops().add(head);
-        });
+        final double chance = headData.chance + (headData.looting * looting);
+        if (ThreadLocalRandom.current().nextDouble() > chance) return;
+
+        final var head = createHead(headData.texture, headData.display, headData.sound);
+        event.getDrops().add(head);
     }
 
     @SuppressWarnings("UnstableApiUsage")
-    private ItemStack createHead(String texture, String display, String sound) {
-        var head = ItemStack.of(Material.PLAYER_HEAD);
-
-        if (texture != null) {
-            head.setData(DataComponentTypes.PROFILE, ResolvableProfile.resolvableProfile()
-                .addProperty(new ProfileProperty("textures", texture))
-                .build());
-        }
-
+    private static @NotNull ItemStack createHead(@Nullable String texture, @Nullable String display, @Nullable String sound) {
+        final var head = ItemStack.of(Material.PLAYER_HEAD);
         if (display != null) head.setData(DataComponentTypes.ITEM_NAME, Component.text(display));
         if (sound != null) head.setData(DataComponentTypes.NOTE_BLOCK_SOUND, NamespacedKey.minecraft(sound));
-
+        if (texture != null) head.setData(DataComponentTypes.PROFILE, ResolvableProfile.resolvableProfile()
+            .addProperty(new ProfileProperty("textures", texture))
+            .build());
         return head;
     }
 
-    private Optional<ConfigurationSection> getEntityConfig(LivingEntity entity) {
-        var configSection = config.getConfigurationSection(entity.getType().name().toLowerCase());
-        if (configSection == null) return Optional.empty();
+    private static @NotNull HeadData createHeadData(@NotNull ConfigurationSection section) {
+        return new HeadData(
+            section.getString("texture"),
+            section.getString("display"),
+            section.getString("sound"),
+            section.getDouble("chance", 0.0),
+            section.getDouble("looting", 0.0)
+        );
+    }
 
-        String key = switch (entity) {
+    private static @Nullable String getVariant(@NotNull LivingEntity entity) {
+        return switch (entity) {
             case Axolotl axolotl -> axolotl.getVariant().name().toLowerCase();
             case Bee bee -> bee.getAnger() > 0
                 ? (bee.hasNectar() ? "nectar_angry" : "angry") : (bee.hasNectar() ? "nectar" : "plain");
@@ -90,7 +137,7 @@ public final class MoreMobHeadsModule extends PluginModule {
             case Horse horse -> horse.getColor().name().toLowerCase();
             case TraderLlama traderLlama -> traderLlama.getColor().name().toLowerCase();
             case Llama llama -> llama.getColor().name().toLowerCase();
-            case MushroomCow mooshroom -> mooshroom.getVariant().name().toLowerCase();
+            case MushroomCow mushroomCow -> mushroomCow.getVariant().name().toLowerCase();
             case Panda panda -> panda.getMainGene().name().toLowerCase();
             case Parrot parrot -> parrot.getVariant().name().toLowerCase();
             case Pig pig -> pig.getVariant().key().value();
@@ -103,7 +150,5 @@ public final class MoreMobHeadsModule extends PluginModule {
             case ZombieVillager zombieVillager -> zombieVillager.getVillagerProfession().key().value();
             default -> null;
         };
-
-        return Optional.of(configSection).map(section -> key == null ? section : section.getConfigurationSection(key));
     }
 }
