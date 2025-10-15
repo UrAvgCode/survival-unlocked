@@ -4,8 +4,6 @@ import com.destroystokyo.paper.profile.ProfileProperty;
 import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import com.uravgcode.survivalunlocked.module.moremobheads.variant.BeeVariant;
-import com.uravgcode.survivalunlocked.module.moremobheads.variant.CatType;
-import com.uravgcode.survivalunlocked.module.moremobheads.variant.VillagerProfession;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ResolvableProfile;
 import net.kyori.adventure.text.Component;
@@ -81,7 +79,7 @@ public final class MoreMobHeadsModule extends PluginModule {
         String key = switch (entity) {
             case Axolotl axolotl -> axolotl.getVariant().name().toLowerCase();
             case Bee bee -> BeeVariant.name(bee.hasNectar(), bee.getAnger() > 0);
-            case Cat cat -> CatType.name(cat.getCatType());
+            case Cat cat -> cat.getCatType().key().value();
             case Chicken chicken -> chicken.getVariant().key().value();
             case CopperGolem copperGolem -> copperGolem.getWeatheringState().name().toLowerCase();
             case Cow cow -> cow.getVariant().key().value();
@@ -100,9 +98,9 @@ public final class MoreMobHeadsModule extends PluginModule {
                 ? "toast" : rabbit.getRabbitType().name().toLowerCase();
             case Sheep sheep -> Component.text("jeb_").equals(sheep.customName())
                 ? "jeb" : Objects.requireNonNull(sheep.getColor()).name().toLowerCase();
-            case Villager villager -> VillagerProfession.name(villager.getProfession());
+            case Villager villager -> villager.getProfession().key().value();
             case Wolf wolf -> wolf.getVariant().key().value() + (wolf.isAngry() ? "_angry" : "");
-            case ZombieVillager zombieVillager -> VillagerProfession.name(zombieVillager.getVillagerProfession());
+            case ZombieVillager zombieVillager -> zombieVillager.getVillagerProfession().key().value();
             default -> null;
         };
 
