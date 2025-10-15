@@ -5,7 +5,6 @@ import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import com.uravgcode.survivalunlocked.module.moremobheads.variant.BeeVariant;
 import com.uravgcode.survivalunlocked.module.moremobheads.variant.CatType;
-import com.uravgcode.survivalunlocked.module.moremobheads.variant.CopperGolemState;
 import com.uravgcode.survivalunlocked.module.moremobheads.variant.VillagerProfession;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ResolvableProfile;
@@ -84,7 +83,7 @@ public final class MoreMobHeadsModule extends PluginModule {
             case Bee bee -> BeeVariant.name(bee.hasNectar(), bee.getAnger() > 0);
             case Cat cat -> CatType.name(cat.getCatType());
             case Chicken chicken -> chicken.getVariant().key().value();
-            case CopperGolem copperGolem -> CopperGolemState.name(copperGolem);
+            case CopperGolem copperGolem -> copperGolem.getWeatheringState().name().toLowerCase();
             case Cow cow -> cow.getVariant().key().value();
             case Creeper creeper -> creeper.isPowered() ? "charged" : null;
             case Fox fox -> fox.getFoxType().name().toLowerCase();
