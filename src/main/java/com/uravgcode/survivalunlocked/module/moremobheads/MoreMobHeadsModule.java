@@ -3,7 +3,6 @@ package com.uravgcode.survivalunlocked.module.moremobheads;
 import com.destroystokyo.paper.profile.ProfileProperty;
 import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
 import com.uravgcode.survivalunlocked.module.PluginModule;
-import com.uravgcode.survivalunlocked.module.moremobheads.variant.BeeVariant;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ResolvableProfile;
 import net.kyori.adventure.text.Component;
@@ -78,7 +77,8 @@ public final class MoreMobHeadsModule extends PluginModule {
 
         String key = switch (entity) {
             case Axolotl axolotl -> axolotl.getVariant().name().toLowerCase();
-            case Bee bee -> BeeVariant.name(bee.hasNectar(), bee.getAnger() > 0);
+            case Bee bee -> bee.getAnger() > 0
+                ? (bee.hasNectar() ? "nectar_angry" : "angry") : (bee.hasNectar() ? "nectar" : "plain");
             case Cat cat -> cat.getCatType().key().value();
             case Chicken chicken -> chicken.getVariant().key().value();
             case CopperGolem copperGolem -> copperGolem.getWeatheringState().name().toLowerCase();
