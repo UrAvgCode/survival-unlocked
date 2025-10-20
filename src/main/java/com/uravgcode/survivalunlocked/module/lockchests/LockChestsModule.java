@@ -29,16 +29,34 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class LockChestsModule extends PluginModule {
     private final NamespacedKey lockKey;
     private final NamespacedKey recipeKey;
+    private final ShapelessRecipe keyRecipe;
 
     public LockChestsModule(@NotNull JavaPlugin plugin) {
         super(plugin);
         this.lockKey = new NamespacedKey(plugin, "lock");
         this.recipeKey = new NamespacedKey(plugin, "trial_key_recipe");
 
-        var result = ItemStack.of(Material.TRIAL_KEY);
-        var recipe = new ShapelessRecipe(recipeKey, result);
-        recipe.addIngredient(Material.TRIAL_KEY);
-        plugin.getServer().addRecipe(recipe);
+        final var result = ItemStack.of(Material.TRIAL_KEY);
+        this.keyRecipe = new ShapelessRecipe(recipeKey, result);
+        this.keyRecipe.addIngredient(Material.TRIAL_KEY);
+    }
+
+    @Override
+    public void enable() {
+        super.enable();
+        final var server = plugin.getServer();
+        if (server.getRecipe(recipeKey) == null) {
+            server.addRecipe(keyRecipe);
+        }
+    }
+
+    @Override
+    public void disable() {
+        super.disable();
+        final var server = plugin.getServer();
+        if (server.getRecipe(recipeKey) != null) {
+            server.removeRecipe(recipeKey);
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
