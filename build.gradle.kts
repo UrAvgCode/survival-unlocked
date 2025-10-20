@@ -4,14 +4,14 @@ plugins {
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
 }
 
-group = 'com.uravgcode'
-version = '1.5.0'
+group = "com.uravgcode"
+version = "1.5.0"
 
 repositories {
     mavenCentral()
     maven {
         name = "papermc-repo"
-        url = "https://repo.papermc.io/repository/maven-public/"
+        url = uri("https://repo.papermc.io/repository/maven-public/")
     }
 }
 
@@ -25,9 +25,9 @@ tasks {
     }
 }
 
-def targetJavaVersion = 21
+val targetJavaVersion = 21
 java {
-    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    val javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
     targetCompatibility = javaVersion
     if (JavaVersion.current() < javaVersion) {
@@ -35,21 +35,21 @@ java {
     }
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+tasks.withType<JavaCompile>().configureEach {
+    options.encoding = "UTF-8"
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible) {
         options.release.set(targetJavaVersion)
     }
 }
 
-processResources {
-    def props = [version: version]
-    inputs.properties props
-    filteringCharset = 'UTF-8'
-    filesMatching('paper-plugin.yml') {
-        expand props
+tasks.processResources {
+    val props = mapOf("version" to project.version)
+    inputs.properties(props)
+    filteringCharset = "UTF-8"
+    filesMatching("paper-plugin.yml") {
+        expand(props)
     }
-    filesMatching('config.yml') {
-        expand props
+    filesMatching("config.yml") {
+        expand(props)
     }
 }
