@@ -1,55 +1,48 @@
 plugins {
-    id("java")
-    id("xyz.jpenilla.run-paper") version "3.0.2"
-    id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
+    alias(libs.plugins.paperweight.userdev)
+    alias(libs.plugins.resource.factory)
+    alias(libs.plugins.run.paper)
 }
 
 group = "com.uravgcode"
 version = "1.5.0"
 
-repositories {
-    mavenCentral()
-    maven {
-        name = "papermc-repo"
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 dependencies {
-    paperweight.paperDevBundle("1.21.10-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle(libs.versions.paper.api)
+}
+
+paperPluginYaml {
+    main = "com.uravgcode.survivalunlocked.SurvivalUnlocked"
+    bootstrapper = "com.uravgcode.survivalunlocked.SurvivalUnlockedBootstrap"
+    foliaSupported = true
+    apiVersion = "1.21.10"
+
+    name = "survival-unlocked"
+    description = "vanilla friendly survival gameplay improvements"
+    website = "https://uravgcode.com"
+    authors.add("UrAvgCode")
 }
 
 tasks {
+    withType<JavaCompile>().configureEach {
+        options.encoding = "UTF-8"
+        options.release.set(21)
+    }
+
+    processResources {
+        val props = mapOf("version" to project.version)
+        inputs.properties(props)
+        filteringCharset = "UTF-8"
+        filesMatching("config.yml") {
+            expand(props)
+        }
+    }
+
     runServer {
         minecraftVersion("1.21.10")
-    }
-}
-
-val targetJavaVersion = 21
-java {
-    val javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaVersion
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
-}
-
-tasks.withType<JavaCompile>().configureEach {
-    options.encoding = "UTF-8"
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible) {
-        options.release.set(targetJavaVersion)
-    }
-}
-
-tasks.processResources {
-    val props = mapOf("version" to project.version)
-    inputs.properties(props)
-    filteringCharset = "UTF-8"
-    filesMatching("paper-plugin.yml") {
-        expand(props)
-    }
-    filesMatching("config.yml") {
-        expand(props)
     }
 }
