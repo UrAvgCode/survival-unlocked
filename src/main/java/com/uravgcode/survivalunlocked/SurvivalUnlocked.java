@@ -1,7 +1,6 @@
 package com.uravgcode.survivalunlocked;
 
-import com.uravgcode.survivalunlocked.module.PluginModule;
-import com.uravgcode.survivalunlocked.module.PluginModules;
+import com.uravgcode.survivalunlocked.manager.ModuleManager;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -10,14 +9,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 public final class SurvivalUnlocked extends JavaPlugin {
     private static SurvivalUnlocked instance = null;
-
-    private List<PluginModule> modules = Collections.emptyList();
 
     public static @NotNull SurvivalUnlocked instance() {
         return Objects.requireNonNull(instance, "plugin not initialized");
@@ -42,15 +37,13 @@ public final class SurvivalUnlocked extends JavaPlugin {
             updateConfig("heads.yml");
         }
 
-        modules = PluginModules.modules(this);
+        ModuleManager.initializeModules(this);
         reload();
     }
 
     public void reload() {
         reloadConfig();
-        for (var module : modules) {
-            module.reload();
-        }
+        ModuleManager.reloadModules();
     }
 
     private void updateConfig(@NotNull String filename) {
