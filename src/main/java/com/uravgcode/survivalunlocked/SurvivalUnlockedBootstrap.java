@@ -9,13 +9,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings("UnstableApiUsage")
-public class SurvivalUnlockedBootstrap implements PluginBootstrap {
+@SuppressWarnings({"unused", "UnstableApiUsage"})
+public final class SurvivalUnlockedBootstrap implements PluginBootstrap {
 
     @Override
     public void bootstrap(BootstrapContext context) {
         context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
-            commands.registrar().register(PluginCommand.createCommand());
+            commands.registrar().register(PluginCommand.build());
         });
     }
 

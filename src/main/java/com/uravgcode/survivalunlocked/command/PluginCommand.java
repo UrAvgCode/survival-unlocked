@@ -9,10 +9,14 @@ import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.entity.Player;
+import org.jspecify.annotations.NullMarked;
 
-public class PluginCommand {
-    public static LiteralCommandNode<CommandSourceStack> createCommand() {
+@NullMarked
+public final class PluginCommand {
+    private PluginCommand() {
+    }
+
+    public static LiteralCommandNode<CommandSourceStack> build() {
         return Commands.literal("survivalunlocked")
             .requires(sender -> sender.getSender().hasPermission("survivalunlocked.admin"))
             .then(Commands.literal("reload").executes(PluginCommand::reload))
@@ -21,16 +25,17 @@ public class PluginCommand {
     }
 
     private static int reload(CommandContext<CommandSourceStack> context) {
-        SurvivalUnlocked.plugin().reload();
-        var message = Component.text("successfully reloaded config", NamedTextColor.GREEN);
-        context.getSource().getSender().sendMessage(message);
+        final var plugin = SurvivalUnlocked.instance();
+        final var sender = context.getSource().getSender();
+
+        plugin.reload();
+        sender.sendMessage(Component.text("successfully reloaded config", NamedTextColor.GREEN));
+
         return Command.SINGLE_SUCCESS;
     }
 
     private static int toggle(CommandContext<CommandSourceStack> context) {
-        if (context.getSource().getExecutor() instanceof Player player) {
-            player.showDialog(SettingsDialog.createDialog());
-        }
+        context.getSource().getSender().showDialog(SettingsDialog.create());
         return Command.SINGLE_SUCCESS;
     }
 }

@@ -4,6 +4,7 @@ import com.uravgcode.survivalunlocked.module.PluginModule;
 import com.uravgcode.survivalunlocked.module.PluginModules;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,19 +12,20 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public final class SurvivalUnlocked extends JavaPlugin {
-    private static SurvivalUnlocked plugin = null;
+    private static SurvivalUnlocked instance = null;
 
     private List<PluginModule> modules = Collections.emptyList();
 
-    public static SurvivalUnlocked plugin() {
-        return plugin;
+    public static @NotNull SurvivalUnlocked instance() {
+        return Objects.requireNonNull(instance, "plugin not initialized");
     }
 
     @Override
     public void onLoad() {
-        plugin = this;
+        instance = this;
     }
 
     @Override
@@ -51,7 +53,7 @@ public final class SurvivalUnlocked extends JavaPlugin {
         }
     }
 
-    private void updateConfig(String filename) {
+    private void updateConfig(@NotNull String filename) {
         final var logger = getComponentLogger();
         final var dataFolder = getDataFolder().toPath();
         final var configPath = dataFolder.resolve(filename);

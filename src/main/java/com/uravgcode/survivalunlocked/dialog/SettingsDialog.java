@@ -23,9 +23,11 @@ import java.util.stream.Collectors;
 
 @NullMarked
 @SuppressWarnings("UnstableApiUsage")
-public class SettingsDialog {
+public final class SettingsDialog {
+    private SettingsDialog() {
+    }
 
-    public static Dialog createDialog() {
+    public static Dialog create() {
         return Dialog.create(builder -> builder.empty()
             .base(DialogBase.builder(Component.text("Survival Unlocked Settings"))
                 .inputs(generateDialogInputs())
@@ -44,7 +46,7 @@ public class SettingsDialog {
     }
 
     private static void updateSettings(DialogResponseView response, Audience audience) {
-        var plugin = SurvivalUnlocked.plugin();
+        var plugin = SurvivalUnlocked.instance();
         var config = plugin.getConfig();
 
         for (String key : getConfigKeys()) {
@@ -61,7 +63,7 @@ public class SettingsDialog {
     private static List<DialogInput> generateDialogInputs() {
         return getConfigKeys().stream()
             .map(key -> {
-                var config = SurvivalUnlocked.plugin().getConfig();
+                var config = SurvivalUnlocked.instance().getConfig();
                 var enabled = config.getBoolean("modules." + key + ".enabled", false);
 
                 var enabledOption = SingleOptionDialogInput.OptionEntry.create(
@@ -92,7 +94,7 @@ public class SettingsDialog {
     }
 
     private static Set<String> getConfigKeys() {
-        var defaults = SurvivalUnlocked.plugin().getConfig().getDefaults();
+        var defaults = SurvivalUnlocked.instance().getConfig().getDefaults();
         if (defaults == null) return Collections.emptySet();
 
         var modulesSection = defaults.getConfigurationSection("modules");
