@@ -10,32 +10,33 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class PluginModule implements Listener {
-    private boolean enabled = false;
-
     protected final String name;
     protected final JavaPlugin plugin;
+    protected boolean enabled;
 
     protected PluginModule(@NotNull JavaPlugin plugin) {
         this.name = getClass().getAnnotation(ModuleMeta.class).name();
         this.plugin = plugin;
+        this.enabled = false;
     }
 
     public void reload() {
-        var config = plugin.getConfig();
-        var logger = plugin.getComponentLogger();
+        final var config = plugin.getConfig();
+        final var logger = plugin.getComponentLogger();
 
-        for (var field : getClass().getDeclaredFields()) {
+        for (final var field : getClass().getDeclaredFields()) {
             if (!field.isAnnotationPresent(ConfigValue.class)) continue;
-            var annotation = field.getAnnotation(ConfigValue.class);
-            var path = "modules." + name + "." + annotation.name();
-            if (!config.contains(path)) continue;
+            final var annotation = field.getAnnotation(ConfigValue.class);
+            final var path = "modules." + name + "." + annotation.name();
 
             try {
                 field.setAccessible(true);
-                var value = config.get(path);
+                final var value = config.get(path, field.get(this));
                 field.set(this, value);
-            } catch (IllegalAccessException ignored) {
-                logger.warn("failed to inject config value for {}", field.getName());
+            } catch (Exception exception) {
+                logger.warn("failed to inject config value for {}: {}", field.getName(), exception.getMessage());
+            } finally {
+                field.setAccessible(false);
             }
         }
 
