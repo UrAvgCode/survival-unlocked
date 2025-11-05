@@ -1,7 +1,7 @@
 package com.uravgcode.survivalunlocked.module.callyourpets;
 
-import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import com.uravgcode.survivalunlocked.annotation.ConfigModule;
+import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import org.bukkit.Material;
 import org.bukkit.entity.AbstractHorse;
@@ -19,6 +19,12 @@ public final class CallYourPetsModule extends PluginModule {
     @ConfigValue(path = "call-radius")
     private double callRadius = 64.0;
 
+    @ConfigValue(path = "stop-distance")
+    private double stopDistance = 4.0;
+
+    @ConfigValue(path = "follow-time")
+    private long followTime = 100L;
+
     public CallYourPetsModule(@NotNull JavaPlugin plugin) {
         super(plugin);
     }
@@ -27,25 +33,33 @@ public final class CallYourPetsModule extends PluginModule {
     public void onHornBlow(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 
-        var player = event.getPlayer();
-        var hand = event.getHand();
+        final var player = event.getPlayer();
+        final var hand = event.getHand();
         if (hand == null) return;
 
-        var item = player.getInventory().getItem(hand);
+        final var item = player.getInventory().getItem(hand);
         if (item.getType() != Material.GOAT_HORN) return;
         if (player.hasCooldown(item)) return;
 
-        for (var entity : player.getNearbyEntities(callRadius, callRadius, callRadius)) {
-            if (!(entity instanceof Tameable pet)) continue;
-            if (pet instanceof Sittable sittable && sittable.isSitting()) continue;
+        final var location = player.getLocation();
+        for (final var entity : player.getNearbyEntities(callRadius, callRadius, callRadius)) {
+            if (!(entity instanceof final Tameable pet)) continue;
+            if (pet instanceof final Sittable sittable && sittable.isSitting()) continue;
             if (!player.getUniqueId().equals(pet.getOwnerUniqueId())) continue;
 
-            final double speed = switch (pet) {
-                case AbstractHorse ignored -> 2.0;
-                default -> 1.2;
-            };
+            final double speed = pet instanceof AbstractHorse ? 1.8 : 1.2;
+            final var followTask = pet.getScheduler().runAtFixedRate(plugin, task -> {
+                if (pet.getLocation().distanceSquared(location) <= stopDistance * stopDistance) {
+                    task.cancel();
+                } else {
+                    if (pet instanceof AbstractHorse horse) horse.setEatingGrass(false);
+                    pet.getPathfinder().moveTo(location, speed);
+                }
+            }, null, 1L, 10L);
 
-            pet.getPathfinder().moveTo(player, speed);
+            pet.getScheduler().runDelayed(plugin, task -> {
+                if (followTask != null) followTask.cancel();
+            }, null, followTime);
         }
     }
 }

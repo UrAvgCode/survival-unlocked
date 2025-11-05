@@ -13,6 +13,8 @@ modules:
   call-your-pets:
     enabled: true
     call-radius: 64
+    stop-distance: 4
+    follow-time: 100
 
   # Build nether portals in any shape, including with crying obsidian.
   custom-shaped-portals:
