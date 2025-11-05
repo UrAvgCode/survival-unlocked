@@ -1,4 +1,10 @@
-# Main configuration file for gameplay features.
+# =======================================
+# Survival Unlocked Plugin Configuration
+# =======================================
+
+config:
+  # current plugin version, do not change this
+  version: ${version}
 
 modules:
   # Armor stands have arms and can change poses when shift-clicked.
@@ -77,6 +83,3 @@ modules:
   # A zombie riding a zombie horse can spawn when a lightning strikes during a thunderstorm.
   zombie-horse:
     enabled: true
-
-config:
-  version: ${version}
