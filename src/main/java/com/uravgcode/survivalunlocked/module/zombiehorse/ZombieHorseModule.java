@@ -5,8 +5,8 @@ import com.uravgcode.survivalunlocked.module.PluginModule;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.Zombie;
+import org.bukkit.entity.ZombieHorse;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.weather.LightningStrikeEvent;
@@ -26,34 +26,38 @@ public final class ZombieHorseModule extends PluginModule {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onLightningStrike(LightningStrikeEvent event) {
-        var cause = event.getCause();
-        if (cause != LightningStrikeEvent.Cause.WEATHER) return;
+        if (event.getCause() != LightningStrikeEvent.Cause.WEATHER) return;
 
-        var lightning = event.getLightning();
-        var world = lightning.getWorld();
-        var location = lightning.getLocation();
+        final var location = event.getLightning().getLocation();
+        if (ThreadLocalRandom.current().nextDouble() > spawnChance(location)) return;
 
-        if (ThreadLocalRandom.current().nextDouble() > spawnChance(world, location)) return;
+        final var world = location.getWorld();
+        world.strikeLightningEffect(location);
 
-        var zombie = world.spawn(location, Zombie.class);
-        var horse = world.spawn(location, org.bukkit.entity.ZombieHorse.class);
-
+        final var horse = world.spawn(location, ZombieHorse.class);
+        horse.setNoDamageTicks(60);
         horse.setTamed(true);
+
+        final var zombie = world.spawn(location, Zombie.class);
+        zombie.setNoDamageTicks(60);
         horse.addPassenger(zombie);
 
-        var equipment = zombie.getEquipment();
+        final var equipment = zombie.getEquipment();
         equipment.setHelmet(ItemStack.of(Material.IRON_HELMET));
         equipment.setChestplate(ItemStack.of(Material.IRON_CHESTPLATE));
         equipment.setLeggings(ItemStack.of(Material.IRON_LEGGINGS));
         equipment.setBoots(ItemStack.of(Material.IRON_BOOTS));
         equipment.setItemInMainHand(ItemStack.of(Material.IRON_SWORD));
+
+        event.setCancelled(true);
     }
 
-    private double spawnChance(World world, Location location) {
-        var difficulty = world.getDifficulty();
+    private double spawnChance(@NotNull Location location) {
+        final var world = location.getWorld();
+        final var difficulty = world.getDifficulty();
         if (difficulty == Difficulty.PEACEFUL) return 0.0;
 
-        var fullTime = world.getFullTime();
+        final var fullTime = world.getFullTime();
 
         double daytimeFactor;
         if (fullTime > 63L * 24000L) {
@@ -64,8 +68,8 @@ public final class ZombieHorseModule extends PluginModule {
             daytimeFactor = (fullTime - 72000L) / 5760000.0;
         }
 
-        var chunk = world.getChunkAt(location);
-        var inhabitedTime = chunk.getInhabitedTime();
+        final var chunk = world.getChunkAt(location);
+        final var inhabitedTime = chunk.getInhabitedTime();
 
         double chunkFactor;
         if (inhabitedTime > TimeUnit.HOURS.toSeconds(50) * 20) {
@@ -78,7 +82,7 @@ public final class ZombieHorseModule extends PluginModule {
             chunkFactor *= 0.75;
         }
 
-        var moonPhase = world.getMoonPhase();
+        final var moonPhase = world.getMoonPhase();
         chunkFactor += Math.min(moonPhase.ordinal() / 4.0, daytimeFactor);
 
         if (difficulty == Difficulty.EASY) {
