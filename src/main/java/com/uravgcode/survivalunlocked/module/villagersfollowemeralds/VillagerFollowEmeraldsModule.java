@@ -1,8 +1,8 @@
 package com.uravgcode.survivalunlocked.module.villagersfollowemeralds;
 
 import com.destroystokyo.paper.event.entity.EntityAddToWorldEvent;
-import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import com.uravgcode.survivalunlocked.annotation.ConfigModule;
+import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
@@ -25,10 +25,10 @@ public final class VillagerFollowEmeraldsModule extends PluginModule {
 
     @EventHandler
     public void onVillagerEntityAdd(EntityAddToWorldEvent event) {
-        if (!(event.getEntity() instanceof CraftVillager craftVillager)) return;
-        var villager = craftVillager.getHandle();
+        if (!(event.getEntity() instanceof final CraftVillager craftVillager)) return;
+        final var villager = craftVillager.getHandle();
 
-        var attributes = villager.getAttributes();
+        final var attributes = villager.getAttributes();
         if (!attributes.hasAttribute(Attributes.TEMPT_RANGE)) {
             attributes.registerAttribute(Attributes.TEMPT_RANGE);
         }
