@@ -23,11 +23,11 @@ public final class ThrowableFireballsModule extends PluginModule {
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_AIR) return;
 
-        var player = event.getPlayer();
-        var hand = event.getHand();
+        final var player = event.getPlayer();
+        final var hand = event.getHand();
         if (hand == null) return;
 
-        var item = player.getInventory().getItem(hand);
+        final var item = player.getInventory().getItem(hand);
         if (item.getType() != Material.FIRE_CHARGE) return;
 
         player.swingHand(hand);
@@ -37,7 +37,7 @@ public final class ThrowableFireballsModule extends PluginModule {
             1, 1f
         );
 
-        var fireball = player.getWorld().spawn(player.getEyeLocation(), SmallFireball.class);
+        final var fireball = player.getWorld().spawn(player.getEyeLocation(), SmallFireball.class);
         fireball.setDirection(player.getEyeLocation().getDirection());
         fireball.setShooter(player);
 
