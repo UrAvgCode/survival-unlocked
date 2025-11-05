@@ -1,7 +1,7 @@
 package com.uravgcode.survivalunlocked.module.customshapedportals;
 
 import com.uravgcode.survivalunlocked.annotation.ConfigValue;
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import org.bukkit.Axis;
 import org.bukkit.Location;
@@ -23,16 +23,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-@ModuleMeta(name = "custom-shaped-portals")
+@ConfigModule(path = "custom-shaped-portals")
 public final class CustomShapedPortalsModule extends PluginModule {
 
-    @ConfigValue(name = "minimum-portal-size")
+    @ConfigValue(path = "minimum-portal-size")
     private int minPortalSize = 6;
 
-    @ConfigValue(name = "maximum-portal-width")
+    @ConfigValue(path = "maximum-portal-width")
     private int maxWidth = 21;
 
-    @ConfigValue(name = "maximum-portal-height")
+    @ConfigValue(path = "maximum-portal-height")
     private int maxHeight = 21;
 
     private final Set<Material> portalBlocks = Set.of(

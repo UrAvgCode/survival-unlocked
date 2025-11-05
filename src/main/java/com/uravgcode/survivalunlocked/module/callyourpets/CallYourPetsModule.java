@@ -1,7 +1,7 @@
 package com.uravgcode.survivalunlocked.module.callyourpets;
 
 import com.uravgcode.survivalunlocked.annotation.ConfigValue;
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import org.bukkit.Material;
 import org.bukkit.entity.AbstractHorse;
@@ -13,10 +13,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-@ModuleMeta(name = "call-your-pets")
+@ConfigModule(path = "call-your-pets")
 public final class CallYourPetsModule extends PluginModule {
 
-    @ConfigValue(name = "call-radius")
+    @ConfigValue(path = "call-radius")
     private double callRadius = 64.0;
 
     public CallYourPetsModule(@NotNull JavaPlugin plugin) {

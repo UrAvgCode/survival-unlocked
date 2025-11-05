@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.module.throwablefireballs;
 
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-@ModuleMeta(name = "throwable-fireballs")
+@ConfigModule(path = "throwable-fireballs")
 public final class ThrowableFireballsModule extends PluginModule {
 
     public ThrowableFireballsModule(@NotNull JavaPlugin plugin) {

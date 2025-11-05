@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.module.lockchests;
 
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.CustomModelData;
@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
-@ModuleMeta(name = "lock-chests")
+@ConfigModule(path = "lock-chests")
 public final class LockChestsModule extends PluginModule {
     private final NamespacedKey lockKey;
     private final NamespacedKey recipeKey;

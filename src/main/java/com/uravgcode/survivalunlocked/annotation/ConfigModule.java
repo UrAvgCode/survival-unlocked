@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ModuleMeta {
-    String name();
+public @interface ConfigModule {
+    String path();
 }

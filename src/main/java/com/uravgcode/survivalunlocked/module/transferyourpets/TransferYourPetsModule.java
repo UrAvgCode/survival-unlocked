@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.module.transferyourpets;
 
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import io.papermc.paper.dialog.Dialog;
 import io.papermc.paper.entity.Leashable;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@ModuleMeta(name = "transfer-your-pets")
+@ConfigModule(path = "transfer-your-pets")
 public final class TransferYourPetsModule extends PluginModule {
 
     public TransferYourPetsModule(@NotNull JavaPlugin plugin) {

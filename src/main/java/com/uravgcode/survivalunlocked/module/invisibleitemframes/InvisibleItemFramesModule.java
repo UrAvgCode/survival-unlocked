@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.module.invisibleitemframes;
 
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-@ModuleMeta(name = "invisible-item-frames")
+@ConfigModule(path = "invisible-item-frames")
 public final class InvisibleItemFramesModule extends PluginModule {
 
     public InvisibleItemFramesModule(@NotNull JavaPlugin plugin) {

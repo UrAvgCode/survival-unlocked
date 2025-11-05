@@ -2,7 +2,7 @@ package com.uravgcode.survivalunlocked.module.villagersfollowemeralds;
 
 import com.destroystokyo.paper.event.entity.EntityAddToWorldEvent;
 import com.uravgcode.survivalunlocked.annotation.ConfigValue;
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
@@ -13,10 +13,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-@ModuleMeta(name = "villagers-follow-emeralds")
+@ConfigModule(path = "villagers-follow-emeralds")
 public final class VillagerFollowEmeraldsModule extends PluginModule {
 
-    @ConfigValue(name = "follow-speed")
+    @ConfigValue(path = "follow-speed")
     private double followSpeed = 0.6;
 
     public VillagerFollowEmeraldsModule(@NotNull JavaPlugin plugin) {

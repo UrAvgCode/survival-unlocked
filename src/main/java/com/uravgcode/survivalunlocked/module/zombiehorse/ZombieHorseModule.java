@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.module.zombiehorse;
 
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-@ModuleMeta(name = "zombie-horse")
+@ConfigModule(path = "zombie-horse")
 public final class ZombieHorseModule extends PluginModule {
 
     public ZombieHorseModule(@NotNull JavaPlugin plugin) {

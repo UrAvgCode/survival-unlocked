@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.module.silencemobs;
 
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.text.Component;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-@ModuleMeta(name = "silence-mobs")
+@ConfigModule(path = "silence-mobs")
 public final class SilenceMobsModule extends PluginModule {
 
     public SilenceMobsModule(@NotNull JavaPlugin plugin) {

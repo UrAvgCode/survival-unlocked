@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.module.keepbabyanimals;
 
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import org.bukkit.*;
 import org.bukkit.entity.Breedable;
@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-@ModuleMeta(name = "keep-baby-animals")
+@ConfigModule(path = "keep-baby-animals")
 public final class KeepBabyAnimalsModule extends PluginModule {
 
     public KeepBabyAnimalsModule(@NotNull JavaPlugin plugin) {

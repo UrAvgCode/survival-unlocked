@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.module.bettertridents;
 
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
@@ -10,7 +10,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-@ModuleMeta(name = "better-tridents")
+@ConfigModule(path = "better-tridents")
 public final class BetterTridentsModule extends PluginModule {
 
     public BetterTridentsModule(@NotNull JavaPlugin plugin) {

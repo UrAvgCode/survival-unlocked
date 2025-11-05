@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.module.betterarmorstands;
 
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.ArmorStand;
@@ -12,7 +12,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-@ModuleMeta(name = "better-armor-stands")
+@ConfigModule(path = "better-armor-stands")
 public final class BetterArmorStandsModule extends PluginModule {
     private final NamespacedKey poseKey;
 

@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.module.silktouchpaintings;
 
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.bukkit.Material;
@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-@ModuleMeta(name = "silk-touch-paintings")
+@ConfigModule(path = "silk-touch-paintings")
 public final class SilkTouchPaintingsModule extends PluginModule {
 
     public SilkTouchPaintingsModule(@NotNull JavaPlugin plugin) {

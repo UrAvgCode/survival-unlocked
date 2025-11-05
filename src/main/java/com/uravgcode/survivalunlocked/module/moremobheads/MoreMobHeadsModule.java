@@ -1,7 +1,7 @@
 package com.uravgcode.survivalunlocked.module.moremobheads;
 
 import com.destroystokyo.paper.profile.ProfileProperty;
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ResolvableProfile;
@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
-@ModuleMeta(name = "more-mob-heads")
+@ConfigModule(path = "more-mob-heads")
 public final class MoreMobHeadsModule extends PluginModule {
 
     private record HeadKey(

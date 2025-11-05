@@ -1,7 +1,7 @@
 package com.uravgcode.survivalunlocked.module.smoothsleeptransition;
 
 import com.uravgcode.survivalunlocked.annotation.ConfigValue;
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import io.papermc.paper.event.player.PlayerDeepSleepEvent;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
@@ -17,11 +17,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
-@ModuleMeta(name = "smooth-sleep-transition")
+@ConfigModule(path = "smooth-sleep-transition")
 public final class SmoothSleepTransitionModule extends PluginModule {
     private static final long DAY_LENGTH = 24000;
 
-    @ConfigValue(name = "time-rate")
+    @ConfigValue(path = "time-rate")
     private long timeRate = 120;
 
     private final Map<World, ScheduledTask> nightSkipTasks;

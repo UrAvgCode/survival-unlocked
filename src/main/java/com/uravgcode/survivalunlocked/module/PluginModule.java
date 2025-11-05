@@ -1,7 +1,7 @@
 package com.uravgcode.survivalunlocked.module;
 
 import com.uravgcode.survivalunlocked.annotation.ConfigValue;
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.event.HandlerList;
@@ -15,7 +15,7 @@ public abstract class PluginModule implements Listener {
     protected boolean enabled;
 
     protected PluginModule(@NotNull JavaPlugin plugin) {
-        this.name = getClass().getAnnotation(ModuleMeta.class).name();
+        this.name = getClass().getAnnotation(ConfigModule.class).path();
         this.plugin = plugin;
         this.enabled = false;
     }
@@ -27,7 +27,7 @@ public abstract class PluginModule implements Listener {
         for (final var field : getClass().getDeclaredFields()) {
             if (!field.isAnnotationPresent(ConfigValue.class)) continue;
             final var annotation = field.getAnnotation(ConfigValue.class);
-            final var path = "modules." + name + "." + annotation.name();
+            final var path = "modules." + name + "." + annotation.path();
 
             try {
                 field.setAccessible(true);

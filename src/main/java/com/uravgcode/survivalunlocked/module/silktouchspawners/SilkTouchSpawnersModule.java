@@ -1,6 +1,6 @@
 package com.uravgcode.survivalunlocked.module.silktouchspawners;
 
-import com.uravgcode.survivalunlocked.annotation.ModuleMeta;
+import com.uravgcode.survivalunlocked.annotation.ConfigModule;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.TooltipDisplay;
@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-@ModuleMeta(name = "silk-touch-spawners")
+@ConfigModule(path = "silk-touch-spawners")
 public final class SilkTouchSpawnersModule extends PluginModule {
 
     public SilkTouchSpawnersModule(@NotNull JavaPlugin plugin) {
