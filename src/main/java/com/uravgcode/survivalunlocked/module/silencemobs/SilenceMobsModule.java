@@ -26,13 +26,13 @@ public final class SilenceMobsModule extends PluginModule {
     @SuppressWarnings("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
-        if (!(event.getRightClicked() instanceof Mob mob)) return;
+        if (!(event.getRightClicked() instanceof final Mob mob)) return;
 
-        var player = event.getPlayer();
-        var item = player.getInventory().getItem(event.getHand());
+        final var player = event.getPlayer();
+        final var item = player.getInventory().getItem(event.getHand());
         if (item.getType() != Material.NAME_TAG) return;
 
-        var name = item.getData(DataComponentTypes.CUSTOM_NAME);
+        final var name = item.getData(DataComponentTypes.CUSTOM_NAME);
         if (Component.text("silence").equals(name)) {
             if (player.getGameMode() != GameMode.CREATIVE) item.subtract();
             player.sendActionBar(Component.text(getMobName(mob) + " silenced"));
@@ -46,7 +46,7 @@ public final class SilenceMobsModule extends PluginModule {
         }
     }
 
-    private String getMobName(Mob entity) {
+    private @NotNull String getMobName(@NotNull Mob entity) {
         return Arrays.stream(entity.getType().name().toLowerCase().split("_"))
             .map(part -> Character.toUpperCase(part.charAt(0)) + part.substring(1))
             .collect(Collectors.joining(" "));
