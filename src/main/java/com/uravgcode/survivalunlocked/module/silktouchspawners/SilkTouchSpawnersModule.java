@@ -25,20 +25,20 @@ public final class SilkTouchSpawnersModule extends PluginModule {
     @SuppressWarnings("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
-        var block = event.getBlock();
+        final var block = event.getBlock();
         if (block.getType() != Material.SPAWNER) return;
 
-        var player = event.getPlayer();
+        final var player = event.getPlayer();
         if (player.getGameMode() == org.bukkit.GameMode.CREATIVE) return;
 
-        var tool = player.getInventory().getItemInMainHand();
+        final var tool = player.getInventory().getItemInMainHand();
         if (!tool.containsEnchantment(Enchantment.SILK_TOUCH)) return;
         if (!block.isPreferredTool(tool)) return;
 
-        var item = ItemStack.of(Material.SPAWNER);
-        var dataComponentType = Registry.DATA_COMPONENT_TYPE.get(DataComponentTypeKeys.BLOCK_ENTITY_DATA);
+        final var item = ItemStack.of(Material.SPAWNER);
+        final var dataComponentType = Registry.DATA_COMPONENT_TYPE.get(DataComponentTypeKeys.BLOCK_ENTITY_DATA);
         if (dataComponentType != null) {
-            var tooltipDisplay = TooltipDisplay.tooltipDisplay().addHiddenComponents(dataComponentType).build();
+            final var tooltipDisplay = TooltipDisplay.tooltipDisplay().addHiddenComponents(dataComponentType).build();
             item.setData(DataComponentTypes.TOOLTIP_DISPLAY, tooltipDisplay);
         }
 
