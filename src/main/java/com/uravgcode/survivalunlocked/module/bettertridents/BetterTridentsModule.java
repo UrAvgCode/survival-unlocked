@@ -19,18 +19,14 @@ public final class BetterTridentsModule extends PluginModule {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onTridentThrow(ProjectileLaunchEvent event) {
-        if (!(event.getEntity() instanceof Trident trident)) return;
+        if (!(event.getEntity() instanceof final Trident trident)) return;
         if (!(trident.getShooter() instanceof Player)) return;
         if (trident.getLoyaltyLevel() == 0) return;
 
+        final var minHeight = trident.getWorld().getMinHeight() - 20;
         trident.getScheduler().runAtFixedRate(plugin, task -> {
-            if (trident.getLocation().getY() < trident.getWorld().getMinHeight() - 20) {
-                trident.setHasDealtDamage(true);
-            }
-
-            if (trident.hasDealtDamage()) {
-                task.cancel();
-            }
+            if (trident.getLocation().getY() < minHeight) trident.setHasDealtDamage(true);
+            if (trident.hasDealtDamage()) task.cancel();
         }, null, 1L, 1L);
     }
 }
