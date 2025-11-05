@@ -1,7 +1,7 @@
 package com.uravgcode.survivalunlocked.module;
 
-import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import com.uravgcode.survivalunlocked.annotation.ConfigModule;
+import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.event.HandlerList;

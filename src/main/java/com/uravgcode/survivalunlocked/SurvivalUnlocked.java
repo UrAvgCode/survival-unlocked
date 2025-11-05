@@ -14,6 +14,8 @@ import java.util.Objects;
 public final class SurvivalUnlocked extends JavaPlugin {
     private static SurvivalUnlocked instance = null;
 
+    private ModuleManager moduleManager = null;
+
     public static @NotNull SurvivalUnlocked instance() {
         return Objects.requireNonNull(instance, "plugin not initialized");
     }
@@ -37,13 +39,14 @@ public final class SurvivalUnlocked extends JavaPlugin {
             updateConfig("heads.yml");
         }
 
-        ModuleManager.initializeModules(this);
+        moduleManager = new ModuleManager(this);
         reload();
     }
 
     public void reload() {
+        saveDefaultConfig();
         reloadConfig();
-        ModuleManager.reloadModules();
+        moduleManager.reloadModules();
     }
 
     private void updateConfig(@NotNull String filename) {

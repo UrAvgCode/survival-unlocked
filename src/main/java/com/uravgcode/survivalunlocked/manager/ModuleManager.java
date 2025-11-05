@@ -9,45 +9,52 @@ import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 public final class ModuleManager {
-    private static final List<@NotNull PluginModule> modules = new ArrayList<>();
+    private final List<@NotNull PluginModule> modules;
 
-    private ModuleManager() {
+    public ModuleManager(@NotNull JavaPlugin plugin) {
+        final var logger = plugin.getComponentLogger();
+
+        modules = new ArrayList<>();
+        for (final var clazz : discoverModules()) {
+            try {
+                final var constructor = clazz.getConstructor(JavaPlugin.class);
+                final var module = constructor.newInstance(plugin);
+                modules.add(module);
+            } catch (Exception exception) {
+                logger.warn("Failed to initialize {}: {}", clazz.getSimpleName(), exception.getMessage());
+            }
+        }
+
+        logger.info("Initialized {} modules", modules.size());
     }
 
-    public static void initializeModules(@NotNull JavaPlugin plugin) {
-        final var logger = plugin.getComponentLogger();
+    public void reloadModules() {
+        modules.forEach(PluginModule::reload);
+    }
+
+    public static List<@NotNull Class<? extends PluginModule>> discoverModules() {
         try {
-            final var loader = plugin.getClass().getClassLoader();
-            final var classPath = ClassPath.from(loader);
+            final var moduleClasses = new ArrayList<Class<? extends PluginModule>>();
+            final var classLoader = ModuleManager.class.getClassLoader();
+            final var classPath = ClassPath.from(classLoader);
 
             final var packageName = "com.uravgcode.survivalunlocked.module";
-            final var classes = classPath.getTopLevelClassesRecursive(packageName).stream()
-                .map(ClassPath.ClassInfo::load)
-                .filter(PluginModule.class::isAssignableFrom)
-                .filter(Predicate.not(Class::isInterface))
-                .filter(clazz -> !Modifier.isAbstract(clazz.getModifiers()))
-                .toList();
+            for (final var classInfo : classPath.getTopLevelClassesRecursive(packageName)) {
+                final var clazz = classInfo.load();
 
-            classes.forEach(clazz -> {
-                try {
-                    final var moduleClass = clazz.asSubclass(PluginModule.class);
-                    final var module = moduleClass.getConstructor(JavaPlugin.class).newInstance(plugin);
-                    modules.add(module);
-                } catch (Exception ignored) {
-                    logger.warn("Failed to initialize {}", clazz.getSimpleName());
-                }
-            });
+                if (!PluginModule.class.isAssignableFrom(clazz)) continue;
+                if (Modifier.isAbstract(clazz.getModifiers())) continue;
+                if (clazz.isInterface()) continue;
 
-            logger.info("Initialized {} modules", modules.size());
+                final var moduleClass = clazz.asSubclass(PluginModule.class);
+                moduleClasses.add(moduleClass);
+            }
+
+            return moduleClasses;
         } catch (IOException exception) {
-            logger.error("Failed to initialize modules");
+            throw new RuntimeException(exception);
         }
-    }
-
-    public static void reloadModules() {
-        modules.forEach(PluginModule::reload);
     }
 }

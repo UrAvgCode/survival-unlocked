@@ -1,7 +1,7 @@
 package com.uravgcode.survivalunlocked.module.customshapedportals;
 
-import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import com.uravgcode.survivalunlocked.annotation.ConfigModule;
+import com.uravgcode.survivalunlocked.annotation.ConfigValue;
 import com.uravgcode.survivalunlocked.module.PluginModule;
 import org.bukkit.Axis;
 import org.bukkit.Location;
