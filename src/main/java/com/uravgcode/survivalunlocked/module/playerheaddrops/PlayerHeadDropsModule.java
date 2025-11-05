@@ -22,10 +22,10 @@ public final class PlayerHeadDropsModule extends PluginModule {
     @SuppressWarnings("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerDeath(PlayerDeathEvent event) {
-        var player = event.getEntity();
+        final var player = event.getEntity();
         if (player.getKiller() == null) return;
 
-        var head = ItemStack.of(Material.PLAYER_HEAD);
+        final var head = ItemStack.of(Material.PLAYER_HEAD);
         head.setData(DataComponentTypes.PROFILE, ResolvableProfile.resolvableProfile(player.getPlayerProfile()));
         event.getDrops().add(head);
     }
