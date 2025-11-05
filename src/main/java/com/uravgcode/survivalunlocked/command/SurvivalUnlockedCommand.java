@@ -5,36 +5,44 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.uravgcode.survivalunlocked.SurvivalUnlocked;
 import com.uravgcode.survivalunlocked.dialog.SettingsDialog;
+import com.uravgcode.survivalunlocked.update.UpdateChecker;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public final class PluginCommand {
-    private PluginCommand() {
-    }
+public final class SurvivalUnlockedCommand {
 
-    public static LiteralCommandNode<CommandSourceStack> build() {
+    public LiteralCommandNode<CommandSourceStack> build() {
         return Commands.literal("survivalunlocked")
             .requires(sender -> sender.getSender().hasPermission("survivalunlocked.admin"))
-            .then(Commands.literal("reload").executes(PluginCommand::reload))
-            .then(Commands.literal("toggle").executes(PluginCommand::toggle))
+            .then(Commands.literal("version")
+                .executes(this::version))
+            .then(Commands.literal("reload")
+                .executes(this::reload))
+            .then(Commands.literal("toggle")
+                .executes(this::toggle))
             .build();
     }
 
-    private static int reload(CommandContext<CommandSourceStack> context) {
-        final var plugin = SurvivalUnlocked.instance();
+    private int version(CommandContext<CommandSourceStack> context) {
+        final var version = new ComparableVersion(SurvivalUnlocked.instance().getPluginMeta().getVersion());
         final var sender = context.getSource().getSender();
-
-        plugin.reload();
-        sender.sendMessage(Component.text("successfully reloaded config", NamedTextColor.GREEN));
-
+        new UpdateChecker().sendVersionInfo(sender, version);
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int toggle(CommandContext<CommandSourceStack> context) {
+    private int reload(CommandContext<CommandSourceStack> context) {
+        SurvivalUnlocked.instance().reload();
+        final var sender = context.getSource().getSender();
+        sender.sendMessage(Component.text("successfully reloaded config", NamedTextColor.GREEN));
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private int toggle(CommandContext<CommandSourceStack> context) {
         context.getSource().getSender().showDialog(SettingsDialog.create());
         return Command.SINGLE_SUCCESS;
     }

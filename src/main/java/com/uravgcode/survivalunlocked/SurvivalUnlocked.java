@@ -2,6 +2,7 @@ package com.uravgcode.survivalunlocked;
 
 import com.uravgcode.survivalunlocked.manager.ModuleManager;
 import com.uravgcode.survivalunlocked.update.ConfigUpdater;
+import com.uravgcode.survivalunlocked.update.UpdateChecker;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,11 +26,7 @@ public final class SurvivalUnlocked extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-        if (!Files.exists(getDataPath().resolve("heads.yml"))) {
-            saveResource("heads.yml", false);
-        }
-
+        new UpdateChecker().checkForUpdate(this);
         configUpdater = new ConfigUpdater(this);
         moduleManager = new ModuleManager(this);
         reload();
@@ -37,6 +34,10 @@ public final class SurvivalUnlocked extends JavaPlugin {
 
     public void reload() {
         saveDefaultConfig();
+        if (!Files.exists(getDataPath().resolve("heads.yml"))) {
+            saveResource("heads.yml", false);
+        }
+
         reloadConfig();
         configUpdater.updateConfigs();
         moduleManager.reloadModules();
