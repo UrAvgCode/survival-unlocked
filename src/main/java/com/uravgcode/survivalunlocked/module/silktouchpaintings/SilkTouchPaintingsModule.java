@@ -24,15 +24,15 @@ public final class SilkTouchPaintingsModule extends PluginModule {
     @SuppressWarnings("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPaintingBreak(HangingBreakByEntityEvent event) {
-        if (!(event.getEntity() instanceof Painting painting)) return;
+        if (!(event.getEntity() instanceof final Painting painting)) return;
 
-        var remover = event.getRemover();
-        if (!(remover instanceof Player player)) return;
+        final var remover = event.getRemover();
+        if (!(remover instanceof final Player player)) return;
 
-        var itemInHand = player.getInventory().getItemInMainHand();
+        final var itemInHand = player.getInventory().getItemInMainHand();
         if (!itemInHand.containsEnchantment(Enchantment.SILK_TOUCH)) return;
 
-        var item = ItemStack.of(Material.PAINTING);
+        final var item = ItemStack.of(Material.PAINTING);
         item.setData(DataComponentTypes.PAINTING_VARIANT, painting.getArt());
 
         painting.remove();
