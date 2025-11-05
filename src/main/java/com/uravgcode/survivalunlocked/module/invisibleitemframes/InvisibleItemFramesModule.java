@@ -22,13 +22,13 @@ public final class InvisibleItemFramesModule extends PluginModule {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
-        if (!(event.getRightClicked() instanceof ItemFrame frame)) return;
+        if (!(event.getRightClicked() instanceof final ItemFrame frame)) return;
 
-        var player = event.getPlayer();
-        var handItem = player.getInventory().getItem(event.getHand());
+        final var player = event.getPlayer();
+        final var handItem = player.getInventory().getItem(event.getHand());
         if (handItem.getType() != Material.SHEARS) return;
 
-        var frameItem = frame.getItem();
+        final var frameItem = frame.getItem();
         if (frameItem.getType() == Material.AIR || !frame.isVisible()) return;
 
         frame.getWorld().spawnParticle(
@@ -51,7 +51,7 @@ public final class InvisibleItemFramesModule extends PluginModule {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (event.getEntity() instanceof ItemFrame frame) {
+        if (event.getEntity() instanceof final ItemFrame frame) {
             frame.setVisible(true);
         }
     }
