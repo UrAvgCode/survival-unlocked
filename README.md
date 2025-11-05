@@ -4,13 +4,6 @@
 improvements to the survival game mode. It is designed to feel like it could belong in the base game,
 keeping the classic vanilla atmosphere intact.
 
-## Commands
-
-| Command                    | Description                                     | Permission               |
-|----------------------------|-------------------------------------------------|--------------------------|
-| `/survivalunlocked reload` | Reloads the plugin config file.                 | `survivalunlocked.admin` |
-| `/survivalunlocked toggle` | Opens an ingame menu to toggle features on/off. | `survivalunlocked.admin` |
-
 ## Features
 
 | Feature                   | Description                                                                                                                  |
@@ -32,3 +25,11 @@ keeping the classic vanilla atmosphere intact.
 | Silence Mobs              | Use a name tag named `silence` to mute mobs, or `unsilence` to restore their sounds.                                         |
 | More Mob Heads            | Mobs have a chance to drop their heads on death. Chances are configurable.                                                   |
 | Player Head Drops         | Players drop their heads when killed by another player.                                                                      |
+
+## Commands
+
+| Command                     | Description                                                | Permission               |
+|-----------------------------|------------------------------------------------------------|--------------------------|
+| `/survivalunlocked version` | Displays the current plugin version and checks for updates | `survivalunlocked.admin` |
+| `/survivalunlocked reload`  | Reloads the plugin’s configuration files                   | `survivalunlocked.admin` |
+| `/survivalunlocked toggle`  | Opens an in-game menu to toggle features on or off         | `survivalunlocked.admin` |
