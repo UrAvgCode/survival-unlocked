@@ -23,31 +23,31 @@ public final class BetterArmorStandsModule extends PluginModule {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onArmorStandSpawn(EntitySpawnEvent event) {
-        if (event.getEntity() instanceof ArmorStand armorStand) {
+        if (event.getEntity() instanceof final ArmorStand armorStand) {
             armorStand.setArms(true);
         }
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onArmorStandClick(PlayerInteractAtEntityEvent event) {
-        if (!(event.getRightClicked() instanceof ArmorStand armorStand)) return;
+        if (!(event.getRightClicked() instanceof final ArmorStand armorStand)) return;
         if (!event.getPlayer().isSneaking()) return;
 
-        var pose = getPose(armorStand);
-        var poses = ArmorStandPose.values();
-        int nextIndex = (pose.ordinal() + 1) % poses.length;
-        var nextPose = poses[nextIndex];
+        final var pose = getPose(armorStand);
+        final var poses = ArmorStandPose.values();
+        final var nextIndex = (pose.ordinal() + 1) % poses.length;
+        final var nextPose = poses[nextIndex];
 
         setPose(armorStand, nextPose);
         event.setCancelled(true);
     }
 
-    private ArmorStandPose getPose(ArmorStand armorStand) {
-        var poseData = armorStand.getPersistentDataContainer().get(poseKey, PersistentDataType.STRING);
+    private ArmorStandPose getPose(@NotNull ArmorStand armorStand) {
+        final var poseData = armorStand.getPersistentDataContainer().get(poseKey, PersistentDataType.STRING);
         return poseData != null ? ArmorStandPose.valueOf(poseData) : ArmorStandPose.DEFAULT;
     }
 
-    private void setPose(ArmorStand armorStand, ArmorStandPose pose) {
+    private void setPose(@NotNull ArmorStand armorStand, @NotNull ArmorStandPose pose) {
         armorStand.getPersistentDataContainer().set(poseKey, PersistentDataType.STRING, pose.name());
         armorStand.setBodyPose(pose.body);
         armorStand.setHeadPose(pose.head);
