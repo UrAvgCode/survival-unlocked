@@ -19,12 +19,12 @@ public final class KeepBabyAnimalsModule extends PluginModule {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
-        if (!(event.getRightClicked() instanceof Breedable breedable)) return;
+        if (!(event.getRightClicked() instanceof final Breedable breedable)) return;
         if (breedable.isAdult()) return;
         if (breedable.getAgeLock()) return;
 
-        var player = event.getPlayer();
-        var item = player.getInventory().getItemInMainHand();
+        final var player = event.getPlayer();
+        final var item = player.getInventory().getItemInMainHand();
         if (item.getType() != Material.POISONOUS_POTATO) return;
 
         breedable.playHurtAnimation(0);
