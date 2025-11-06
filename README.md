@@ -25,6 +25,8 @@ keeping the classic vanilla atmosphere intact.
 | Silence Mobs              | Use a name tag named `silence` to mute mobs, or `unsilence` to restore their sounds.                                         |
 | More Mob Heads            | Mobs have a chance to drop their heads on death. Chances are configurable.                                                   |
 | Player Head Drops         | Players drop their heads when killed by another player.                                                                      |
+| Shear Name Tags           | Remove nametags from mobs by right-clicking them with shears.                                                                |
+| Coordinate Hud            | Shows coordinates and direction on the action bar.                                                                           |
 
 ## Commands
 
