@@ -28,8 +28,9 @@ keeping the classic vanilla atmosphere intact.
 
 ## Commands
 
-| Command                     | Description                                                | Permission               |
-|-----------------------------|------------------------------------------------------------|--------------------------|
-| `/survivalunlocked version` | Displays the current plugin version and checks for updates | `survivalunlocked.admin` |
-| `/survivalunlocked reload`  | Reloads the plugin’s configuration files                   | `survivalunlocked.admin` |
-| `/survivalunlocked toggle`  | Opens an in-game menu to toggle features on or off         | `survivalunlocked.admin` |
+| Command                     | Description                                                | Permission                       |
+|-----------------------------|------------------------------------------------------------|----------------------------------|
+| `/survivalunlocked version` | Displays the current plugin version and checks for updates | `survivalunlocked.admin`         |
+| `/survivalunlocked reload`  | Reloads the plugin’s configuration files                   | `survivalunlocked.admin`         |
+| `/survivalunlocked toggle`  | Opens an in-game menu to toggle features on or off         | `survivalunlocked.admin`         |
+| `/coordinatehud`            | Shows coordinates and direction on the action bar          | `survivalunlocked.coordinatehud` |

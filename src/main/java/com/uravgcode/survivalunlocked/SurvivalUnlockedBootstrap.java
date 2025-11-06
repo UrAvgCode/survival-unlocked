@@ -1,5 +1,6 @@
 package com.uravgcode.survivalunlocked;
 
+import com.uravgcode.survivalunlocked.command.CoordinateHudCommand;
 import com.uravgcode.survivalunlocked.command.SurvivalUnlockedCommand;
 import io.papermc.paper.plugin.bootstrap.BootstrapContext;
 import io.papermc.paper.plugin.bootstrap.PluginBootstrap;
@@ -14,9 +15,10 @@ public final class SurvivalUnlockedBootstrap implements PluginBootstrap {
 
     @Override
     public void bootstrap(BootstrapContext context) {
-        context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands ->
-            commands.registrar().register(new SurvivalUnlockedCommand().build())
-        );
+        context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
+            commands.registrar().register(new SurvivalUnlockedCommand().build());
+            commands.registrar().register(new CoordinateHudCommand().build());
+        });
     }
 
     @Override
