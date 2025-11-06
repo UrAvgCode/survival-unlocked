@@ -79,7 +79,9 @@ public final class CoordinateHudModule extends PluginModule {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        players.add(event.getPlayer());
+        if (event.getPlayer().getPersistentDataContainer().has(hudKey)) {
+            players.add(event.getPlayer());
+        }
     }
 
     @EventHandler
