@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,13 +87,13 @@ public final class CoordinateHudModule extends PluginModule {
         players.remove(event.getPlayer());
     }
 
-    private void updateCoordinateHud(final ScheduledTask ignored) {
+    private void updateCoordinateHud(@Nullable ScheduledTask ignored) {
         for (final var player : players) {
             player.sendActionBar(miniMessage.deserialize(format, player));
         }
     }
 
-    private static TagResolver positionPlaceholders() {
+    private @NotNull TagResolver positionPlaceholders() {
         return TagResolver.builder()
             .tag("x", (arguments, context) -> {
                 final var player = context.targetAsType(Player.class);
@@ -114,10 +115,14 @@ public final class CoordinateHudModule extends PluginModule {
                 final var yaw = player.getLocation().getYaw();
 
                 var direction = "?";
-                if (yaw >= 135f || yaw <= -135f) direction = "N";
-                if (yaw >= -135f && yaw <= -45f) direction = "E";
-                if (yaw >= -45f && yaw <= 45f) direction = "S";
-                if (yaw >= 45f && yaw <= 135f) direction = "W";
+                if ((yaw >= -22.5 && yaw < 22.5) || (yaw >= 337.5 || yaw < -337.5)) direction = "S";
+                else if (yaw >= 22.5 && yaw < 67.5) direction = "SW";
+                else if (yaw >= 67.5 && yaw < 112.5) direction = "W";
+                else if (yaw >= 112.5 && yaw < 157.5) direction = "NW";
+                else if ((yaw >= 157.5 && yaw <= 180) || (yaw >= -180 && yaw < -157.5)) direction = "N";
+                else if (yaw >= -157.5 && yaw < -112.5) direction = "NE";
+                else if (yaw >= -112.5 && yaw < -67.5) direction = "E";
+                else if (yaw >= -67.5 && yaw < -22.5) direction = "SE";
 
                 return Tag.selfClosingInserting(Component.text(direction));
             })

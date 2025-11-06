@@ -26,7 +26,7 @@ modules:
   # /coordinatehud (survivalunlocked.coordinatehud)
   coordinate-hud:
     enabled: true
-    format: <x>,<y>,<z>  <yellow><direction>
+    format: <x> <y> <z>  <yellow><direction>
     refresh-interval: 2
 
   # Build nether portals in any shape, including with crying obsidian.
