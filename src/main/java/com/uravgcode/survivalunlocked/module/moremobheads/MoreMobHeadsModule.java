@@ -6,6 +6,7 @@ import com.uravgcode.survivalunlocked.module.PluginModule;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ResolvableProfile;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
@@ -103,7 +104,7 @@ public final class MoreMobHeadsModule extends PluginModule {
     @SuppressWarnings("UnstableApiUsage")
     private static @NotNull ItemStack createHead(@Nullable String texture, @Nullable String display, @Nullable String sound) {
         final var head = ItemStack.of(Material.PLAYER_HEAD);
-        if (display != null) head.setData(DataComponentTypes.ITEM_NAME, Component.text(display));
+        if (display != null) head.setData(DataComponentTypes.CUSTOM_NAME, Component.text(display).decoration(TextDecoration.ITALIC, false));
         if (sound != null) head.setData(DataComponentTypes.NOTE_BLOCK_SOUND, NamespacedKey.minecraft(sound));
         if (texture != null) head.setData(DataComponentTypes.PROFILE, ResolvableProfile.resolvableProfile()
             .addProperty(new ProfileProperty("textures", texture))
