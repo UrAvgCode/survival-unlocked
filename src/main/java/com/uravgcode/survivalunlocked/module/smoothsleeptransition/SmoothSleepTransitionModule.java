@@ -9,6 +9,7 @@ import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerBedLeaveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -38,6 +39,11 @@ public final class SmoothSleepTransitionModule extends PluginModule {
 
     @EventHandler
     public void onBedLeave(PlayerBedLeaveEvent event) {
+        updateNightSkipState(event.getPlayer().getWorld());
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
         updateNightSkipState(event.getPlayer().getWorld());
     }
 
