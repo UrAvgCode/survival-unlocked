@@ -56,6 +56,10 @@ modules:
   player-head-drops:
     enabled: true
 
+  # Scorch vines with flint and steel to stop their growth
+  scorch-vines:
+    enabled: true
+
   # Remove nametags from mobs by right-clicking them with shears.
   shear-name-tags:
     enabled: true
