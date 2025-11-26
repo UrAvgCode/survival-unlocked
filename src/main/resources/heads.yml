@@ -87,8 +87,8 @@ blaze:
 bogged:
   texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGY4MDdhMTg3MDc3ZjgzNmI5MzgyMGIzMmQ4ZDgzNDFkNGQzMmNkNGM4YzExMTVjZjFkYTYzNzRlMGZiZDNmZiJ9fX0=
   display: Bogged Head
-  chance: 0.06
-  looting: 0.05
+  chance: 0.025
+  looting: 0.01
   sound: entity.bogged.ambient
 
 breeze:
@@ -104,6 +104,13 @@ camel:
   chance: 0.2
   looting: 0.05
   sound: entity.camel.ambient
+
+camel_husk:
+  texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzUwYmZjOWIyY2M0MGY0ZDhkMDIyNGNjYmFiYWMyNmIzMzhhYTk0N2Q5OWRjZGU3NjlmODU5YjU5YjhkMGIwZSJ9fX0=
+  display: Camel Husk Head
+  chance: 0.2
+  looting: 0.05
+  sound: entity.camel_husk.ambient
 
 cat:
   all_black:
@@ -519,6 +526,13 @@ mule:
   looting: 0.05
   sound: entity.mule.ambient
 
+nautilus:
+  texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2JiMzQwZGQzMzAyNjE1MzQ4ZGU1MTYyZmUxNjcwYjljNWM5YzYxNmNkOTJkMmRlOWQ4Mzk4Y2IzM2U4NDJhZSJ9fX0=
+  display: Nautilus Head
+  chance: 0.025
+  looting: 0.01
+  sound: entity.nautilus.ambient
+
 ocelot:
   texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTE3NWNjNDNlYThhZTIwMTY4YTFmMTcwODEwYjRkYTRkOWI0ZWJkM2M5OTc2ZTlmYzIyZTlmOTk1YzNjYmMzYyJ9fX0=
   display: Ocelot Head
@@ -569,6 +583,13 @@ panda:
     chance: 0.27
     looting: 0.004
     sound: entity.panda.aggressive_ambient
+
+parched:
+  texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjRhZWNlZmY1ZjI2ZGQ4NDEzYzVjMDM1NDdjMjM0YWMwMzEwOGQxODdhZjBiOWNkODM0YThjZTEyNTk4NTkxYyJ9fX0=
+  display: Parched Head
+  chance: 0.025
+  looting: 0.01
+  sound: entity.parched.ambient
 
 parrot:
   red:
@@ -884,8 +905,8 @@ squid:
 stray:
   texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTkyYjU1OTcwODVlMzVkYjUzZDliZGEwMDhjYWU3MmIyZjAwY2Q3ZDRjZDhkYzY5ZmYxNzRhNTViNjg5ZTZlIn19fQ==
   display: Stray Head
-  chance: 0.06
-  looting: 0.05
+  chance: 0.025
+  looting: 0.01
   sound: entity.stray.ambient
 
 strider:
@@ -1184,6 +1205,13 @@ zombie_horse:
   chance: 0.2
   looting: 0.05
   sound: entity.zombie_horse.ambient
+
+zombie_nautilus:
+  texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmQ5YTkzMzM3NmRhNDRjMzM5MTMwN2NiOWY0Y2YwM2YxNmYzYTU0ZjQ5NWZkNWExMWJhZDhhMzczZjlkNTcyMCJ9fX0=
+  display: Zombie Nautilus Head
+  chance: 0.025
+  looting: 0.01
+  sound: entity.zombie_nautilus.ambient
 
 zombie_villager:
   armorer:
