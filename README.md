@@ -8,25 +8,26 @@ keeping the classic vanilla atmosphere intact.
 
 | Feature                   | Description                                                                                                                  |
 |---------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| Smooth Sleep Transition   | Smoothly skips the night with an animation when enough players are sleeping, using the `playersSleepingPercentage` gamerule. |
-| Custom Shaped Portals     | Build nether portals in any shape, including with crying obsidian.                                                           |
-| Throwable Fireballs       | Players can throw fireballs from their hand.                                                                                 |
-| Zombie Horse              | A zombie riding a zombie horse can spawn when a lightning strikes during a thunderstorm.                                     |
 | Better Armor Stands       | Armor stands have arms and can change poses when shift-clicked.                                                              |
 | Better Tridents           | Tridents enchanted with loyalty will return when thrown into the void.                                                       |
-| Invisible Item Frames     | Make item frames invisible by right-clicking them with shears.                                                               |
-| Silk Touch Paintings      | Destroy paintings with a silk touch tool to collect the exact painting variant, preserving its artwork.                      |
-| Silk Touch Spawners       | Mine mob spawners with a silk touch tool to collect and place them for decoration.                                           |
-| Lock Chests               | Lock chests by shift-right-clicking them with a trial key.                                                                   |
-| Villagers Follow Emeralds | Villagers are attracted to players holding emerald blocks.                                                                   |
 | Call Your Pets            | Call your pets to you by using a goat horn.                                                                                  |
-| Transfer Your Pets        | Transfer pets between players by shift-right-clicking them with a leashed pet.                                               |
+| Coordinate Hud            | Shows coordinates and direction on the action bar.                                                                           |
+| Custom Shaped Portals     | Build nether portals in any shape, including with crying obsidian.                                                           |
+| Invisible Item Frames     | Make item frames invisible by right-clicking them with shears.                                                               |
 | Keep Baby Animals         | Keep animals in their baby form by feeding them a poisonous potato.                                                          |
-| Silence Mobs              | Use a name tag named `silence` to mute mobs, or `unsilence` to restore their sounds.                                         |
+| Lock Chests               | Lock chests by shift-right-clicking them with a trial key.                                                                   |
 | More Mob Heads            | Mobs have a chance to drop their heads on death. Chances are configurable.                                                   |
 | Player Head Drops         | Players drop their heads when killed by another player.                                                                      |
+| Scorch Vines              | Scorch vines with flint and steel to stop their growth                                                                       |
 | Shear Name Tags           | Remove nametags from mobs by right-clicking them with shears.                                                                |
-| Coordinate Hud            | Shows coordinates and direction on the action bar.                                                                           |
+| Silence Mobs              | Use a name tag named `silence` to mute mobs, or `unsilence` to restore their sounds.                                         |
+| Silk Touch Paintings      | Destroy paintings with a silk touch tool to collect the exact painting variant, preserving its artwork.                      |
+| Silk Touch Spawners       | Mine mob spawners with a silk touch tool to collect and place them for decoration.                                           |
+| Smooth Sleep Transition   | Smoothly skips the night with an animation when enough players are sleeping, using the `playersSleepingPercentage` gamerule. |
+| Throwable Fireballs       | Players can throw fireballs from their hand.                                                                                 |
+| Transfer Your Pets        | Transfer pets between players by shift-right-clicking them with a leashed pet.                                               |
+| Villagers Follow Emeralds | Villagers are attracted to players holding emerald blocks.                                                                   |
+| Zombie Horse              | A zombie riding a zombie horse can spawn when a lightning strikes during a thunderstorm.                                     |
 
 ## Commands
 
