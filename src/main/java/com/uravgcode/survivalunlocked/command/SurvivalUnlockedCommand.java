@@ -10,7 +10,6 @@ import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
@@ -29,9 +28,8 @@ public final class SurvivalUnlockedCommand {
     }
 
     private int version(CommandContext<CommandSourceStack> context) {
-        final var version = new ComparableVersion(SurvivalUnlocked.instance().getPluginMeta().getVersion());
         final var sender = context.getSource().getSender();
-        new UpdateChecker().sendVersionInfo(sender, version);
+        new UpdateChecker(SurvivalUnlocked.instance()).sendVersionInfo(sender);
         return Command.SINGLE_SUCCESS;
     }
 

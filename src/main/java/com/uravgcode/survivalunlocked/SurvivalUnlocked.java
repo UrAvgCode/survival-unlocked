@@ -26,7 +26,7 @@ public final class SurvivalUnlocked extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        new UpdateChecker().checkForUpdate(this);
+        new UpdateChecker(this).checkForUpdate();
         configUpdater = new ConfigUpdater(this);
         moduleManager = new ModuleManager(this);
         reload();
