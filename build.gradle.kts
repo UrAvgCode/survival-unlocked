@@ -8,7 +8,7 @@ group = "com.uravgcode"
 version = "1.6.0"
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(25))
 }
 
 dependencies {
@@ -32,11 +32,6 @@ runPaper {
 }
 
 tasks {
-    withType<JavaCompile>().configureEach {
-        options.encoding = "UTF-8"
-        options.release.set(21)
-    }
-
     processResources {
         val props = mapOf("version" to project.version)
         inputs.properties(props)
@@ -47,6 +42,6 @@ tasks {
     }
 
     runServer {
-        minecraftVersion("1.21.11")
+        minecraftVersion("26.1.1")
     }
 }
