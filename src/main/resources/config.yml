@@ -42,7 +42,7 @@ modules:
 
   # Keep animals in their baby form by feeding them a poisonous potato.
   keep-baby-animals:
-    enabled: true
+    enabled: false
 
   # Lock chests by shift-right-clicking them with a trial key.
   lock-chests:
@@ -97,4 +97,4 @@ modules:
 
   # A zombie riding a zombie horse can spawn when a lightning strikes during a thunderstorm.
   zombie-horse:
-    enabled: true
+    enabled: false
