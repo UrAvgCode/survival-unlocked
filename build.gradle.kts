@@ -19,7 +19,7 @@ paperPluginYaml {
     main = "com.uravgcode.survivalunlocked.SurvivalUnlocked"
     bootstrapper = "com.uravgcode.survivalunlocked.SurvivalUnlockedBootstrap"
     foliaSupported = true
-    apiVersion = "1.21.11"
+    apiVersion = "26.2"
 
     name = "survival-unlocked"
     description = "vanilla friendly survival gameplay improvements"
@@ -42,6 +42,6 @@ tasks {
     }
 
     runServer {
-        minecraftVersion("26.1.1")
+        minecraftVersion("26.2")
     }
 }

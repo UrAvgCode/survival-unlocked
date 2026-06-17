@@ -33,7 +33,7 @@ public final class VillagerFollowEmeraldsModule extends PluginModule {
             attributes.registerAttribute(Attributes.TEMPT_RANGE);
         }
 
-        villager.goalSelector.addGoal(3, new TemptGoal(
+        villager.getGoalSelector().addGoal(3, new TemptGoal(
             villager,
             followSpeed,
             Ingredient.of(Items.EMERALD_BLOCK),
