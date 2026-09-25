@@ -80,14 +80,16 @@ public final class UpdateChecker {
                         .append(Component.text("Github", TextColor.color(0x59636e))
                             .clickEvent(ClickEvent.openUrl("https://github.com/UrAvgCode/survival-unlocked/releases/latest")))
                         .append(Component.text(" Modrinth", TextColor.color(0x1bd96a))
-                            .clickEvent(ClickEvent.openUrl("https://modrinth.com/plugin/survival-unlocked/version/latest"))));
+                            .clickEvent(ClickEvent.openUrl("https://modrinth.com/plugin/survival-unlocked")))
+                        .append(Component.text(" Hangar", TextColor.color(0x2f4476))
+                            .clickEvent(ClickEvent.openUrl("https://hangar.papermc.io/UrAvgCode/survival-unlocked"))));
                 } else {
                     audience.sendMessage(Component.text("Latest version: ")
                         .append(Component.text(latestVersion.toString(), NamedTextColor.GREEN)));
                     audience.sendMessage(Component.text("You are running a newer version than the latest release", NamedTextColor.RED));
                 }
             })
-            .exceptionally(throwable -> {
+            .exceptionally(_ -> {
                 audience.sendMessage(Component.text("survival-unlocked version: ")
                     .append(Component.text(version.toString(), NamedTextColor.GREEN)));
                 audience.sendMessage(Component.text("Failed to fetch latest version", NamedTextColor.RED));
