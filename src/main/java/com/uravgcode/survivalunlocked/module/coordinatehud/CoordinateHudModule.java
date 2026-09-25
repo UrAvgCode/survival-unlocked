@@ -97,22 +97,22 @@ public final class CoordinateHudModule extends PluginModule {
 
     private @NotNull TagResolver positionPlaceholders() {
         return TagResolver.builder()
-            .tag("x", (arguments, context) -> {
+            .tag("x", (_, context) -> {
                 final var player = context.targetAsType(Player.class);
                 final var x = player.getLocation().getBlockX();
                 return Tag.selfClosingInserting(Component.text(x));
             })
-            .tag("y", (arguments, context) -> {
+            .tag("y", (_, context) -> {
                 final var player = context.targetAsType(Player.class);
                 final var y = player.getLocation().getBlockY();
                 return Tag.selfClosingInserting(Component.text(y));
             })
-            .tag("z", (arguments, context) -> {
+            .tag("z", (_, context) -> {
                 final var player = context.targetAsType(Player.class);
                 final var z = player.getLocation().getBlockZ();
                 return Tag.selfClosingInserting(Component.text(z));
             })
-            .tag("direction", (arguments, context) -> {
+            .tag("direction", (_, context) -> {
                 final var player = context.targetAsType(Player.class);
                 final var yaw = player.getLocation().getYaw();
 

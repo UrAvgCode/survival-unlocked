@@ -57,7 +57,7 @@ public final class CallYourPetsModule extends PluginModule {
                 }
             }, null, 1L, 10L);
 
-            pet.getScheduler().runDelayed(plugin, task -> {
+            pet.getScheduler().runDelayed(plugin, _ -> {
                 if (followTask != null) followTask.cancel();
             }, null, followTime);
         }

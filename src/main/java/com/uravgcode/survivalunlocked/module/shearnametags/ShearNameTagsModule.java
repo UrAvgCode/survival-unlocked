@@ -20,7 +20,6 @@ public final class ShearNameTagsModule extends PluginModule {
         super(plugin);
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         final var player = event.getPlayer();

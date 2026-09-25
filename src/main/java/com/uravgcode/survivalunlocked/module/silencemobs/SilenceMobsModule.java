@@ -23,7 +23,6 @@ public final class SilenceMobsModule extends PluginModule {
         super(plugin);
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         if (!(event.getRightClicked() instanceof final Mob mob)) return;

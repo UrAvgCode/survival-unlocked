@@ -105,7 +105,6 @@ public final class LockChestsModule extends PluginModule {
         }
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     private void setKeyMeta(ItemStack item) {
         item.setData(DataComponentTypes.ITEM_NAME, Component.translatable("item.survivalunlocked.key").fallback("Key"));
         item.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData().addString("key"));

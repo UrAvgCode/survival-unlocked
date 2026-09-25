@@ -101,7 +101,6 @@ public final class MoreMobHeadsModule extends PluginModule {
         event.getDrops().add(head);
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     private static @NotNull ItemStack createHead(@Nullable String texture, @Nullable String display, @Nullable String sound) {
         final var head = ItemStack.of(Material.PLAYER_HEAD);
         if (display != null) head.setData(DataComponentTypes.CUSTOM_NAME, Component.text(display).decoration(TextDecoration.ITALIC, false));
@@ -136,7 +135,6 @@ public final class MoreMobHeadsModule extends PluginModule {
             case Frog frog -> frog.getVariant().key().value();
             case Goat goat -> goat.isScreaming() ? "screaming" : "normal";
             case Horse horse -> horse.getColor().name().toLowerCase();
-            case TraderLlama traderLlama -> traderLlama.getColor().name().toLowerCase();
             case Llama llama -> llama.getColor().name().toLowerCase();
             case MushroomCow mushroomCow -> mushroomCow.getVariant().name().toLowerCase();
             case Panda panda -> panda.getMainGene().name().toLowerCase();

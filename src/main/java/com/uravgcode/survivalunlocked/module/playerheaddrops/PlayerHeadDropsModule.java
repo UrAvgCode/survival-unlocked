@@ -19,7 +19,6 @@ public final class PlayerHeadDropsModule extends PluginModule {
         super(plugin);
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerDeath(PlayerDeathEvent event) {
         final var player = event.getEntity();

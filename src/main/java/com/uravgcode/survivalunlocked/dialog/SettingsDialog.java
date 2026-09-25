@@ -22,7 +22,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @NullMarked
-@SuppressWarnings("UnstableApiUsage")
 public final class SettingsDialog {
     private SettingsDialog() {
     }

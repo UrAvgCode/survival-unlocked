@@ -52,7 +52,7 @@ public final class TransferYourPetsModule extends PluginModule {
             return;
         }
 
-        showConfirmationDialog(player, target, (response, audience) -> {
+        showConfirmationDialog(player, target, (_, _) -> {
             if (player.getLocation().distance(target.getLocation()) > 10) {
                 player.sendActionBar(Component.text(target.getName() + " is too far away"));
                 return;
@@ -69,7 +69,6 @@ public final class TransferYourPetsModule extends PluginModule {
         });
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     private void showConfirmationDialog(Player player, Player target, DialogActionCallback callback) {
         var title = "Transfer Ownership";
         var body = """

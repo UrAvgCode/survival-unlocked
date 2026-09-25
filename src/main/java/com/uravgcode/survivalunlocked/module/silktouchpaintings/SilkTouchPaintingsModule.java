@@ -21,7 +21,6 @@ public final class SilkTouchPaintingsModule extends PluginModule {
         super(plugin);
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPaintingBreak(HangingBreakByEntityEvent event) {
         if (!(event.getEntity() instanceof final Painting painting)) return;

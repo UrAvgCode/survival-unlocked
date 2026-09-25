@@ -22,7 +22,6 @@ public final class SilkTouchSpawnersModule extends PluginModule {
         super(plugin);
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
         final var block = event.getBlock();
