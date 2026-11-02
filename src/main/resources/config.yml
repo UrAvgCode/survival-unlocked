@@ -40,10 +40,6 @@ modules:
   invisible-item-frames:
     enabled: true
 
-  # Keep animals in their baby form by feeding them a poisonous potato.
-  keep-baby-animals:
-    enabled: false
-
   # Lock chests by shift-right-clicking them with a trial key.
   lock-chests:
     enabled: true

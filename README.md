@@ -14,7 +14,6 @@ keeping the classic vanilla atmosphere intact.
 | Coordinate Hud            | Shows coordinates and direction on the action bar.                                                                           |
 | Custom Shaped Portals     | Build nether portals in any shape, including with crying obsidian.                                                           |
 | Invisible Item Frames     | Make item frames invisible by right-clicking them with shears.                                                               |
-| Keep Baby Animals         | Keep animals in their baby form by feeding them a poisonous potato.                                                          |
 | Lock Chests               | Lock chests by shift-right-clicking them with a trial key.                                                                   |
 | More Mob Heads            | Mobs have a chance to drop their heads on death. Chances are configurable.                                                   |
 | Player Head Drops         | Players drop their heads when killed by another player.                                                                      |
