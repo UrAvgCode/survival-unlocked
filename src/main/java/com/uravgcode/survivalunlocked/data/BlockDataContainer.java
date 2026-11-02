@@ -1,6 +1,8 @@
 package com.uravgcode.survivalunlocked.data;
 
 import com.uravgcode.survivalunlocked.SurvivalUnlocked;
+import io.papermc.paper.persistence.PersistentDataKey;
+import net.kyori.adventure.key.Key;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -73,6 +75,11 @@ public final class BlockDataContainer implements PersistentDataContainer {
     }
 
     @Override
+    public boolean has(PersistentDataKey<?> dataKey) {
+        return blockDataContainer.has(dataKey);
+    }
+
+    @Override
     public <P, C> @Nullable C get(NamespacedKey key, PersistentDataType<P, C> type) {
         return blockDataContainer.get(key, type);
     }
@@ -80,6 +87,21 @@ public final class BlockDataContainer implements PersistentDataContainer {
     @Override
     public <P, C> C getOrDefault(NamespacedKey key, PersistentDataType<P, C> type, C defaultValue) {
         return blockDataContainer.getOrDefault(key, type, defaultValue);
+    }
+
+    @Override
+    public @Nullable <C> C get(PersistentDataKey<C> dataKey) {
+        return blockDataContainer.get(dataKey);
+    }
+
+    @Override
+    public <C> C getOrDefault(PersistentDataKey<C> dataKey, C defaultValue) {
+        return blockDataContainer.getOrDefault(dataKey, defaultValue);
+    }
+
+    @Override
+    public @Nullable PersistentDataType<?, ?> getPrimitiveStorageType(Key key) {
+        return blockDataContainer.getPrimitiveStorageType(key);
     }
 
     @Override
